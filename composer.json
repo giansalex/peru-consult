@@ -1,0 +1,32 @@
+{
+    "name": "giansalex/peru-consult",
+    "description": "Consulta Perú",
+    "keywords": ["sunat", "reniec"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Giancarlos Salas",
+            "email": "giansalex@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/giansalex/peru-consult",
+    "type": "project",
+    "require": {
+		"php": ">=5.5.9",
+        "symfony/dom-crawler": "^3.3",
+        "php-curl-class/php-curl-class": "^8.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4.8 < 6.0"
+    },
+	"autoload": {
+        "psr-4": {
+            "Peru\\": "src/Peru/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Peru\\": "tests/Peru/"
+        }
+    }
+}
