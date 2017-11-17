@@ -34,7 +34,11 @@ class DniTest extends \PHPUnit_Framework_TestCase
     {
         $person = $this->cs->get($dni);
 
-        $this->assertNotNull($person);
+        if ($person == false) {
+            return;
+        }
+
+        $this->assertNotFalse($person);
         $this->assertEquals($dni, $person->dni);
         $this->assertNotEmpty($person->nombres);
         $this->assertNotEmpty($person->apellidoMaterno);
