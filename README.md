@@ -8,3 +8,4 @@ composer require giansalex/peru-consult
 
 ### Disponibles
 - Ruc - SUNAT
+- Dni - RENIEC
