@@ -12,6 +12,15 @@ use Peru\Sunat\Ruc;
 
 class RucTest extends \PHPUnit_Framework_TestCase
 {
+    /**
+     * @var Ruc
+     */
+    private $cs;
+
+    public function setUp()
+    {
+        $this->cs = new Ruc();
+    }
 
     /**
      * @dataProvider rucProviders
@@ -19,8 +28,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
      */
     public function testGetRuc($ruc)
     {
-        $service = new Ruc();
-        $company = $service->get($ruc);
+        $company = $this->cs->get($ruc);
 
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
@@ -34,20 +42,18 @@ class RucTest extends \PHPUnit_Framework_TestCase
 
     public function testInvalidRucLength()
     {
-        $service = new Ruc();
-        $company = $service->get('2323');
+        $company = $this->cs->get('2323');
 
         $this->assertFalse($company);
-        $this->assertContains('11', $service->getError());
+        $this->assertContains('11', $this->cs->getError());
     }
 
     public function testInvalidRuc()
     {
-        $service = new Ruc();
-        $company = $service->get('20000000001');
+        $company = $this->cs->get('20000000001');
 
         $this->assertFalse($company);
-        $this->assertEquals('No se encontro el ruc', $service->getError());
+        $this->assertEquals('No se encontro el ruc', $this->cs->getError());
     }
 
     public function rucProviders()

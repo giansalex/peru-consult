@@ -21,11 +21,7 @@ class Person
     /**
      * @var string
      */
-    public $primerNombre;
-    /**
-     * @var string
-     */
-    public $segundoNombre;
+    public $nombres;
     /**
      * @var string
      */
@@ -37,5 +33,5 @@ class Person
     /**
      * @var string
      */
-    public $verifica;
+    public $codVerifica;
 }

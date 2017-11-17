@@ -88,10 +88,16 @@ class Ruc extends CookieRequest
         return $this->getCompany($dic);
     }
 
+    /**
+     * Get Last error message.
+     *
+     * @return string
+     */
     public function getError()
     {
         return $this->error;
     }
+
     private function clearComment(\DOMNode $node)
     {
         $childs = $node->childNodes;
