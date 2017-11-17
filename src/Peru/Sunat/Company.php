@@ -27,6 +27,10 @@ class Company
      */
     public $nombreComercial;
     /**
+     * @var array
+     */
+    public $telefonos;
+    /**
      * @var string
      */
     public $tipo;
@@ -54,42 +58,34 @@ class Company
      * @var string
      */
     public $sistContabilidad;
-
     /**
      * @var string
      */
     public $actExterior;
-
     /**
      * @var array
      */
     public $actEconomicas;
-
     /**
      * @var array
      */
     public $cpPago;
-
     /**
      * @var array
      */
     public $sistElectronica;
-
     /**
      * @var string
      */
     public $fechaEmisorFe;
-
     /**
      * @var array
      */
     public $cpeElectronico;
-
     /**
      * @var string
      */
     public $fechaPle;
-
     /**
      * @var array
      */

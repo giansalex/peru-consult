@@ -29,7 +29,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($company->direccion);
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertNotEmpty($company->fechaEmisorFe);
-//        file_put_contents('cp.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
+//        file_put_contents($ruc.'.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
     }
 
     public function testInvalidRucLength()

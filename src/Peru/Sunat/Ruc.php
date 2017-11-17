@@ -84,6 +84,7 @@ class Ruc extends CookieRequest
             }
         }
 
+        $dic['Phone'] = $this->getPhone($html);
         return $this->getCompany($dic);
     }
 
@@ -129,6 +130,7 @@ class Ruc extends CookieRequest
         $cp->ruc = trim(substr($rucText, 0, $pos));
         $cp->razonSocial = trim(substr($rucText, $pos));
         $cp->nombreComercial = $items['Nombre Comercial:'];
+        $cp->telefonos = $items['Phone'];
         $cp->tipo = $items['Tipo Contribuyente:'];
         $cp->estado = $items['Estado del Contribuyente:'];
         $cp->condicion = $items['Condición del Contribuyente:'];
@@ -152,5 +154,22 @@ class Ruc extends CookieRequest
         $cp->padrones = $items['Padrones :'];
 
         return $cp;
+    }
+
+    private function getPhone($html)
+    {
+        $arr = [];
+        $patron='/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
+        preg_match_all($patron, $html, $matches,PREG_SET_ORDER);
+        if(count($matches) > 0)
+        {
+            $phones = explode('/', $matches[0][1]);
+            foreach ($phones as $phone) {
+                if (empty($phone)) continue;
+                $arr[] = trim($phone);
+            }
+        }
+
+        return $arr;
     }
 }
