@@ -120,7 +120,7 @@ class Dni extends CookieRequest
             return false;
         }
 
-        $image = @imagecreatefromstring($captcha);
+        $image = imagecreatefromstring($captcha);
         if (!$image) {
             return false;
         }
