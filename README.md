@@ -9,3 +9,6 @@ composer require giansalex/peru-consult
 ### Disponibles
 - Ruc - SUNAT
 - Dni - RENIEC
+
+Visit [Quertium](http://quertium.ga/)  
+![Quertium](http://quertium.ga/images/quertium.png)
