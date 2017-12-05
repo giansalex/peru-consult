@@ -7,7 +7,7 @@ composer require giansalex/peru-consult
 ```
 
 ### Disponibles
-- Ruc - SUNAT
+- Ruc - SUNAT | [Reference](http://www.sunat.gob.pe/descarga/AfiSEE/AfiSEE1.html)
 - Dni - RENIEC
 
 Visit [Quertium](http://quertium.ga/)  
