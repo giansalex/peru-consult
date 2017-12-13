@@ -98,23 +98,6 @@ class Ruc extends CookieRequest
         return $this->error;
     }
 
-    private function clearComment(\DOMNode $node)
-    {
-        $childs = $node->childNodes;
-        if (!$childs || !$childs->length) {
-            return;
-        }
-
-        foreach ($childs as $child) {
-            /**@var $child \DOMNode*/
-            if ($child->nodeType == XML_COMMENT_NODE) {
-                $child->parentNode->removeChild($child);
-            } elseif ($child->nodeType == XML_ELEMENT_NODE) {
-                $this->clearComment($child);
-            }
-        }
-    }
-
     private function getRandom()
     {
         $curl = $this->getCurl();
@@ -134,7 +117,7 @@ class Ruc extends CookieRequest
         $pos = strpos($rucText,'-');
 
         $cp->ruc = trim(substr($rucText, 0, $pos));
-        $cp->razonSocial = trim(substr($rucText, $pos));
+        $cp->razonSocial = trim(substr($rucText, $pos + 1));
         $cp->nombreComercial = $items['Nombre Comercial:'];
         $cp->telefonos = $items['Phone'];
         $cp->tipo = $items['Tipo Contribuyente:'];
