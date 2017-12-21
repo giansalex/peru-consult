@@ -1,5 +1,6 @@
 # Consultas Peru
-[![Travis-CI](https://img.shields.io/travis/giansalex/peru-consult.svg?label=build&branch=master&style=flat-square)](https://travis-ci.org/giansalex/peru-consult)  
+[![Travis-CI](https://img.shields.io/travis/giansalex/peru-consult.svg?label=build&branch=master&style=flat-square)](https://travis-ci.org/giansalex/peru-consult)
+[![Coverage Status](https://coveralls.io/repos/github/giansalex/peru-consult/badge.svg?branch=master)](https://coveralls.io/github/giansalex/peru-consult?branch=master)  
 
 # Install
 ```bash
