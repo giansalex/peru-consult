@@ -15,3 +15,6 @@ script:
   - mkdir -p build/logs
   - vendor/bin/phpunit --configuration phpunit.xml --coverage-clover build/logs/clover.xml
   - vendor/bin/behat --config behat.yml
+
+after_success:
+  - travis_retry php vendor/bin/coveralls -v
