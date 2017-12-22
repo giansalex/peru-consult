@@ -32,7 +32,6 @@ class Dni extends CookieRequest
         }
         $captcha = $this->getCatpchaValue();
         if ($captcha === false) {
-            $this->error = 'No se pudo iniciar la consulta';
             return false;
         }
 
@@ -101,6 +100,7 @@ class Dni extends CookieRequest
         $image = $req->get(self::URL_CAPTCHA);
 
         if ($req->error) {
+            $this->error = $req->errorMessage;
             return false;
         }
 
@@ -122,6 +122,7 @@ class Dni extends CookieRequest
 
         $image = imagecreatefromstring($captcha);
         if (!$image) {
+            $this->error = 'No se pudo crear imagen desde el captcha';
             return false;
         }
 
