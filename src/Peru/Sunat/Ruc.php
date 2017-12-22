@@ -44,7 +44,11 @@ class Ruc extends CookieRequest
         }
 
         $dom = new \DOMDocument();
-        @$dom->loadHTML($html);
+        $prevState = libxml_use_internal_errors(true);
+        $dom->loadHTML($html);
+        libxml_clear_errors();
+        libxml_use_internal_errors($prevState);
+
         $xp = new \DOMXPath($dom);
 
         $table = $xp->query('./html/body/table[1]');
