@@ -1,6 +1,8 @@
 # Consultas Peru
 [![Travis-CI](https://img.shields.io/travis/giansalex/peru-consult.svg?label=build&branch=master&style=flat-square)](https://travis-ci.org/giansalex/peru-consult)
-
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
+[![Code Coverage](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
+[![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
 # Install
 ```bash
 composer require giansalex/peru-consult
