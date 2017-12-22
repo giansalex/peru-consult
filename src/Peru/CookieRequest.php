@@ -36,6 +36,9 @@ class CookieRequest
     public function getCurl()
     {
         $curl = new Curl();
+        $curl->setUserAgent('');
+        $curl->setOpt(CURLOPT_SSL_VERIFYHOST, false);
+        $curl->setOpt(CURLOPT_SSL_VERIFYPEER, false);
         if (!empty($this->cookies)) {
             $curl->setCookies($this->cookies);
         }
