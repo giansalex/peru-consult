@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 16/11/2017
- * Time: 20:04
+ * Time: 20:04.
  */
 
 namespace Peru;
@@ -11,8 +11,7 @@ namespace Peru;
 use Curl\Curl;
 
 /**
- * Class CookieRequest
- * @package Peru
+ * Class CookieRequest.
  */
 class CookieRequest
 {
@@ -28,7 +27,6 @@ class CookieRequest
     {
         $this->clearCookies();
     }
-
 
     /**
      * @return Curl

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Administrador
  * Date: 15/11/2017
- * Time: 04:15 PM
+ * Time: 04:15 PM.
  */
 
 namespace Peru\Sunat;
@@ -11,8 +11,7 @@ namespace Peru\Sunat;
 use Peru\CookieRequest;
 
 /**
- * Class Ruc
- * @package Peru\Sunat
+ * Class Ruc.
  */
 class Ruc extends CookieRequest
 {
@@ -22,22 +21,25 @@ class Ruc extends CookieRequest
 
     /**
      * @param string $ruc
+     *
      * @return bool|Company
      */
     public function get($ruc)
     {
         if (strlen($ruc) !== 11) {
             $this->error = 'Ruc debe tener 11 dígitos';
+
             return false;
         }
         $random = $this->getRandom();
-        $url = self::URL_CONSULT . "?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+        $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
 
         $req = $this->getCurl();
         $html = $req->get($url);
 
         if ($req->error) {
             $this->error = $req->errorMessage;
+
             return false;
         }
 
@@ -49,6 +51,7 @@ class Ruc extends CookieRequest
 
         if ($table->length == 0) {
             $this->error = 'No se encontro el ruc';
+
             return false;
         }
         $nodes = $table->item(0)->childNodes;
@@ -56,13 +59,17 @@ class Ruc extends CookieRequest
 
         $temp = '';
         foreach ($nodes as $item) {
-            /**@var $item \DOMNode */
-            if ($item->nodeType != XML_ELEMENT_NODE && $item->nodeName != "tr") continue;
+            /** @var $item \DOMNode */
+            if ($item->nodeType != XML_ELEMENT_NODE && $item->nodeName != 'tr') {
+                continue;
+            }
             $i = 0;
             foreach ($item->childNodes as $item2) {
-                /**@var $item2 \DOMNode */
-                if ($item2->nodeType != XML_ELEMENT_NODE && $item2->nodeName != "td") continue;
-                $i++;
+                /** @var $item2 \DOMNode */
+                if ($item2->nodeType != XML_ELEMENT_NODE && $item2->nodeName != 'td') {
+                    continue;
+                }
+                ++$i;
                 if ($i == 1) {
                     $temp = trim($item2->textContent);
                 } else {
@@ -71,9 +78,11 @@ class Ruc extends CookieRequest
                         $arr = [];
                         $options = $select->item(0)->childNodes;
                         foreach ($options as $opt) {
-                            /**@var $opt \DOMNode */
-                            if ($opt->nodeName != 'option') continue;
-                            $arr[] =  trim($opt->textContent);
+                            /** @var $opt \DOMNode */
+                            if ($opt->nodeName != 'option') {
+                                continue;
+                            }
+                            $arr[] = trim($opt->textContent);
                         }
                         $dic[$temp] = $arr;
                     } else {
@@ -85,6 +94,7 @@ class Ruc extends CookieRequest
         }
 
         $dic['Phone'] = $this->getPhone($html);
+
         return $this->getCompany($dic);
     }
 
@@ -113,8 +123,8 @@ class Ruc extends CookieRequest
     private function getCompany(array $items)
     {
         $cp = new Company();
-        $rucText  = $items['Número de RUC:'];
-        $pos = strpos($rucText,'-');
+        $rucText = $items['Número de RUC:'];
+        $pos = strpos($rucText, '-');
 
         $cp->ruc = trim(substr($rucText, 0, $pos));
         $cp->razonSocial = trim(substr($rucText, $pos + 1));
@@ -123,7 +133,7 @@ class Ruc extends CookieRequest
         $cp->tipo = $items['Tipo Contribuyente:'];
         $cp->estado = $items['Estado del Contribuyente:'];
         $cp->condicion = $items['Condición del Contribuyente:'];
-        $cp->direccion = preg_replace("[\s+]"," ", $items['Dirección del Domicilio Fiscal:']);
+        $cp->direccion = preg_replace("[\s+]", ' ', $items['Dirección del Domicilio Fiscal:']);
         $cp->fechaInscripcion = $items['Fecha de Inscripción:'];
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
         $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
@@ -148,13 +158,14 @@ class Ruc extends CookieRequest
     private function getPhone($html)
     {
         $arr = [];
-        $patron='/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
-        preg_match_all($patron, $html, $matches,PREG_SET_ORDER);
-        if(count($matches) > 0)
-        {
+        $patron = '/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
+        preg_match_all($patron, $html, $matches, PREG_SET_ORDER);
+        if (count($matches) > 0) {
             $phones = explode('/', $matches[0][1]);
             foreach ($phones as $phone) {
-                if (empty($phone)) continue;
+                if (empty($phone)) {
+                    continue;
+                }
                 $arr[] = trim($phone);
             }
         }
