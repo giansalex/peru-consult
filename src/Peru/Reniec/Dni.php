@@ -112,7 +112,7 @@ class Dni extends CookieRequest
      *
      * @return bool|string
      */
-    function getCatpchaValue()
+    private function getCatpchaValue()
     {
         $captcha = $this->getCaptchaImage();
 
@@ -159,7 +159,7 @@ SQL;
      * @param $image
      * @return string
      */
-    function getText($image)
+    private function getText($image)
     {
         $rtn="";
         $w = imagesx($image);
