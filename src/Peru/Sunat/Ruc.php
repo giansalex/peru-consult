@@ -43,6 +43,31 @@ class Ruc extends CookieRequest
             return false;
         }
 
+        $dic = $this->parseHtml($html);
+        if ($dic === false) {
+
+            return false;
+        }
+
+        return $this->getCompany($dic);
+    }
+
+    /**
+     * Get Last error message.
+     *
+     * @return string
+     */
+    public function getError()
+    {
+        return $this->error;
+    }
+
+    /**
+     * @param $html
+     * @return array|bool
+     */
+    private function parseHtml($html)
+    {
         $dom = new \DOMDocument();
         $prevState = libxml_use_internal_errors(true);
         $dom->loadHTML($html);
@@ -99,17 +124,7 @@ class Ruc extends CookieRequest
 
         $dic['Phone'] = $this->getPhone($html);
 
-        return $this->getCompany($dic);
-    }
-
-    /**
-     * Get Last error message.
-     *
-     * @return string
-     */
-    public function getError()
-    {
-        return $this->error;
+        return $dic;
     }
 
     private function getRandom()
