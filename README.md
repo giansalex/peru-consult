@@ -15,5 +15,7 @@ composer require giansalex/peru-consult
 ### API Rest
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
 
-Sponsored by [Quertium](http://quertium.ga/)  
+### Sponsors
+
+Powered by [Quertium](http://quertium.ga/)  
 ![Quertium](http://quertium.ga/images/quertium.png)
