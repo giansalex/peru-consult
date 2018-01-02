@@ -9,8 +9,8 @@ composer require giansalex/peru-consult
 ```
 
 ### Disponibles
-- Ruc - SUNAT | [Reference](http://www.sunat.gob.pe/descarga/AfiSEE/AfiSEE1.html)
-- Dni - RENIEC
+- Ruc (SUNAT)
+- Dni (RENIEC)
 
 ### API Rest
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
@@ -18,4 +18,10 @@ Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-
 ### Sponsors
 
 Powered by [Quertium](http://quertium.ga/)  
-![Quertium](http://quertium.ga/images/quertium.png)
+![Quertium](docs/quertium.png)
+
+### JetBrains
+
+![JetBrains](docs/jetbrains.png)
+
+[JetBrains](https://www.jetbrains.com/) supports our open source project by sponsoring some [All Products Packs](https://www.jetbrains.com/products.html) within their [Free Open Source License](https://www.jetbrains.com/buy/opensource/) program.
