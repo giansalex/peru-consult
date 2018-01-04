@@ -36,7 +36,6 @@ class DniTest extends \PHPUnit_Framework_TestCase
 
         if ($person == false) {
             echo 'Error DNI ' . $dni . ' -> ' . $this->cs->getError() . PHP_EOL;
-            return;
         }
 
         $this->assertNotFalse($person);
