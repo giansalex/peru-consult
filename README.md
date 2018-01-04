@@ -1,9 +1,12 @@
-# Consultas Peru
+# Peru Consultas
 [![CircleCI](https://circleci.com/gh/giansalex/peru-consult.svg?style=svg)](https://circleci.com/gh/giansalex/peru-consult)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
+[![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)   
+Consultas de DNI y RUC sin uso de captcha.
+
 # Install
+From [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
 ```bash
 composer require giansalex/peru-consult
 ```
@@ -12,7 +15,7 @@ composer require giansalex/peru-consult
 - Ruc (SUNAT)
 - Dni (RENIEC)
 
-### API Rest
+### API
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
 
 ### Sponsors
