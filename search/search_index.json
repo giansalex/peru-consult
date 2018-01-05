@@ -1,0 +1,54 @@
+{
+    "docs": [
+        {
+            "location": "/", 
+            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha.\n\n\nInstall\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium", 
+            "title": "Home"
+        }, 
+        {
+            "location": "/#peru-consultas", 
+            "text": "Consultas de DNI y RUC sin uso de captcha.", 
+            "title": "Per\u00fa Consultas"
+        }, 
+        {
+            "location": "/#install", 
+            "text": "Via composer desde  packagist.org  composer require giansalex/peru-consult", 
+            "title": "Install"
+        }, 
+        {
+            "location": "/#disponibles", 
+            "text": "Ruc (SUNAT)  Dni (RENIEC)", 
+            "title": "Disponibles"
+        }, 
+        {
+            "location": "/#api", 
+            "text": "Puede utilizar el API REST  peru-consult-api", 
+            "title": "API"
+        }, 
+        {
+            "location": "/#sponsors", 
+            "text": "Powered by  Quertium", 
+            "title": "Sponsors"
+        }, 
+        {
+            "location": "/dni/", 
+            "text": "DNI", 
+            "title": "Dni"
+        }, 
+        {
+            "location": "/dni/#dni", 
+            "text": "", 
+            "title": "DNI"
+        }, 
+        {
+            "location": "/ruc/", 
+            "text": "RUC", 
+            "title": "Ruc"
+        }, 
+        {
+            "location": "/ruc/#ruc", 
+            "text": "", 
+            "title": "RUC"
+        }
+    ]
+}
