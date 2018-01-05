@@ -32,23 +32,33 @@
         }, 
         {
             "location": "/dni/", 
-            "text": "DNI", 
+            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($person);", 
             "title": "Dni"
         }, 
         {
             "location": "/dni/#dni", 
-            "text": "", 
+            "text": "Consulta del DNI usando el servicio p\u00fablico de Reniec.", 
             "title": "DNI"
         }, 
         {
+            "location": "/dni/#ejemplo", 
+            "text": "use Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs- get($dni);\nif ($person === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($person);", 
+            "title": "Ejemplo"
+        }, 
+        {
             "location": "/ruc/", 
-            "text": "RUC", 
+            "text": "RUC\n\n\nConsulta del RUC usando el servicio p\u00fablico de Sunat.\n\n\nEjemplo\n\n\nuse Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs-\nget($dni);\nif ($company === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($company);", 
             "title": "Ruc"
         }, 
         {
             "location": "/ruc/#ruc", 
-            "text": "", 
+            "text": "Consulta del RUC usando el servicio p\u00fablico de Sunat.", 
             "title": "RUC"
+        }, 
+        {
+            "location": "/ruc/#ejemplo", 
+            "text": "use Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs- get($dni);\nif ($company === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($company);", 
+            "title": "Ejemplo"
         }
     ]
 }
