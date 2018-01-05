@@ -1,13 +1,22 @@
 site_name: Perú Consultas
+site_url: https://giansalex.github.io/peru-consult
 site_description: 'Documentación de Perú Consultas, DNI - Renice, RUC - Sunat '
 site_author: 'Giancarlos Salas'
+
+# Repository
+repo_name: 'giansalex/peru-consult'
 repo_url: 'https://github.com/giansalex/peru-consult'
+
 pages:
     - Home: index.md
     - Dni: dni.md
     - Ruc: ruc.md
+
+# Configuration
 theme:
   name: 'material'
+  favicon: 'img/peru.png'
+  logo: 'img/peru.png'
   language: 'es'
   palette:
     primary: 'Teal'
@@ -16,7 +25,7 @@ theme:
 extra_css:
   - 'css/prism.css'
 extra_javascript:
-  - js/prism.js
+  - 'js/prism.js'
 
 extra:
   social:
@@ -25,6 +34,12 @@ extra:
   author:
     github: giansalex
 
+# Google Analytics
+google_analytics:
+  - 'UA-90097417-4'
+  - 'auto'
+
+# Extensions
 markdown_extensions:
   - admonition
   - codehilite:

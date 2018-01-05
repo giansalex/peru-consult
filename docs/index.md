@@ -26,4 +26,4 @@ Sponsors
 ---------
 
 Powered by [Quertium](http://quertium.ga/)  
-![Quertium](quertium.png)
+![Quertium](img/quertium.png)

@@ -21,10 +21,10 @@ Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-
 ### Sponsors
 
 Powered by [Quertium](http://quertium.ga/)  
-![Quertium](docs/quertium.png)
+![Quertium](docs/img/quertium.png)
 
 ### JetBrains
 
-![JetBrains](docs/jetbrains.png)
+![JetBrains](docs/img/etbrains.png)
 
 [JetBrains](https://www.jetbrains.com/) supports our open source project by sponsoring some [All Products Packs](https://www.jetbrains.com/products.html) within their [Free Open Source License](https://www.jetbrains.com/buy/opensource/) program.
