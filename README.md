@@ -6,7 +6,7 @@
 Consultas de DNI y RUC sin uso de captcha.
 
 # Install
-From [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
+Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
 ```bash
 composer require giansalex/peru-consult
 ```
@@ -14,6 +14,10 @@ composer require giansalex/peru-consult
 ### Disponibles
 - Ruc (SUNAT).
 - Dni (RENIEC).
+
+### Requirements
+- Ruc necesita la extension `dom`.
+- Dni necesita las extensiones `gd`, `pdo_sqlite`.
 
 ### API
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  

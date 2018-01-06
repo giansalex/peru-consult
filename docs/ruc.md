@@ -2,6 +2,10 @@
 
 Consulta del RUC usando el servicio público de Sunat.
 
+Requerimientos
+---------------
+- Tener cargada la extension `dom`.
+
 Ejemplo
 --------
 

@@ -18,6 +18,11 @@ Disponibles
 - Ruc (SUNAT)
 - Dni (RENIEC)
 
+Requerimientos
+---------------
+- Ruc necesita la extension [dom](http://php.net/manual/es/book.dom.php).
+- Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php), [pdo_sqlite](http://php.net/manual/es/pdo.installation.php).
+
 API
 ----
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
