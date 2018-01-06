@@ -25,6 +25,6 @@ Powered by [Quertium](http://quertium.ga/)
 
 ### JetBrains
 
-![JetBrains](docs/img/etbrains.png)
+![JetBrains](docs/img/jetbrains.png)
 
 [JetBrains](https://www.jetbrains.com/) supports our open source project by sponsoring some [All Products Packs](https://www.jetbrains.com/products.html) within their [Free Open Source License](https://www.jetbrains.com/buy/opensource/) program.
