@@ -10,7 +10,7 @@ jobs:
       - checkout
       - run: sudo apt install -y libsqlite3-dev git libfreetype6-dev libjpeg62-turbo-dev
       - run: sudo docker-php-ext-install pdo
-      - run: sudo docker-php-ext-install gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+      - run: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
       - run: sudo docker-php-ext-install -j$(nproc) gd
       - run: sudo composer self-update
       - restore_cache:
