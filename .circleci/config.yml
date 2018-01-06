@@ -8,8 +8,20 @@ jobs:
       - image: circleci/php:7.1-node-browsers
     steps:
       - checkout
+      - run: sudo apt install -y libsqlite3-dev git libfreetype6-dev libjpeg62-turbo-dev
+      - run: sudo docker-php-ext-install pdo
+      - run: sudo docker-php-ext-install gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
+      - run: sudo docker-php-ext-install -j$(nproc) gd
       - run: sudo composer self-update
-      - run: composer install --prefer-source --no-interaction --dev
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "composer.json" }}
+          - v1-dependencies-
+      - run: composer install -n --prefer-dist
+      - save_cache:
+          paths:
+            - ./vendor
+          key: v1-dependencies-{{ checksum "composer.json" }}
       - run: ./vendor/bin/phpunit --configuration phpunit.xml
       - run: ./vendor/bin/behat --config behat.yml
 
