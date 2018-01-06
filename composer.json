@@ -13,9 +13,6 @@
     "type": "library",
     "require": {
 		"php": ">=5.5.9",
-        "ext-dom": "*",
-        "ext-gd": "*",
-        "ext-pdo_sqlite": "*",
         "php-curl-class/php-curl-class": "^8.0"
     },
     "require-dev": {
@@ -26,6 +23,11 @@
         "psr-4": {
             "Peru\\": "src/Peru/"
         }
+    },
+    "suggest": {
+        "ext-dom": "Needed to use class Ruc",
+        "ext-gd": "Needed to use class Dni",
+        "ext-pdo_sqlite": "Needed to use class Dni"
     },
     "autoload-dev": {
         "psr-4": {
