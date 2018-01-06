@@ -1,5 +1,6 @@
+/.idea/
 /vendor/
+/site/
 /composer.lock
 .DS_Store
-/.idea/
 /build/
