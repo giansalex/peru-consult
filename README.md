@@ -12,8 +12,8 @@ composer require giansalex/peru-consult
 ```
 
 ### Disponibles
-- Ruc (SUNAT)
-- Dni (RENIEC)
+- Ruc (SUNAT).
+- Dni (RENIEC).
 
 ### API
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
