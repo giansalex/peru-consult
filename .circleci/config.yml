@@ -3,21 +3,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.1-node-browsers
-        environment:
-          - GIT_COMMIT_DESC: git log --format=oneline -n 1 $CIRCLE_SHA1
     steps:
       - checkout
       - run: sudo apt install -y libsqlite3-dev git libfreetype6-dev libjpeg62-turbo-dev
       - run: sudo docker-php-ext-install pdo
       - run: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
       - run: sudo docker-php-ext-install -j$(nproc) gd
-      - run: echo $GIT_COMMIT_DESC
-      - run:
-          name: Deploy Docs
-          command: |
-            if [[ $GIT_COMMIT_DESC == *"[docs]"* ]]; then
-              echo "docs to deploy"
-            fi
       - run: sudo composer self-update
       - restore_cache:
           keys:
@@ -30,13 +21,39 @@ jobs:
           key: v1-dependencies-{{ checksum "composer.json" }}
       - run: ./vendor/bin/phpunit --configuration phpunit.xml
       - run: ./vendor/bin/behat --config behat.yml
-
+  deploy:
+    docker:
+      - image: circleci/python:3.4.4
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+      - run:
+          name: Deploy Docs
+          command: |
+            python3 -m venv venv
+            . venv/bin/activate
+            GIT_COMMIT_DESC="$(git log --format=oneline -n 1 $CIRCLE_SHA1)"
+            echo $GIT_COMMIT_DESC
+            if [[ $GIT_COMMIT_DESC == *"[docs]"* ]]; then
+              echo "docs to deploy"
+              git config user.name "Giancarlos Salas";
+              git config user.email "giansalex@gmail.com";
+              git remote add gh-token "https://${GH_TOKEN}@github.com/giansalex/peru-consult.git";
+              git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
+              pip install -IU -r requirements.txt;
+              mkdocs gh-deploy -v --clean --remote-name gh-token;
+            fi
+      - save_cache:
+          key: deps1-{{ .Branch }}-{{ checksum "requirements.txt" }}
+          paths:
+            - "venv"
 workflows:
   version: 2
-  build_and_test:
+  build_test_and_deploy:
     jobs:
       - build:
           filters:
             branches:
               ignore: gh-pages
-
+      - deploy
