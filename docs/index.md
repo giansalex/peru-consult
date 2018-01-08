@@ -7,7 +7,7 @@
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
 Consultas de DNI y RUC sin uso de captcha.
 
-Install
+Instalar
 --------
 Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
 ```bash

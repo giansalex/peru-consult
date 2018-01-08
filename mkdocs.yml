@@ -8,7 +8,7 @@ repo_name: 'giansalex/peru-consult'
 repo_url: 'https://github.com/giansalex/peru-consult'
 
 pages:
-    - Home: index.md
+    - Principal: index.md
     - Dni: dni.md
     - Ruc: ruc.md
 
