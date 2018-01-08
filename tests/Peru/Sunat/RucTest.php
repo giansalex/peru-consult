@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 16/11/2017
- * Time: 19:59
+ * Time: 19:59.
  */
 
 namespace Tests\Peru\Sunat;
@@ -24,6 +24,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
 
     /**
      * @dataProvider rucProviders
+     *
      * @param string $ruc
      */
     public function testGetRuc($ruc)
