@@ -1,78 +1,78 @@
 {
     "docs": [
         {
-            "location": "/", 
-            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha.\n\n\nInstall\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n, \npdo_sqlite\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium", 
+            "location": "/",
+            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha.\n\n\nInstall\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n, \npdo_sqlite\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium",
             "title": "Home"
-        }, 
+        },
         {
-            "location": "/#peru-consultas", 
-            "text": "Consultas de DNI y RUC sin uso de captcha.", 
+            "location": "/#peru-consultas",
+            "text": "Consultas de DNI y RUC sin uso de captcha.",
             "title": "Per\u00fa Consultas"
-        }, 
+        },
         {
-            "location": "/#install", 
-            "text": "Via composer desde  packagist.org  composer require giansalex/peru-consult", 
+            "location": "/#install",
+            "text": "Via composer desde  packagist.org  composer require giansalex/peru-consult",
             "title": "Install"
-        }, 
+        },
         {
-            "location": "/#disponibles", 
-            "text": "Ruc (SUNAT)  Dni (RENIEC)", 
+            "location": "/#disponibles",
+            "text": "Ruc (SUNAT)  Dni (RENIEC)",
             "title": "Disponibles"
-        }, 
+        },
         {
-            "location": "/#requerimientos", 
-            "text": "Ruc necesita la extension  dom .  Dni necesita las extensiones  gd ,  pdo_sqlite .", 
+            "location": "/#requerimientos",
+            "text": "Ruc necesita la extension  dom .  Dni necesita las extensiones  gd ,  pdo_sqlite .",
             "title": "Requerimientos"
-        }, 
+        },
         {
-            "location": "/#api", 
-            "text": "Puede utilizar el API REST  peru-consult-api", 
+            "location": "/#api",
+            "text": "Puede utilizar el API REST  peru-consult-api",
             "title": "API"
-        }, 
+        },
         {
-            "location": "/#sponsors", 
-            "text": "Powered by  Quertium", 
+            "location": "/#sponsors",
+            "text": "Powered by  Quertium",
             "title": "Sponsors"
-        }, 
+        },
         {
-            "location": "/dni/", 
-            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n y \npdo_sqlite\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($person);", 
+            "location": "/dni/",
+            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n y \npdo_sqlite\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($person);",
             "title": "Dni"
-        }, 
+        },
         {
-            "location": "/dni/#dni", 
-            "text": "Consulta del DNI usando el servicio p\u00fablico de Reniec.", 
+            "location": "/dni/#dni",
+            "text": "Consulta del DNI usando el servicio p\u00fablico de Reniec.",
             "title": "DNI"
-        }, 
+        },
         {
-            "location": "/dni/#requerimientos", 
-            "text": "Tener cargada la extension  gd  y  pdo_sqlite .", 
+            "location": "/dni/#requerimientos",
+            "text": "Tener cargada la extension  gd  y  pdo_sqlite .",
             "title": "Requerimientos"
-        }, 
+        },
         {
-            "location": "/dni/#ejemplo", 
-            "text": "use Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs- get($dni);\nif ($person === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($person);", 
+            "location": "/dni/#ejemplo",
+            "text": "use Peru\\Reniec\\Dni;\n\nrequire 'vendor/autload.php';\n\n$myDni = '00000004';\n\n$cs = new Dni();\n$person = $cs- get($dni);\nif ($person === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($person);",
             "title": "Ejemplo"
-        }, 
+        },
         {
-            "location": "/ruc/", 
-            "text": "RUC\n\n\nConsulta del RUC usando el servicio p\u00fablico de Sunat.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ndom\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs-\nget($dni);\nif ($company === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($company);", 
+            "location": "/ruc/",
+            "text": "RUC\n\n\nConsulta del RUC usando el servicio p\u00fablico de Sunat.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ndom\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs-\nget($dni);\nif ($company === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\nvar_dump($company);",
             "title": "Ruc"
-        }, 
+        },
         {
-            "location": "/ruc/#ruc", 
-            "text": "Consulta del RUC usando el servicio p\u00fablico de Sunat.", 
+            "location": "/ruc/#ruc",
+            "text": "Consulta del RUC usando el servicio p\u00fablico de Sunat.",
             "title": "RUC"
-        }, 
+        },
         {
-            "location": "/ruc/#requerimientos", 
-            "text": "Tener cargada la extension  dom .", 
+            "location": "/ruc/#requerimientos",
+            "text": "Tener cargada la extension  dom .",
             "title": "Requerimientos"
-        }, 
+        },
         {
-            "location": "/ruc/#ejemplo", 
-            "text": "use Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs- get($dni);\nif ($company === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($company);", 
+            "location": "/ruc/#ejemplo",
+            "text": "use Peru\\Sunat\\Ruc;\n\nrequire 'vendor/autload.php';\n\n$myDni = '20513176962';\n\n$cs = new Ruc();\n$company = $cs- get($dni);\nif ($company === false) {\n    echo $cs- getError();\n    exit();\n}\n\nvar_dump($company);",
             "title": "Ejemplo"
         }
     ]
