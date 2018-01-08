@@ -3,7 +3,8 @@
 [![CircleCI](https://circleci.com/gh/giansalex/peru-consult.svg?style=svg)](https://circleci.com/gh/giansalex/peru-consult)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master)
-[![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)   
+[![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
+[![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
 Consultas de DNI y RUC sin uso de captcha.
 
 Install
