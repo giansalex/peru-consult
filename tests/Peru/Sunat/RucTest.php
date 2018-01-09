@@ -38,6 +38,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($company->direccion);
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertTrue(is_array($company->cpeElectronico));
+        $this->assertTrue(new \DateTime($company->fechaInscripcion) !== false);
 //        file_put_contents($ruc.'.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
     }
 

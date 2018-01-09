@@ -153,30 +153,24 @@ class Ruc extends CookieRequest
         $cp->estado = $items['Estado del Contribuyente:'];
         $cp->condicion = $items['Condición del Contribuyente:'];
         $cp->direccion = preg_replace("[\s+]", ' ', $items['Dirección del Domicilio Fiscal:']);
-        $cp->fechaInscripcion = $items['Fecha de Inscripción:'];
+        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
         $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
         $cp->actExterior = $items['Actividad de Comercio Exterior:'];
         $cp->actEconomicas = $items['Actividad(es) Económica(s):'];
         $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'];
         $cp->sistElectronica = $items['Sistema de Emision Electronica:'];
-        $cp->fechaEmisorFe = $items['Emisor electrónico desde:'];
+        $cp->fechaEmisorFe = $this->parseDate($items['Emisor electrónico desde:']);
         $cpText = $items['Comprobantes Electrónicos:'];
         $cpes = [];
         if ($cpText != '-') {
             $cpes = explode(',', $cpText);
         }
         $cp->cpeElectronico = $cpes;
-        $cp->fechaPle = $items['Afiliado al PLE desde:'];
+        $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:']);
         $cp->padrones = $items['Padrones :'];
         if ($cp->sistElectronica == '-') {
             $cp->sistElectronica = [];
-        }
-        if ($cp->fechaEmisorFe == '-') {
-            $cp->fechaEmisorFe = null;
-        }
-        if ($cp->fechaPle == '-') {
-            $cp->fechaPle = null;
         }
 
         return $cp;
@@ -198,5 +192,20 @@ class Ruc extends CookieRequest
         }
 
         return $arr;
+    }
+
+    /**
+     * @param $text
+     * @return null|string
+     */
+    private function parseDate($text)
+    {
+        if (empty($text) || $text == '-') {
+            return null;
+        }
+
+        $date = \DateTime::createFromFormat('d/m/Y', $text);
+
+        return $date === false ? null : $date->format('Y-m-d').'T00:00:00.000Z';
     }
 }
