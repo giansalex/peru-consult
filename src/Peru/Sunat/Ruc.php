@@ -160,11 +160,7 @@ class Ruc extends CookieRequest
         $cp->actEconomicas = $items['Actividad(es) Económica(s):'];
         $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'];
         $cp->sistElectronica = $items['Sistema de Emision Electronica:'];
-        if ($cp->sistElectronica == '-') {
-            $cp->sistElectronica = [];
-        }
         $cp->fechaEmisorFe = $items['Emisor electrónico desde:'];
-
         $cpText = $items['Comprobantes Electrónicos:'];
         $cpes = [];
         if ($cpText != '-') {
@@ -173,6 +169,15 @@ class Ruc extends CookieRequest
         $cp->cpeElectronico = $cpes;
         $cp->fechaPle = $items['Afiliado al PLE desde:'];
         $cp->padrones = $items['Padrones :'];
+        if ($cp->sistElectronica == '-') {
+            $cp->sistElectronica = [];
+        }
+        if ($cp->fechaEmisorFe == '-') {
+            $cp->fechaEmisorFe = null;
+        }
+        if ($cp->fechaPle == '-') {
+            $cp->fechaPle = null;
+        }
 
         return $cp;
     }
