@@ -45,7 +45,6 @@ class Ruc extends CookieRequest
 
         $dic = $this->parseHtml($html);
         if ($dic === false) {
-
             return false;
         }
 
@@ -64,6 +63,7 @@ class Ruc extends CookieRequest
 
     /**
      * @param $html
+     *
      * @return array|bool
      */
     private function parseHtml($html)
@@ -175,6 +175,7 @@ class Ruc extends CookieRequest
         }
 
         $this->fixDirection($cp);
+
         return $cp;
     }
 
@@ -198,6 +199,7 @@ class Ruc extends CookieRequest
 
     /**
      * @param $text
+     *
      * @return null|string
      */
     private function parseDate($text)
@@ -214,26 +216,40 @@ class Ruc extends CookieRequest
     private function fixDirection(Company $company)
     {
         $items = explode('                                               -', $company->direccion);
-        if (count($items) == 3) {
-            $pieces = explode(' ', trim($items[0]));
-            $company->departamento = $this->fixDepartamento(array_pop($pieces));
-            $company->provincia = trim($items[1]);
-            $company->distrito = trim($items[2]);
+        if (count($items) !== 3) {
+            $company->direccion = preg_replace("[\s+]", ' ', $company->direccion);
+
+            return;
         }
 
-        $company->direccion = preg_replace("[\s+]", ' ', $company->direccion);
+        $pieces = explode(' ', trim($items[0]));
+        list($len, $value) = $this->getDepartment(array_pop($pieces));
+        $company->departamento = $value;
+        $company->provincia = trim($items[1]);
+        $company->distrito = trim($items[2]);
+        array_splice($pieces, -1 * $len);
+        $company->direccion = join(' ', $pieces);
     }
 
-    private function fixDepartamento($department)
+    private function getDepartment($department)
     {
         $department = strtoupper($department);
-        switch ($department)
-        {
-            case 'DIOS': return 'MADRE DE DIOS';
-            case 'MARTIN': return 'SAN MARTIN';
-            case 'LIBERTAD': return 'LA LIBERTAD';
+        $words = 1;
+        switch ($department) {
+            case 'DIOS':
+                $department = 'MADRE DE DIOS';
+                $words = 3;
+            break;
+            case 'MARTIN':
+                $department = 'SAN MARTIN';
+                $words = 2;
+            break;
+            case 'LIBERTAD':
+                $department = 'LA LIBERTAD';
+                $words = 2;
+            break;
         }
 
-        return $department;
+        return [$words, $department];
     }
 }
