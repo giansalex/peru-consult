@@ -48,6 +48,18 @@ class Company
     /**
      * @var string
      */
+    public $departamento;
+    /**
+     * @var string
+     */
+    public $provincia;
+    /**
+     * @var string
+     */
+    public $distrito;
+    /**
+     * @var string
+     */
     public $fechaInscripcion;
     /**
      * @var string

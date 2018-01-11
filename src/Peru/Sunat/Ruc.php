@@ -152,7 +152,8 @@ class Ruc extends CookieRequest
         $cp->tipo = $items['Tipo Contribuyente:'];
         $cp->estado = $items['Estado del Contribuyente:'];
         $cp->condicion = $items['Condición del Contribuyente:'];
-        $cp->direccion = preg_replace("[\s+]", ' ', $items['Dirección del Domicilio Fiscal:']);
+
+        $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
         $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
@@ -173,6 +174,7 @@ class Ruc extends CookieRequest
             $cp->sistElectronica = [];
         }
 
+        $this->fixDirection($cp);
         return $cp;
     }
 
@@ -207,5 +209,31 @@ class Ruc extends CookieRequest
         $date = \DateTime::createFromFormat('d/m/Y', $text);
 
         return $date === false ? null : $date->format('Y-m-d').'T00:00:00.000Z';
+    }
+
+    private function fixDirection(Company $company)
+    {
+        $items = explode('                                               -', $company->direccion);
+        if (count($items) == 3) {
+            $pieces = explode(' ', trim($items[0]));
+            $company->departamento = $this->fixDepartamento(array_pop($pieces));
+            $company->provincia = trim($items[1]);
+            $company->distrito = trim($items[2]);
+        }
+
+        $company->direccion = preg_replace("[\s+]", ' ', $company->direccion);
+    }
+
+    private function fixDepartamento($department)
+    {
+        $department = strtoupper($department);
+        switch ($department)
+        {
+            case 'DIOS': return 'MADRE DE DIOS';
+            case 'MARTIN': return 'SAN MARTIN';
+            case 'LIBERTAD': return 'LA LIBERTAD';
+        }
+
+        return $department;
     }
 }

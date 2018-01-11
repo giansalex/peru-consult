@@ -39,6 +39,9 @@ class RucTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertTrue(is_array($company->cpeElectronico));
         $this->assertTrue(new \DateTime($company->fechaInscripcion) !== false);
+        $this->assertNotEmpty($company->departamento);
+        $this->assertNotEmpty($company->provincia);
+        $this->assertNotEmpty($company->distrito);
 //        file_put_contents($ruc.'.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
     }
 
@@ -61,6 +64,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
     public function rucProviders()
     {
         return [
+          ['20440374248'],
           ['20513176962'],
           ['10401510465'],
           ['20600055519'],
