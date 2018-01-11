@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../img/peru.png">
-      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.2.6">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.3.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.6525f7f6.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.0e9c8aca.css">
       
         <link rel="stylesheet" href="../assets/stylesheets/application-palette.792431c1.css">
       
@@ -269,6 +269,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#resultado" title="Resultado" class="md-nav__link">
+    Resultado
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -324,6 +331,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#resultado" title="Resultado" class="md-nav__link">
+    Resultado
+  </a>
+  
+</li>
+      
       
       
     </ul>
@@ -350,9 +364,9 @@
 <h2 id="ejemplo">Ejemplo<a class="headerlink" href="#ejemplo" title="Permanent link">&para;</a></h2>
 <pre class="code"><code class="language-php">use Peru\Reniec\Dni;
 
-require 'vendor/autload.php';
+require 'vendor/autoload.php';
 
-$myDni = '00000004';
+$dni = '00000004';
 
 $cs = new Dni();
 $person = $cs-&gt;get($dni);
@@ -361,7 +375,18 @@ if ($person === false) {
     exit();
 }
 
-var_dump($person);</code></pre>
+echo json_encode(get_object_vars($person));</code></pre>
+
+
+<h2 id="resultado">Resultado<a class="headerlink" href="#resultado" title="Permanent link">&para;</a></h2>
+<p>Resultado en formato json.</p>
+<pre class="code"><code class="language-json">{
+    &quot;dni&quot;:&quot;00000004&quot;,
+   &quot;nombres&quot;:&quot;JOYCE&quot;,
+   &quot;apellidoPaterno&quot;:&quot;BARDALES&quot;,
+   &quot;apellidoMaterno&quot;:&quot;TORRES&quot;,
+   &quot;codVerifica&quot;:&quot;9&quot;
+}</code></pre>
                 
                   
                 
