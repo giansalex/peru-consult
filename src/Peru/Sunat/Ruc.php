@@ -84,8 +84,16 @@ class Ruc extends CookieRequest
             return false;
         }
         $nodes = $table->item(0)->childNodes;
-        $dic = [];
+        $dic = $this->getKeyValues($nodes, $xp);
 
+        $dic['Phone'] = $this->getPhone($html);
+
+        return $dic;
+    }
+
+    private function getKeyValues(\DOMNodeList $nodes, \DOMXPath $xp)
+    {
+        $dic = [];
         $temp = '';
         foreach ($nodes as $item) {
             /** @var $item \DOMNode */
@@ -121,8 +129,6 @@ class Ruc extends CookieRequest
                 }
             }
         }
-
-        $dic['Phone'] = $this->getPhone($html);
 
         return $dic;
     }
