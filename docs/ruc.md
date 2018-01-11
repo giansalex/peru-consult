@@ -45,7 +45,7 @@ Resultado en formato json.
    "tipo":"SOCIEDAD ANONIMA CERRADA",
    "estado":"ACTIVO",
    "condicion":"HABIDO",
-   "direccion":"JR. ITALIA NRO. 1404 INT. 4-A (4TO. PISO) LIMA - LIMA - LA VICTORIA",
+   "direccion":"JR. ITALIA NRO. 1404 INT. 4-A (4TO. PISO)",
    "departamento":"LIMA",
    "provincia":"LIMA",
    "distrito":"LA VICTORIA",
