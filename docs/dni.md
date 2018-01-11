@@ -11,17 +11,32 @@ Ejemplo
 ```php
 use Peru\Reniec\Dni;
 
-require 'vendor/autload.php';
+require 'vendor/autoload.php';
 
-$myDni = '00000004';
+$dni = '00000004';
 
 $cs = new Dni();
 $person = $cs->get($dni);
 if ($person === false) {
-	echo $cs->getError();
-	exit();
+    echo $cs->getError();
+    exit();
 }
 
-var_dump($person);
+echo json_encode(get_object_vars($person));
 
+```
+
+Resultado
+---------
+
+Resultado en formato json.
+
+```json
+{
+    "dni":"00000004",
+   "nombres":"JOYCE",
+   "apellidoPaterno":"BARDALES",
+   "apellidoMaterno":"TORRES",
+   "codVerifica":"9"
+}
 ```
