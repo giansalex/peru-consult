@@ -8,6 +8,7 @@
 
 namespace Tests\Peru\Reniec;
 
+use Peru\Http\ClientInterface;
 use Peru\Reniec\Dni;
 
 /**
@@ -45,6 +46,17 @@ class DniTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($person->apellidoPaterno);
     }
 
+    public function testInvalidRequest()
+    {
+        $dni = new Dni();
+        $dni->setClient($this->getClientMock(Dni::URL_CAPTCHA));
+
+        $cs = $dni->get('00000001');
+
+        $this->assertFalse($cs);
+        $this->assertEquals('No se pudo cargar el captcha image', $dni->getError());
+    }
+
     public function testInvalidDniLength()
     {
         $person = $this->cs->get('2323');
@@ -71,5 +83,31 @@ class DniTest extends \PHPUnit_Framework_TestCase
             ['00000010'],
             ['48004836'],
         ];
+    }
+
+    /**
+     * @param $url
+     * @return ClientInterface
+     */
+    private function getClientMock($url)
+    {
+        $stub = $this->getMockBuilder(ClientInterface::class)
+            ->getMock();
+
+        $stub->method('get')
+            ->willReturnCallback(function ($param) use ($url) {
+                if (empty($url)) {
+                    return '111';
+                }
+                $count = strlen($url);
+                if (substr($param, 0, $count) == $url) {
+                    return false;
+                }
+
+                return '111';
+            });
+
+        /**@var $stub ClientInterface*/
+        return $stub;
     }
 }
