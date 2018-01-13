@@ -18,7 +18,7 @@ composer require giansalex/peru-consult
 
 ### Requirements
 - Ruc necesita la extension `dom`.
-- Dni necesita las extensiones `gd`, `pdo_sqlite`.
+- Dni necesita las extensiones `gd`.
 
 ### API
 Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  

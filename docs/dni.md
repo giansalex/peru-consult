@@ -3,7 +3,7 @@ Consulta del DNI usando el servicio público de Reniec.
 
 Requerimientos
 ---------------
-- Tener cargada la extension `gd` y `pdo_sqlite`.
+- Tener cargada la extension `gd`.
 
 Ejemplo
 --------
