@@ -8,16 +8,32 @@
 
 namespace Peru\Reniec;
 
-use Peru\CookieRequest;
+use Peru\Http\ClientInterface;
+use Peru\Http\ContextClient;
 
 /**
  * Class Dni.
  */
-class Dni extends CookieRequest
+class Dni
 {
     const URL_CONSULT = 'https://cel.reniec.gob.pe/valreg/valreg.do';
     const URL_CAPTCHA = 'https://cel.reniec.gob.pe/valreg/codigo.do';
+    /**
+     * @var string
+     */
     private $error;
+    /**
+     * @var ClientInterface
+     */
+    private $client;
+
+    /**
+     * Dni constructor.
+     */
+    public function __construct()
+    {
+        $this->client = new ContextClient();
+    }
 
     /**
      * @param string $dni
@@ -36,14 +52,13 @@ class Dni extends CookieRequest
             return false;
         }
 
-        $req = $this->getCurl();
-        $page = $req->post(self::URL_CONSULT, [
+        $page = $this->client->post(self::URL_CONSULT, [], [
             'accion' => 'buscar',
             'nuDni' => $dni,
             'imagen' => $captcha,
         ]);
 
-        if ($req->error) {
+        if ($page === false) {
             $this->error = 'Ocurrio un problema conectando a Reniec';
 
             return false;
@@ -58,6 +73,16 @@ class Dni extends CookieRequest
         $person->dni = $dni;
 
         return $person;
+    }
+
+    /**
+     * Set Custom Http Client.
+     *
+     * @param ClientInterface $client
+     */
+    public function setClient(ClientInterface $client)
+    {
+        $this->client = $client;
     }
 
     /**
@@ -97,11 +122,10 @@ class Dni extends CookieRequest
      */
     private function getCaptchaImage()
     {
-        $req = $this->getCurl();
-        $image = $req->get(self::URL_CAPTCHA);
+        $image = $this->client->get(self::URL_CAPTCHA, []);
 
-        if ($req->error) {
-            $this->error = $req->errorMessage;
+        if ($image === false) {
+            $this->error = 'No se pudo cargar el captcha image';
 
             return false;
         }

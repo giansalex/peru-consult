@@ -8,16 +8,33 @@
 
 namespace Peru\Sunat;
 
-use Peru\CookieRequest;
+use Peru\Http\ClientInterface;
+use Peru\Http\ContextClient;
 
 /**
  * Class Ruc.
  */
-class Ruc extends CookieRequest
+class Ruc
 {
     const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
     const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
+
+    /**
+     * @var string
+     */
     private $error;
+    /**
+     * @var ClientInterface
+     */
+    private $client;
+
+    /**
+     * Ruc constructor.
+     */
+    public function __construct()
+    {
+        $this->client = new ContextClient();
+    }
 
     /**
      * @param string $ruc
@@ -32,13 +49,13 @@ class Ruc extends CookieRequest
             return false;
         }
         $random = $this->getRandom();
+
+
         $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+        $html = $this->client->get($url, []);
 
-        $req = $this->getCurl();
-        $html = $req->get($url);
-
-        if ($req->error) {
-            $this->error = $req->errorMessage;
+        if ($html === false) {
+            $this->error = 'Ocurrio un problema conectando a Sunat';
 
             return false;
         }
@@ -49,6 +66,16 @@ class Ruc extends CookieRequest
         }
 
         return $this->getCompany($dic);
+    }
+
+    /**
+     * Set Custom Http Client.
+     *
+     * @param ClientInterface $client
+     */
+    public function setClient(ClientInterface $client)
+    {
+        $this->client = $client;
     }
 
     /**
@@ -135,12 +162,7 @@ class Ruc extends CookieRequest
 
     private function getRandom()
     {
-        $curl = $this->getCurl();
-        $code = $curl->get(self::URL_RANDOM);
-
-        if ($curl->error) {
-            return false;
-        }
+        $code = $this->client->get(self::URL_RANDOM, []);
 
         return $code;
     }
