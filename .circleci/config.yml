@@ -2,11 +2,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/php:7.1-node-browsers
+      - image: circleci/php:7.1.9
     steps:
       - checkout
-      - run: sudo apt install -y libsqlite3-dev git libfreetype6-dev libjpeg62-turbo-dev
-      - run: sudo docker-php-ext-install pdo
+      - run: sudo apt install -y git libfreetype6-dev libjpeg62-turbo-dev
       - run: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
       - run: sudo docker-php-ext-install -j$(nproc) gd
       - run: sudo composer self-update
@@ -34,10 +33,9 @@ jobs:
             python3 -m venv venv
             . venv/bin/activate
             GIT_FILES=($(git show --pretty="" --name-only $CIRCLE_SHA1))
-            echo ${GIT_FILES[*]}
             for f in ${GIT_FILES[@]};
             do
-              if [[ $f == "docs/"* ]]; then
+              if [[ $f == "docs/"* ]] || [ $f == "mkdocs.yml" ]; then
                 git config user.name "Giancarlos Salas";
                 git config user.email "giansalex@gmail.com";
                 git remote add gh-token "https://${GH_TOKEN}@github.com/giansalex/peru-consult.git";
