@@ -26,6 +26,10 @@ class Dni
      * @var ClientInterface
      */
     private $client;
+    /**
+     * @var CaptchaCodes
+     */
+    private $codes;
 
     /**
      * Dni constructor.
@@ -33,6 +37,7 @@ class Dni
     public function __construct()
     {
         $this->client = new ContextClient();
+        $this->codes = new CaptchaCodes();
     }
 
     /**
@@ -166,19 +171,13 @@ class Dni
         imagecopyresampled($L3, $image, 0, 0, 76, 10, 25, 20, 25, 20);
         imagecopyresampled($L4, $image, 0, 0, 106, 15, 25, 20, 25, 20);
 
-        $query = <<<SQL
-SELECT (SELECT Caracter FROM Diccionario WHERE Codigo1='{$this->getText($L1)}') AS c1,
-(SELECT Caracter FROM Diccionario WHERE Codigo2='{$this->getText($L2)}') AS c2,
-(SELECT Caracter FROM Diccionario WHERE Codigo3='{$this->getText($L3)}') AS c3,
-(SELECT Caracter FROM Diccionario WHERE Codigo4='{$this->getText($L4)}') AS c4
-SQL;
+        $cod = $this->codes;
+        $value = $cod->getLetter($this->getText($L1), 1);
+        $value .= $cod->getLetter($this->getText($L2), 2);
+        $value .= $cod->getLetter($this->getText($L3), 3);
+        $value .= $cod->getLetter($this->getText($L4), 4);
 
-        $rpt = $this->getConnection()->query($query);
-        if ($row = $rpt->fetch(\PDO::FETCH_ASSOC)) {
-            return $row['c1'].$row['c2'].$row['c3'].$row['c4'];
-        }
-
-        return false;
+        return $value;
     }
 
     /**
@@ -208,15 +207,5 @@ SQL;
         }
 
         return $rtn;
-    }
-
-    /**
-     * Get Db Connection.
-     *
-     * @return \PDO
-     */
-    private function getConnection()
-    {
-        return new \PDO('sqlite:'.__DIR__.'/solver.db');
     }
 }
