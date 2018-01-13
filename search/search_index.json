@@ -2,12 +2,12 @@
     "docs": [
         {
             "location": "/",
-            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha.\n\n\nInstalar\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n, \npdo_sqlite\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium",
+            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha, con cero dependencias.\n\n\nInstalar\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium",
             "title": "Principal"
         },
         {
             "location": "/#peru-consultas",
-            "text": "Consultas de DNI y RUC sin uso de captcha.",
+            "text": "Consultas de DNI y RUC sin uso de captcha, con cero dependencias.",
             "title": "Per\u00fa Consultas"
         },
         {
@@ -22,7 +22,7 @@
         },
         {
             "location": "/#requerimientos",
-            "text": "Ruc necesita la extension  dom .  Dni necesita las extensiones  gd ,  pdo_sqlite .",
+            "text": "Ruc necesita la extension  dom .  Dni necesita las extensiones  gd .",
             "title": "Requerimientos"
         },
         {
@@ -37,7 +37,7 @@
         },
         {
             "location": "/dni/",
-            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n y \npdo_sqlite\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autoload.php';\n\n$dni = '00000004';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\necho json_encode(get_object_vars($person));\n\n\n\n\nResultado\n\n\nResultado en formato json.\n\n\n{\n    \ndni\n:\n00000004\n,\n   \nnombres\n:\nJOYCE\n,\n   \napellidoPaterno\n:\nBARDALES\n,\n   \napellidoMaterno\n:\nTORRES\n,\n   \ncodVerifica\n:\n9\n\n}",
+            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autoload.php';\n\n$dni = '00000004';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\necho json_encode(get_object_vars($person));\n\n\n\n\nResultado\n\n\nResultado en formato json.\n\n\n{\n    \ndni\n:\n00000004\n,\n   \nnombres\n:\nJOYCE\n,\n   \napellidoPaterno\n:\nBARDALES\n,\n   \napellidoMaterno\n:\nTORRES\n,\n   \ncodVerifica\n:\n9\n\n}",
             "title": "Dni"
         },
         {
@@ -47,7 +47,7 @@
         },
         {
             "location": "/dni/#requerimientos",
-            "text": "Tener cargada la extension  gd  y  pdo_sqlite .",
+            "text": "Tener cargada la extension  gd .",
             "title": "Requerimientos"
         },
         {

@@ -34,7 +34,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="./img/peru.png">
-      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.3.0">
+      <meta name="generator" content="mkdocs-0.17.2, mkdocs-material-2.5.0">
     
     
       
@@ -42,7 +42,7 @@
       
     
     
-      <link rel="stylesheet" href="./assets/stylesheets/application.0e9c8aca.css">
+      <link rel="stylesheet" href="./assets/stylesheets/application.2a88008a.css">
       
         <link rel="stylesheet" href="./assets/stylesheets/application-palette.792431c1.css">
       
@@ -63,11 +63,10 @@
     
   </head>
   
+  
     
     
-    
-      <body data-md-color-primary="teal" data-md-color-accent="indigo">
-    
+    <body dir="ltr" data-md-color-primary="teal" data-md-color-accent="indigo">
   
     <svg class="md-svg">
       <defs>
@@ -115,11 +114,13 @@
             
 <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="search"></label>
-  <div class="md-search__inner">
+  <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" required placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <input type="text" class="md-search__input" name="query" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
       <label class="md-icon md-search__icon" for="search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">&#xE5CD;</button>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
     </form>
     <div class="md-search__output">
       <div class="md-search__scrollwrap" data-md-scrollfix>
@@ -389,7 +390,7 @@
 <a href="https://scrutinizer-ci.com/g/giansalex/peru-consult/?branch=master"><img alt="Code Coverage" src="https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/coverage.png?b=master" /></a>
 <a href="https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master"><img alt="Build Status" src="https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master" /></a>
 <a href="https://packagist.org/packages/giansalex/peru-consult"><img alt="Packagist" src="https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square" /></a> <br />
-Consultas de DNI y RUC sin uso de captcha.</p>
+Consultas de DNI y RUC sin uso de captcha, con cero dependencias.</p>
 <h2 id="instalar">Instalar<a class="headerlink" href="#instalar" title="Permanent link">&para;</a></h2>
 <p>Via composer desde <a href="https://packagist.org/packages/giansalex/peru-consult">packagist.org</a></p>
 <pre class="code"><code class="language-bash">composer require giansalex/peru-consult</code></pre>
@@ -403,7 +404,7 @@ Consultas de DNI y RUC sin uso de captcha.</p>
 <h2 id="requerimientos">Requerimientos<a class="headerlink" href="#requerimientos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Ruc necesita la extension <a href="http://php.net/manual/es/book.dom.php">dom</a>.</li>
-<li>Dni necesita las extensiones <a href="http://php.net/manual/es/image.installation.php">gd</a>, <a href="http://php.net/manual/es/pdo.installation.php">pdo_sqlite</a>.</li>
+<li>Dni necesita las extensiones <a href="http://php.net/manual/es/image.installation.php">gd</a>.</li>
 </ul>
 <h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>Puede utilizar el API REST <a href="https://github.com/giansalex/peru-consult-api">peru-consult-api</a>  </p>
@@ -473,7 +474,7 @@ Consultas de DNI y RUC sin uso de captcha.</p>
       
     </div>
     
-      <script src="./assets/javascripts/application.cae2244d.js"></script>
+      <script src="./assets/javascripts/application.ce2ab4bf.js"></script>
       
         
         
