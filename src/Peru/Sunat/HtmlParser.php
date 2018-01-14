@@ -16,7 +16,7 @@ final class HtmlParser
     /**
      * Parse html to dictionary.
      *
-     * @param string $html
+     * @param $html
      *
      * @return array|bool
      */
@@ -61,9 +61,10 @@ final class HtmlParser
             if ($this->isNotElement($item2)) {
                 continue;
             }
-            ++$i;
-            if ($i == 1) {
+
+            if ($i === 0) {
                 $temp = trim($item2->textContent);
+                $i = 1;
                 continue;
             }
 
@@ -85,20 +86,25 @@ final class HtmlParser
 
     private function getPhone($html)
     {
-        $arr = [];
         $patron = '/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
         preg_match_all($patron, $html, $matches, PREG_SET_ORDER);
         if (count($matches) > 0) {
-            $phones = explode('/', $matches[0][1]);
-            foreach ($phones as $phone) {
-                if (empty($phone)) {
-                    continue;
-                }
-                $arr[] = trim($phone);
-            }
+            $parts = $this->getPhoneParts($matches[0][1]);
+            return iterator_to_array($parts);
         }
 
-        return $arr;
+        return [];
+    }
+
+    private function getPhoneParts($text)
+    {
+        $phones = explode('/', $text);
+        foreach ($phones as $phone) {
+            if (empty($phone)) {
+                continue;
+            }
+            yield trim($phone);
+        }
     }
 
     private function getContent(\DOMXPath $xp, \DOMNode $node)

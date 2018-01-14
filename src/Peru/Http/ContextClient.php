@@ -68,24 +68,15 @@ class ContextClient implements ClientInterface
      */
     private function getContext($method, $data, array $headers)
     {
-        $append = '';
-        foreach ($headers as $key => $value) {
-            $append .= $key.': '.$value."\r\n";
-        }
-
         $options = [
             'http' => [
-                'header' => $append,
+                'header' => $this->join(': ', $headers),
                 'method' => $method,
-                'content' => is_array($data) ? http_build_query($data) : $data,
+                'content' => $this->getRawData($data),
             ],
         ];
         if (!empty($this->cookies)) {
-            $append = '';
-            foreach ($this->cookies as $key => $value) {
-                $append .= $key.'='.$value."\r\n";
-            }
-            $options['http']['header'] .= 'Cookie: '.$append;
+            $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies);
         }
 
         $context = stream_context_create($options);
@@ -106,5 +97,20 @@ class ContextClient implements ClientInterface
         if (!empty($cookies)) {
             $this->cookies = $cookies;
         }
+    }
+
+    private function getRawData($data)
+    {
+        return is_array($data) ? http_build_query($data) : $data;
+    }
+
+    private function join($glue, array $items)
+    {
+        $append = '';
+        foreach ($items as $key => $value) {
+            $append .= $key.$glue.$value."\r\n";
+        }
+
+        return $append;
     }
 }

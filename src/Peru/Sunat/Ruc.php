@@ -104,16 +104,7 @@ class Ruc
 
     private function getCompany(array $items)
     {
-        $cp = new Company();
-
-        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:']);
-        $cp->nombreComercial = $items['Nombre Comercial:'];
-        $cp->telefonos = $items['Phone'];
-        $cp->tipo = $items['Tipo Contribuyente:'];
-        $cp->estado = $items['Estado del Contribuyente:'];
-        $cp->condicion = $items['Condición del Contribuyente:'];
-        $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
-        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
+        $cp = $this->getHeadCompany($items);
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
         $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
         $cp->actExterior = $items['Actividad de Comercio Exterior:'];
@@ -129,6 +120,21 @@ class Ruc
         }
         $this->fixDirection($cp);
 
+        return $cp;
+    }
+
+    private function getHeadCompany(array $items)
+    {
+        $cp = new Company();
+
+        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:']);
+        $cp->nombreComercial = $items['Nombre Comercial:'];
+        $cp->telefonos = $items['Phone'];
+        $cp->tipo = $items['Tipo Contribuyente:'];
+        $cp->estado = $items['Estado del Contribuyente:'];
+        $cp->condicion = $items['Condición del Contribuyente:'];
+        $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
+        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
         return $cp;
     }
 
