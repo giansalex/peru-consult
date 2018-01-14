@@ -54,7 +54,7 @@ final class HtmlParser
 
     private function setValuesFromNode(\DOMXPath $xp, \DOMNode $item, &$dic)
     {
-        $i = 0;
+        $start = true;
         $temp = '';
         foreach ($item->childNodes as $item2) {
             /** @var $item2 \DOMNode */
@@ -62,14 +62,13 @@ final class HtmlParser
                 continue;
             }
 
-            if ($i === 0) {
+            if ($start) {
                 $temp = trim($item2->textContent);
-                $i = 1;
-                continue;
+            } else {
+                $dic[$temp] = $this->getContent($xp, $item2);
             }
 
-            $dic[$temp] = $this->getContent($xp, $item2);
-            $i = 0;
+            $start = !$start;
         }
     }
 

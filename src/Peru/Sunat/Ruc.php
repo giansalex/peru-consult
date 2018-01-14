@@ -54,21 +54,10 @@ class Ruc
             return false;
         }
         $random = $this->getRandom();
-
-
         $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
-        $html = $this->client->get($url, []);
+        $dic = $this->getValuesFromUrl($url);
 
-        if ($html === false) {
-            $this->error = 'Ocurrio un problema conectando a Sunat';
-
-            return false;
-        }
-
-        $dic = $this->parser->parse($html);
         if ($dic === false) {
-            $this->error = 'No se encontro el ruc';
-
             return false;
         }
 
@@ -100,6 +89,26 @@ class Ruc
         $code = $this->client->get(self::URL_RANDOM, []);
 
         return $code;
+    }
+
+    private function getValuesFromUrl($url)
+    {
+        $html = $this->client->get($url, []);
+
+        if ($html === false) {
+            $this->error = 'Ocurrio un problema conectando a Sunat';
+
+            return false;
+        }
+
+        $dic = $this->parser->parse($html);
+        if ($dic === false) {
+            $this->error = 'No se encontro el ruc';
+
+            return false;
+        }
+
+        return $dic;
     }
 
     private function getCompany(array $items)
@@ -135,6 +144,7 @@ class Ruc
         $cp->condicion = $items['Condición del Contribuyente:'];
         $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
+
         return $cp;
     }
 
