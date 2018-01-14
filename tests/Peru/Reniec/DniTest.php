@@ -35,10 +35,6 @@ class DniTest extends \PHPUnit_Framework_TestCase
     {
         $person = $this->cs->get($dni);
 
-        if ($person == false) {
-            echo 'Error DNI ' . $dni . ' -> ' . $this->cs->getError() . PHP_EOL;
-        }
-
         $this->assertNotFalse($person);
         $this->assertEquals($dni, $person->dni);
         $this->assertNotEmpty($person->nombres);
@@ -47,6 +43,28 @@ class DniTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testInvalidRequest()
+    {
+        $dni = new Dni();
+        $dni->setClient($this->getClientCaptchaMock(Dni::URL_CONSULT));
+
+        $cs = $dni->get('00000001');
+
+        $this->assertFalse($cs);
+        $this->assertEquals('Ocurrio un problema conectando a Reniec', $dni->getError());
+    }
+
+    public function testInvalidCaptcha()
+    {
+        $dni = new Dni();
+        $dni->setClient($this->getClientMock(null));
+
+        $cs = $dni->get('00000001');
+
+        $this->assertFalse($cs);
+        $this->assertEquals('No se pudo crear imagen desde el captcha', $dni->getError());
+    }
+
+    public function testInvalidRequestCaptcha()
     {
         $dni = new Dni();
         $dni->setClient($this->getClientMock(Dni::URL_CAPTCHA));
@@ -70,7 +88,6 @@ class DniTest extends \PHPUnit_Framework_TestCase
         $person = $this->cs->get('00000000');
 
         $this->assertFalse($person);
-//        $this->assertEquals('No se encontro resultados para el dni', $this->cs->getError());
     }
 
     public function dniProviders()
@@ -91,10 +108,33 @@ class DniTest extends \PHPUnit_Framework_TestCase
      */
     private function getClientMock($url)
     {
-        $stub = $this->getMockBuilder(ClientInterface::class)
-            ->getMock();
+        $stub = $this->getHttpMock('get', $url);
 
+        /**@var $stub ClientInterface*/
+        return $stub;
+    }
+
+    /**
+     * @param $url
+     * @return ClientInterface
+     */
+    private function getClientCaptchaMock($url)
+    {
+        $stub = $this->getHttpMock('post', $url);
+
+        $image = file_get_contents(__DIR__.'/../../Resources/captcha.jpg');
         $stub->method('get')
+            ->will($this->returnValue($image));
+
+        /**@var $stub ClientInterface*/
+        return $stub;
+    }
+
+    private function getHttpMock($method, $url)
+    {
+        $stub = $this->getMockBuilder(ClientInterface::class)
+                ->getMock();
+        $stub->method($method)
             ->willReturnCallback(function ($param) use ($url) {
                 if (empty($url)) {
                     return '111';
@@ -107,7 +147,7 @@ class DniTest extends \PHPUnit_Framework_TestCase
                 return '111';
             });
 
-        /**@var $stub ClientInterface*/
         return $stub;
+
     }
 }

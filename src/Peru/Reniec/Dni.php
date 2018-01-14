@@ -57,6 +57,17 @@ class Dni
             return false;
         }
 
+        $person = $this->getResult($dni, $captcha);
+        if ($person === false) {
+            return false;
+        }
+        $person->dni = $dni;
+
+        return $person;
+    }
+
+    private function getResult($dni, $captcha)
+    {
         $page = $this->client->post(self::URL_CONSULT, [], [
             'accion' => 'buscar',
             'nuDni' => $dni,
@@ -75,7 +86,6 @@ class Dni
 
             return false;
         }
-        $person->dni = $dni;
 
         return $person;
     }
@@ -151,13 +161,18 @@ class Dni
             return false;
         }
 
-        $image = imagecreatefromstring($captcha);
+        $image = @imagecreatefromstring($captcha);
         if (!$image) {
             $this->error = 'No se pudo crear imagen desde el captcha';
 
             return false;
         }
 
+        return $this->getValueCaptchaFromImage($image);
+    }
+
+    private function getValueCaptchaFromImage($image)
+    {
         imagefilter($image, IMG_FILTER_GRAYSCALE);
         imagefilter($image, IMG_FILTER_BRIGHTNESS, 100);
         imagefilter($image, IMG_FILTER_NEGATE);
@@ -195,17 +210,22 @@ class Dni
         for ($y = 0; $y < $h; ++$y) {
             for ($x = 0; $x < $w; ++$x) {
                 $rgb = imagecolorat($image, $x, $y);
-                $r = ($rgb >> 16) & 0xFF;
-                $g = ($rgb >> 8) & 0xFF;
-                $b = $rgb & 0xFF;
-                if ((($r + $g + $b) / 255) < 1) {
-                    $rtn .= '0';
-                } else {
-                    $rtn .= '1';
-                }
+                $rtn .= $this->getDotFromRgb($rgb);
             }
         }
 
         return $rtn;
+    }
+
+    private function getDotFromRgb($rgb)
+    {
+        $r = ($rgb >> 16) & 0xFF;
+        $g = ($rgb >> 8) & 0xFF;
+        $b = $rgb & 0xFF;
+        if ((($r + $g + $b) / 255) < 1) {
+            return '0';
+        }
+
+        return '1';
     }
 }

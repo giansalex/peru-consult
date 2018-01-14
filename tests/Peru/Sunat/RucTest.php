@@ -46,6 +46,19 @@ class RucTest extends \PHPUnit_Framework_TestCase
 //        file_put_contents($ruc.'.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
     }
 
+    public function testExtraDirection()
+    {
+        $ruc = new Ruc();
+        $ruc->setClient($this->getClientHtmlMock());
+
+        $cp = $ruc->get('20440374248');
+
+        $this->assertNotFalse($cp);
+        $this->assertNull($cp->departamento);
+        $this->assertNull($cp->provincia);
+        $this->assertNull($cp->distrito);
+    }
+
     public function testInvalidRequest()
     {
         $ruc = new Ruc();
@@ -105,8 +118,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
      */
     private function getClientMock($url)
     {
-        $stub = $this->getMockBuilder(ClientInterface::class)
-                ->getMock();
+        $stub = $this->getHttpMock();
 
         $stub->method('get')
             ->willReturnCallback(function ($param) use ($url) {
@@ -123,5 +135,33 @@ class RucTest extends \PHPUnit_Framework_TestCase
 
         /**@var $stub ClientInterface*/
         return $stub;
+    }
+
+    /**
+     * @return ClientInterface
+     */
+    private function getClientHtmlMock()
+    {
+        $stub = $this->getHttpMock();
+
+        $stub->method('get')
+            ->willReturnCallback(function ($param) {
+                if ($param == Ruc::URL_RANDOM) {
+                    return '-3234111';
+                }
+
+                return utf8_decode(
+                    file_get_contents(__DIR__.'/../../Resources/sunat.html')
+                );
+            });
+
+        /**@var $stub ClientInterface*/
+        return $stub;
+    }
+
+    private function getHttpMock()
+    {
+        return $this->getMockBuilder(ClientInterface::class)
+            ->getMock();
     }
 }
