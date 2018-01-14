@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/",
-            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha, con cero dependencias.\n\n\nInstalar\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium",
+            "text": "Per\u00fa Consultas\n\n\n\n\n\n\n\n\n\n\n\n\n \n\nConsultas de DNI y RUC sin uso de captcha, con cero dependencias.\n\n\nInstalar\n\n\nVia composer desde \npackagist.org\n\n\ncomposer require giansalex/peru-consult\n\n\n\n\nDisponibles\n\n\n\n\nRuc (SUNAT)\n\n\nDni (RENIEC)\n\n\n\n\nRequerimientos\n\n\n\n\nRuc necesita la extension \ndom\n.\n\n\nDni necesita las extensiones \ngd\n.\n\n\n\n\nAPI\n\n\nPuede utilizar el API REST \nperu-consult-api\n  \n\n\nSponsors\n\n\nPowered by \nQuertium",
             "title": "Principal"
         },
         {
