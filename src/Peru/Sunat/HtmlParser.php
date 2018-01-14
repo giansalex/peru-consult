@@ -40,30 +40,36 @@ final class HtmlParser
     private function getKeyValues(\DOMNodeList $nodes, \DOMXPath $xp)
     {
         $dic = [];
-        $temp = '';
         foreach ($nodes as $item) {
             /** @var $item \DOMNode */
             if ($this->isNotElement($item)) {
                 continue;
             }
-            $i = 0;
-            foreach ($item->childNodes as $item2) {
-                /** @var $item2 \DOMNode */
-                if ($this->isNotElement($item2)) {
-                    continue;
-                }
-                ++$i;
-                if ($i == 1) {
-                    $temp = trim($item2->textContent);
-                    continue;
-                }
 
-                $dic[$temp] = $this->getContent($xp, $item2);
-                $i = 0;
-            }
+            $this->setValuesFromNode($xp, $item, $dic);
         }
 
         return $dic;
+    }
+
+    private function setValuesFromNode(\DOMXPath $xp, \DOMNode $item, &$dic)
+    {
+        $i = 0;
+        $temp = '';
+        foreach ($item->childNodes as $item2) {
+            /** @var $item2 \DOMNode */
+            if ($this->isNotElement($item2)) {
+                continue;
+            }
+            ++$i;
+            if ($i == 1) {
+                $temp = trim($item2->textContent);
+                continue;
+            }
+
+            $dic[$temp] = $this->getContent($xp, $item2);
+            $i = 0;
+        }
     }
 
     private function getXpathFromHtml($html)
@@ -99,19 +105,23 @@ final class HtmlParser
     {
         $select = $xp->query('./select', $node);
         if ($select->length > 0) {
-            $arr = [];
             $options = $select->item(0)->childNodes;
-            foreach ($options as $opt) {
-                /** @var $opt \DOMNode */
-                if ($opt->nodeName != 'option') {
-                    continue;
-                }
-                $arr[] = trim($opt->textContent);
-            }
-            return $arr;
+
+            return iterator_to_array($this->getValuesFromOption($options));
         }
 
         return trim($node->textContent);
+    }
+
+    private function getValuesFromOption(\DOMNodeList $options)
+    {
+        foreach ($options as $opt) {
+            /** @var $opt \DOMNode */
+            if ($opt->nodeName != 'option') {
+                continue;
+            }
+            yield trim($opt->textContent);
+        }
     }
 
     private function isNotElement(\DOMNode $node)

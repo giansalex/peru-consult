@@ -120,14 +120,18 @@ class Dni
             $person->apellidoPaterno = utf8_encode($matches[0][2]);
             $person->apellidoMaterno = utf8_encode($matches[0][3]);
         }
+        $this->setCodVerifica($person, $html);
 
+        return $person;
+    }
+
+    private function setCodVerifica(Person $person, $html)
+    {
         $patron = '/<font color=#ff0000>([A-Z0-9]+) <\/font>/';
         preg_match_all($patron, $html, $matches, PREG_SET_ORDER);
         if (isset($matches[0])) {
             $person->codVerifica = trim($matches[0][1]);
         }
-
-        return $person;
     }
 
     /**
