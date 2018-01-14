@@ -14,7 +14,7 @@ use Peru\Sunat\Ruc;
 
 require 'vendor/autoload.php';
 
-$ruc = '20513176962';
+$ruc = '20100070970';
 
 $cs = new Ruc();
 $company = $cs->get($ruc);
@@ -34,45 +34,49 @@ Resultado en formato json.
 
 ```json
 {
-   "ruc":"20513176962",
-   "razonSocial":"ABLIMATEX EXPORT S.A.C.",
-   "nombreComercial":"-",
-   "telefonos":[
-      "4127420",
-      "997501515",
-      "997501513"
-   ],
-   "tipo":"SOCIEDAD ANONIMA CERRADA",
-   "estado":"ACTIVO",
-   "condicion":"HABIDO",
-   "direccion":"JR. ITALIA NRO. 1404 INT. 4-A (4TO. PISO)",
-   "departamento":"LIMA",
-   "provincia":"LIMA",
-   "distrito":"LA VICTORIA",
-   "fechaInscripcion":"2006-05-18T00:00:00.000Z",
-   "sistEmsion":"MANUAL\/COMPUTARIZADO",
-   "sistContabilidad":"MANUAL\/COMPUTARIZADO",
-   "actExterior":"EXPORTADOR",
-   "actEconomicas":[
-      "1410 - FABRICACI\u00d3N DE PRENDAS DE VESTIR, EXCEPTO PRENDAS DE PIEL"
-   ],
-   "cpPago":[
-      "FACTURA",
-      "BOLETA DE VENTA",
-      "NOTA DE CREDITO",
-      "NOTA DE DEBITO",
-      "GUIA DE REMISION - REMITENTE"
-   ],
-   "sistElectronica":[
-
-   ],
-   "fechaEmisorFe":null,
-   "cpeElectronico":[
-
-   ],
-   "fechaPle":"2014-01-01T00:00:00.000Z",
-   "padrones":[
-      "NINGUNO"
-   ]
+    "ruc": "20100070970",
+    "razonSocial": "SUPERMERCADOS PERUANOS SOCIEDAD ANONIMA 'O ' S.P.S.A.",
+    "nombreComercial": "-",
+    "telefonos": [
+        "6188000",
+        "993548438"
+    ],
+    "tipo": "SOCIEDAD ANONIMA",
+    "estado": "ACTIVO",
+    "condicion": "HABIDO",
+    "direccion": "CAL.MORELLI NRO. 181 INT.",
+    "departamento": "LIMA",
+    "provincia": "LIMA",
+    "distrito": "SAN BORJA",
+    "fechaInscripcion": "1992-10-09T00:00:00.000Z",
+    "sistEmsion": "MECANIZADO",
+    "sistContabilidad": "COMPUTARIZADO",
+    "actExterior": "SIN ACTIVIDAD",
+    "actEconomicas": [
+        "4711 - VENTA AL POR MENOR EN COMERCIOS NO ESPECIALIZADOS CON PREDOMINIO DE LA VENTA DE ALIMENTOS, BEBIDAS O TABACO",
+        "50304 - VENTA PARTES, PIEZAS, ACCESORIOS.",
+        "4530 - VENTA DE PARTES, PIEZAS Y ACCESORIOS PARA VEHÍCULOS AUTOMOTORES"
+    ],
+    "cpPago": [
+        "FACTURA",
+        "BOLETA DE VENTA",
+        "LIQUIDACION DE COMPRA",
+        "NOTA DE CREDITO",
+        "NOTA DE DEBITO",
+        "GUIA DE REMISION - REMITENTE",
+        "COMPROBANTE DE RETENCION"
+    ],
+    "sistElectronica": [
+        "DESDE LOS SISTEMAS DEL CONTRIBUYENTE. AUTORIZ DESDE 01/01/2013"
+    ],
+    "fechaEmisorFe": "2013-01-01T00:00:00.000Z",
+    "cpeElectronico": [
+        "FACTURA (desde 01/01/2013)",
+        "BOLETA (desde 01/01/2013)"
+    ],
+    "fechaPle": "2011-09-08T00:00:00.000Z",
+    "padrones": [
+        "Incorporado al Régimen de Agentes de Retención de IGV (R.S.037-2002) a partir del 01/06/2002"
+    ]
 }
 ```

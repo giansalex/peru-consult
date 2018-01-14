@@ -13,7 +13,7 @@ use Peru\Reniec\Dni;
 
 require 'vendor/autoload.php';
 
-$dni = '00000004';
+$dni = '46658592';
 
 $cs = new Dni();
 $person = $cs->get($dni);
@@ -33,10 +33,10 @@ Resultado en formato json.
 
 ```json
 {
-    "dni":"00000004",
-   "nombres":"JOYCE",
-   "apellidoPaterno":"BARDALES",
-   "apellidoMaterno":"TORRES",
-   "codVerifica":"9"
+  "dni": "46658592",
+  "nombres": "LESLY LICET",
+  "apellidoPaterno": "PEREZ",
+  "apellidoMaterno": "PEÑA",
+  "codVerifica": "6"
 }
 ```
