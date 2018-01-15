@@ -19,7 +19,7 @@ theme:
   logo: 'img/peru.png'
   language: 'es'
   palette:
-    primary: 'Teal'
+    primary: 'Red'
     accent: 'Indigo'
 
 extra_css:
