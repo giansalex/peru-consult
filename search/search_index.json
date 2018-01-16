@@ -37,7 +37,7 @@
         },
         {
             "location": "/dni/",
-            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autoload.php';\n\n$dni = '46658592';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\necho json_encode(get_object_vars($person));\n\n\n\n\nResultado\n\n\nResultado en formato json.\n\n\n{\n  \ndni\n: \n46658592\n,\n  \nnombres\n: \nLESLY LICET\n,\n  \napellidoPaterno\n: \nPEREZ\n,\n  \napellidoMaterno\n: \nPE\u00d1A\n,\n  \ncodVerifica\n: \n6\n\n}",
+            "text": "DNI\n\n\nConsulta del DNI usando el servicio p\u00fablico de Reniec.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extension \ngd\n and \nopenssl\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Reniec\\Dni;\n\nrequire 'vendor/autoload.php';\n\n$dni = '46658592';\n\n$cs = new Dni();\n$person = $cs-\nget($dni);\nif ($person === false) {\n    echo $cs-\ngetError();\n    exit();\n}\n\necho json_encode(get_object_vars($person));\n\n\n\n\nResultado\n\n\nResultado en formato json.\n\n\n{\n  \ndni\n: \n46658592\n,\n  \nnombres\n: \nLESLY LICET\n,\n  \napellidoPaterno\n: \nPEREZ\n,\n  \napellidoMaterno\n: \nPE\u00d1A\n,\n  \ncodVerifica\n: \n6\n\n}",
             "title": "Dni"
         },
         {
@@ -47,7 +47,7 @@
         },
         {
             "location": "/dni/#requerimientos",
-            "text": "Tener cargada la extension  gd .",
+            "text": "Tener cargada la extension  gd  and  openssl .",
             "title": "Requerimientos"
         },
         {
