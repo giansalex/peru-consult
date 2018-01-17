@@ -8,7 +8,6 @@
 
 namespace Tests\Peru\Reniec;
 
-use Peru\Http\ClientInterface;
 use Peru\Reniec\Dni;
 
 /**
@@ -17,6 +16,10 @@ use Peru\Reniec\Dni;
  */
 class DniTest extends \PHPUnit_Framework_TestCase
 {
+    use DniTrait {
+        getHttpMock as private getHttp;
+    }
+
     /**
      * @var Dni
      */
@@ -100,54 +103,5 @@ class DniTest extends \PHPUnit_Framework_TestCase
             ['00000010'],
             ['48004836'],
         ];
-    }
-
-    /**
-     * @param $url
-     * @return ClientInterface
-     */
-    private function getClientMock($url)
-    {
-        $stub = $this->getHttpMock('get', $url);
-
-        /**@var $stub ClientInterface*/
-        return $stub;
-    }
-
-    /**
-     * @param $url
-     * @return ClientInterface
-     */
-    private function getClientCaptchaMock($url)
-    {
-        $stub = $this->getHttpMock('post', $url);
-
-        $image = file_get_contents(__DIR__.'/../../Resources/captcha.jpg');
-        $stub->method('get')
-            ->will($this->returnValue($image));
-
-        /**@var $stub ClientInterface*/
-        return $stub;
-    }
-
-    private function getHttpMock($method, $url)
-    {
-        $stub = $this->getMockBuilder(ClientInterface::class)
-                ->getMock();
-        $stub->method($method)
-            ->willReturnCallback(function ($param) use ($url) {
-                if (empty($url)) {
-                    return '111';
-                }
-                $count = strlen($url);
-                if (substr($param, 0, $count) == $url) {
-                    return false;
-                }
-
-                return '111';
-            });
-
-        return $stub;
-
     }
 }

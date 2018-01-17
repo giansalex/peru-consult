@@ -15,6 +15,8 @@ namespace Peru\Http;
  */
 class ContextClient implements ClientInterface
 {
+    const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+
     /**
      * @var array
      */
@@ -49,7 +51,7 @@ class ContextClient implements ClientInterface
     public function post($url, array $headers, $data)
     {
         if (is_array($data)) {
-            $headers['Content-type'] = 'application/x-www-form-urlencoded';
+            $headers['Content-type'] = self::FORM_CONTENT_TYPE;
         }
 
         $ctx = $this->getContext('POST', $data, $headers);
