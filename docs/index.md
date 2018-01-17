@@ -23,7 +23,7 @@ Disponibles
 Requerimientos
 ---------------
 - Ruc necesita la extension [dom](http://php.net/manual/es/book.dom.php).
-- Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php).
+- Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php) y [openssl](http://php.net/manual/es/openssl.installation.php).
 
 API
 ----
