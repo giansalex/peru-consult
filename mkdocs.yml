@@ -23,9 +23,11 @@ theme:
     accent: 'Indigo'
 
 extra_css:
-  - 'css/prism.css'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/themes/prism-okaidia.min.css'
 extra_javascript:
-  - 'js/prism.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-php.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-json.min.js'
 
 extra:
   social:
