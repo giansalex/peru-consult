@@ -72,7 +72,7 @@ final class HtmlParser
         }
     }
 
-    private function getXpathFromHtml($html)
+    public static  function getXpathFromHtml($html)
     {
         $dom = new \DOMDocument();
         $prevState = libxml_use_internal_errors(true);
