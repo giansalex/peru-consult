@@ -109,7 +109,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
         return [
             ['20440374248'], // LA LIBERTAD
             ['20513176962'],
-            ['10401510465'],
+//            ['10401510465'], // Direccion fiscal no disponible por SUNAT
             ['20600055519'],
             ['20512530517'],
             ['20100070970'],
