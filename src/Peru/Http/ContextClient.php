@@ -32,7 +32,7 @@ class ContextClient implements ClientInterface
      */
     public function get($url, array $headers)
     {
-        $ctx = $this->getContext('POST', null, $headers);
+        $ctx = $this->getContext('GET', null, $headers);
         $response = file_get_contents($url, false, $ctx);
         $this->saveCookies($http_response_header);
 
@@ -78,7 +78,7 @@ class ContextClient implements ClientInterface
             ],
         ];
         if (!empty($this->cookies)) {
-            $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies);
+            $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies, '; ');
         }
 
         $context = stream_context_create($options);
@@ -106,11 +106,11 @@ class ContextClient implements ClientInterface
         return is_array($data) ? http_build_query($data) : $data;
     }
 
-    private function join($glue, array $items)
+    private function join($glue, array $items, $end = "\r\n")
     {
         $append = '';
         foreach ($items as $key => $value) {
-            $append .= $key.$glue.$value."\r\n";
+            $append .= $key.$glue.$value.$end;
         }
 
         return $append;
