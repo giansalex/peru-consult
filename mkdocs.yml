@@ -11,6 +11,7 @@ pages:
     - Principal: index.md
     - Dni: dni.md
     - Ruc: ruc.md
+    - 'Usuario SOL': user-sol.md
 
 # Configuration
 theme:
