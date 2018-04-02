@@ -13,9 +13,10 @@ Using composer from [packagist.org](https://packagist.org/packages/giansalex/per
 composer require giansalex/peru-consult
 ```
 
-### Disponibles
+### Servicios Disponibles
 - Ruc (SUNAT).
 - Dni (RENIEC).
+- Validez Usuario SOL (SUNAT).
 
 ### Requirements
 - Ruc requier extension `dom`.
