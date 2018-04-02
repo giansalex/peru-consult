@@ -21,16 +21,16 @@ interface ClientInterface
      *
      * @return string|bool
      */
-    public function get($url, array $headers);
+    public function get($url, array $headers = []);
 
     /**
      * Post Request.
      *
      * @param string $url
-     * @param array  $headers
      * @param mixed  $data
+     * @param array  $headers
      *
      * @return string|bool
      */
-    public function post($url, array $headers, $data);
+    public function post($url, $data, array $headers = []);
 }

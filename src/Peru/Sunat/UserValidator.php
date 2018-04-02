@@ -41,10 +41,8 @@ class UserValidator
      */
     public function vaild($ruc, $user)
     {
-        $this->client->get(self::URL_VALIDEZ, []);
+        $this->client->get(self::URL_VALIDEZ);
         $html = $this->client->post(self::URL_VALIDEZ, [
-            'Content-Type' => 'application/x-www-form-urlencoded'
-        ], [
             'accion' => 'e1',
             'ruc' => $ruc,
             'usr' => $user,

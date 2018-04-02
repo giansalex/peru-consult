@@ -30,7 +30,7 @@ class ContextClient implements ClientInterface
      *
      * @return string|false
      */
-    public function get($url, array $headers)
+    public function get($url, array $headers = [])
     {
         $ctx = $this->getContext('GET', null, $headers);
         $response = file_get_contents($url, false, $ctx);
@@ -43,12 +43,12 @@ class ContextClient implements ClientInterface
      * Post Request.
      *
      * @param string $url
-     * @param array  $headers
      * @param mixed  $data
+     * @param array  $headers
      *
      * @return string|bool
      */
-    public function post($url, array $headers, $data)
+    public function post($url, $data, array $headers = [])
     {
         if (is_array($data)) {
             $headers['Content-type'] = self::FORM_CONTENT_TYPE;

@@ -68,7 +68,7 @@ class Dni
 
     private function getResult($dni, $captcha)
     {
-        $page = $this->client->post(self::URL_CONSULT, [], [
+        $page = $this->client->post(self::URL_CONSULT, [
             'accion' => 'buscar',
             'nuDni' => $dni,
             'imagen' => $captcha,
@@ -141,7 +141,7 @@ class Dni
      */
     private function getCaptchaImage()
     {
-        $image = $this->client->get(self::URL_CAPTCHA, []);
+        $image = $this->client->get(self::URL_CAPTCHA);
 
         if ($image === false) {
             $this->error = 'No se pudo cargar el captcha image';

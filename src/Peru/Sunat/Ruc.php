@@ -86,14 +86,14 @@ class Ruc
 
     private function getRandom()
     {
-        $code = $this->client->get(self::URL_RANDOM, []);
+        $code = $this->client->get(self::URL_RANDOM);
 
         return $code;
     }
 
     private function getValuesFromUrl($url)
     {
-        $html = $this->client->get($url, []);
+        $html = $this->client->get($url);
 
         if ($html === false) {
             $this->error = 'Ocurrio un problema conectando a Sunat';
