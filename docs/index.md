@@ -19,6 +19,7 @@ Disponibles
 ------------
 - Ruc (SUNAT)
 - Dni (RENIEC)
+- Validez Usuario SOL (SUNAT).
 
 Requerimientos
 ---------------
