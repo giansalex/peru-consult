@@ -10,7 +10,7 @@ Consultas de DNI y RUC sin uso de captcha, con cero dependencias.
 
 Instalar
 --------
-Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
+Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult).
 ```bash
 composer require giansalex/peru-consult
 ```
@@ -19,7 +19,7 @@ Disponibles
 ------------
 - Ruc (SUNAT)
 - Dni (RENIEC)
-- Validez Usuario SOL (SUNAT).
+- Validez Usuario SOL (SUNAT)
 
 Requerimientos
 ---------------

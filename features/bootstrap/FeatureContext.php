@@ -1,6 +1,7 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Peru\Http\ContextClient;
 
 /**
  * Defines application features from the specific context.
@@ -41,12 +42,17 @@ class FeatureContext implements Context
      */
     public function executeConsult()
     {
+        $client = new ContextClient();
         switch (strlen($this->document)) {
             case 8:
-                $this->result = (new \Peru\Reniec\Dni())->get($this->document);
+                $cs = new \Peru\Reniec\Dni();
+                $cs->setClient($client);
+                $this->result = $cs->get($this->document);
                 break;
             case 11:
-                $this->result = (new \Peru\Sunat\Ruc())->get($this->document);
+                $cs = new \Peru\Sunat\Ruc();
+                $cs->setClient($client);
+                $this->result = $cs->get($this->document);
                 break;
         }
     }
