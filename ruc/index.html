@@ -393,6 +393,8 @@ require 'vendor/autoload.php';
 $ruc = '20100070970';
 
 $cs = new Ruc();
+$cs-&gt;setClient(new ContextClient());
+
 $company = $cs-&gt;get($ruc);
 if ($company === false) {
     echo $cs-&gt;getError();
