@@ -87,7 +87,7 @@
         },
         {
             "location": "/user-sol/",
-            "text": "Usuario SOL\n\n\nConsulta la v\u00e1lidez del usuario SOL segun SUNAT.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extensi\u00f3n \ndom\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Sunat\\UserValidator;\nuse Peru\\Http\\ContextClient;\n\nrequire 'vendor/autoload.php';\n\n$ruc = '20123456789'; // colocar un ruc v\u00e1lido\n$user = 'TGGMMSYY'; // colocar un usuario seg\u00fan el ruc\n\n$cs = new UserValidator(new ContextClient());\n$valid = $cs-\nvaild($dni);\nif ($valid) {\n    echo 'V\u00e1lido';\n} else {\n    echo 'Inv\u00e1lido';\n}\n\n\n\n\nResultado\n\n\nResultado en consola\n\n\nV\u00e1lido",
+            "text": "Usuario SOL\n\n\nConsulta la v\u00e1lidez del usuario SOL segun SUNAT.\n\n\nRequerimientos\n\n\n\n\nTener cargada la extensi\u00f3n \ndom\n.\n\n\n\n\nEjemplo\n\n\nuse Peru\\Sunat\\UserValidator;\nuse Peru\\Http\\ContextClient;\n\nrequire 'vendor/autoload.php';\n\n$ruc = '20123456789'; // colocar un ruc v\u00e1lido\n$user = 'TGGMMSYY'; // colocar un usuario seg\u00fan el ruc\n\n$cs = new UserValidator(new ContextClient());\n$valid = $cs-\nvalid($dni);\nif ($valid) {\n    echo 'V\u00e1lido';\n} else {\n    echo 'Inv\u00e1lido';\n}\n\n\n\n\nResultado\n\n\nResultado en consola\n\n\nV\u00e1lido",
             "title": "Usuario SOL"
         },
         {
@@ -102,7 +102,7 @@
         },
         {
             "location": "/user-sol/#ejemplo",
-            "text": "use Peru\\Sunat\\UserValidator;\nuse Peru\\Http\\ContextClient;\n\nrequire 'vendor/autoload.php';\n\n$ruc = '20123456789'; // colocar un ruc v\u00e1lido\n$user = 'TGGMMSYY'; // colocar un usuario seg\u00fan el ruc\n\n$cs = new UserValidator(new ContextClient());\n$valid = $cs- vaild($dni);\nif ($valid) {\n    echo 'V\u00e1lido';\n} else {\n    echo 'Inv\u00e1lido';\n}",
+            "text": "use Peru\\Sunat\\UserValidator;\nuse Peru\\Http\\ContextClient;\n\nrequire 'vendor/autoload.php';\n\n$ruc = '20123456789'; // colocar un ruc v\u00e1lido\n$user = 'TGGMMSYY'; // colocar un usuario seg\u00fan el ruc\n\n$cs = new UserValidator(new ContextClient());\n$valid = $cs- valid($dni);\nif ($valid) {\n    echo 'V\u00e1lido';\n} else {\n    echo 'Inv\u00e1lido';\n}",
             "title": "Ejemplo"
         },
         {
