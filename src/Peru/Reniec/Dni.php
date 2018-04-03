@@ -9,7 +9,6 @@
 namespace Peru\Reniec;
 
 use Peru\Http\ClientInterface;
-use Peru\Http\ContextClient;
 
 /**
  * Class Dni.
@@ -36,7 +35,6 @@ class Dni
      */
     public function __construct()
     {
-        $this->client = new ContextClient();
         $this->codes = new CaptchaCodes();
     }
 

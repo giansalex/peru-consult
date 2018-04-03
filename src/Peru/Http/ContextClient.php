@@ -18,9 +18,11 @@ class ContextClient implements ClientInterface
     const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
     /**
+     * Cookies store.
+     *
      * @var array
      */
-    private $cookies;
+    public $cookies;
 
     /**
      * Get Request.

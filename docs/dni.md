@@ -16,6 +16,8 @@ require 'vendor/autoload.php';
 $dni = '46658592';
 
 $cs = new Dni();
+$cs->setClient(new ContextClient());
+
 $person = $cs->get($dni);
 if ($person === false) {
     echo $cs->getError();

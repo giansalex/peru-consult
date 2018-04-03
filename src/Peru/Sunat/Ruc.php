@@ -9,7 +9,6 @@
 namespace Peru\Sunat;
 
 use Peru\Http\ClientInterface;
-use Peru\Http\ContextClient;
 
 /**
  * Class Ruc.
@@ -26,7 +25,7 @@ class Ruc
     /**
      * @var ClientInterface
      */
-    private $client;
+    public $client;
     /**
      * @var HtmlParser
      */
@@ -37,7 +36,6 @@ class Ruc
      */
     public function __construct()
     {
-        $this->client = new ContextClient();
         $this->parser = new HtmlParser();
     }
 

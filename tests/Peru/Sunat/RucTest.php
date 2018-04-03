@@ -8,6 +8,7 @@
 
 namespace Tests\Peru\Sunat;
 
+use Peru\Http\ContextClient;
 use Peru\Sunat\Ruc;
 
 /**
@@ -28,6 +29,7 @@ class RucTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->cs = new Ruc();
+        $this->cs->setClient(new ContextClient());
     }
 
     /**

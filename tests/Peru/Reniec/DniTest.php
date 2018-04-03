@@ -8,6 +8,7 @@
 
 namespace Tests\Peru\Reniec;
 
+use Peru\Http\ContextClient;
 use Peru\Reniec\Dni;
 
 /**
@@ -28,6 +29,7 @@ class DniTest extends \PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->cs = new Dni();
+        $this->cs->setClient(new ContextClient());
     }
 
     /**
