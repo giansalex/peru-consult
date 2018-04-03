@@ -20,7 +20,7 @@ class UserValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $consulta = new UserValidator($this->getClientMock(true));
 
-        $result = $consulta->vaild('20000000001', 'HUAFDSMU');
+        $result = $consulta->valid('20000000001', 'HUAFDSMU');
 
         $this->assertTrue($result);
     }
@@ -29,7 +29,7 @@ class UserValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $consulta = new UserValidator($this->getClientMock(false));
 
-        $result = $consulta->vaild('20000000001', 'HUAFDSMU');
+        $result = $consulta->valid('20000000001', 'HUAFDSMU');
 
         $this->assertFalse($result);
     }

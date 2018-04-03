@@ -39,7 +39,7 @@ class UserValidator
      * @param string $user
      * @return bool
      */
-    public function vaild($ruc, $user)
+    public function valid($ruc, $user)
     {
         $this->client->get(self::URL_VALIDEZ);
         $html = $this->client->post(self::URL_VALIDEZ, [
