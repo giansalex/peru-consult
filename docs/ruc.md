@@ -11,6 +11,7 @@ Ejemplo
 
 ```php
 use Peru\Sunat\Ruc;
+use Peru\Http\ContextClient;
 
 require 'vendor/autoload.php';
 

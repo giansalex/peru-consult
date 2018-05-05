@@ -10,6 +10,7 @@ Ejemplo
 
 ```php
 use Peru\Reniec\Dni;
+use Peru\Http\ContextClient;
 
 require 'vendor/autoload.php';
 
