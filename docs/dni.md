@@ -25,7 +25,7 @@ if ($person === false) {
     exit();
 }
 
-echo json_encode(get_object_vars($person));
+echo json_encode($person);
 
 ```
 

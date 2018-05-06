@@ -26,7 +26,7 @@ if ($company === false) {
     exit();
 }
 
-echo json_encode(get_object_vars($company));
+echo json_encode($company);
 
 ```
 
