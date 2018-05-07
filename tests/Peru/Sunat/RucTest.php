@@ -52,7 +52,17 @@ class RucTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($company->departamento);
         $this->assertNotEmpty($company->provincia);
         $this->assertNotEmpty($company->distrito);
-//        file_put_contents($ruc.'.json', json_encode(get_object_vars($company), JSON_PRETTY_PRINT));
+    }
+
+    public function testJsonEncode()
+    {
+        $company = $this->cs->get('10401510465');
+
+        $this->assertNotFalse($company);
+        $json = json_encode($company);
+        $this->assertJson($json);
+        $obj = json_decode($json);
+        $this->assertNotEmpty($obj->ruc);
     }
 
     public function testExtraDirection()

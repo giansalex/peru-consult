@@ -47,6 +47,17 @@ class DniTest extends \PHPUnit_Framework_TestCase
         $this->assertNotEmpty($person->apellidoPaterno);
     }
 
+    public function testJsonEncode()
+    {
+        $person = $this->cs->get('00000004');
+
+        $this->assertNotFalse($person);
+        $json = json_encode($person);
+        $this->assertJson($json);
+        $obj = json_decode($json);
+        $this->assertNotEmpty($obj->dni);
+    }
+
     public function testInvalidRequest()
     {
         $dni = new Dni();
