@@ -27,7 +27,7 @@ Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-
 
 ### Sponsors
 
-Powered by [Quertium](http://quertium.ga/)  
+Powered by [Quertium](http://quertium.com/)  
 ![Quertium](https://raw.githubusercontent.com/giansalex/peru-consult/master/docs/img/quertium.png)
 
 ### JetBrains
