@@ -10,12 +10,14 @@
 	<testsuites>
 		<testsuite name="Unit Tests">
 			<directory>tests</directory>
+			<exclude>./tests/Peru/Reniec/DniTest.php</exclude>
 		</testsuite>
 	</testsuites>
 	<filter>
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">src</directory>
 			<exclude>
+				<directory>./src/Peru/Reniec</directory>
 				<directory>./tests</directory>
 				<directory>./vendor</directory>
 			</exclude>
