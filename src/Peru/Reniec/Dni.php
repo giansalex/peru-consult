@@ -39,6 +39,8 @@ class Dni
     }
 
     /**
+     * @deprecated Pagina de Reniec cambio seguridad por Recaptcha.
+     *
      * @param string $dni
      *
      * @return bool|Person
