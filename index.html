@@ -10,7 +10,7 @@
       <meta name="viewport" content="width=device-width,initial-scale=1">
       <meta http-equiv="x-ua-compatible" content="ie=edge">
       
-        <meta name="description" content="Documentación de Perú Consultas, DNI - Reniec, RUC - Sunat">
+        <meta name="description" content="Documentación de Perú Consultas, RUC - Sunat">
       
       
         <link rel="canonical" href="https://giansalex.github.io/peru-consult/">
@@ -293,18 +293,6 @@
 
 
   <li class="md-nav__item">
-    <a href="dni/" title="Dni" class="md-nav__link">
-      Dni
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
     <a href="ruc/" title="Ruc" class="md-nav__link">
       Ruc
     </a>
@@ -402,7 +390,7 @@
 <a href="https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master"><img alt="Build Status" src="https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master" /></a>
 <a href="https://codeclimate.com/github/giansalex/peru-consult/maintainability"><img alt="Maintainability" src="https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability" /></a>
 <a href="https://packagist.org/packages/giansalex/peru-consult"><img alt="Packagist" src="https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square" /></a> <br />
-Consultas de DNI y RUC sin uso de captcha, ni OCR con cero dependencias.</p>
+Consultas de RUC sin uso de captcha, ni OCR con cero dependencias.</p>
 <h2 id="instalar">Instalar<a class="headerlink" href="#instalar" title="Permanent link">&para;</a></h2>
 <p>Via composer desde <a href="https://packagist.org/packages/giansalex/peru-consult">packagist.org</a>.</p>
 <pre class="code"><code class="language-bash">composer require giansalex/peru-consult</code></pre>
@@ -411,13 +399,13 @@ Consultas de DNI y RUC sin uso de captcha, ni OCR con cero dependencias.</p>
 <h2 id="servicios">Servicios<a class="headerlink" href="#servicios" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Ruc (SUNAT)</li>
-<li>Dni (RENIEC)</li>
+<li>Dni (RENIEC)  <strong>[DEPRECATED]</strong></li>
 <li>Validez Usuario SOL (SUNAT)</li>
 </ul>
 <h2 id="requerimientos">Requerimientos<a class="headerlink" href="#requerimientos" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Ruc, Validez Usuario SOL necesita la extension <a href="http://php.net/manual/es/book.dom.php">dom</a>.</li>
-<li>Dni necesita las extensiones <a href="http://php.net/manual/es/image.installation.php">gd</a> y <a href="http://php.net/manual/es/openssl.installation.php">openssl</a>.</li>
+<li>Dni necesita las extensiones <a href="http://php.net/manual/es/image.installation.php">gd</a> y <a href="http://php.net/manual/es/openssl.installation.php">openssl</a>.  <strong>[DEPRECATED]</strong></li>
 </ul>
 <h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
 <p>Puede utilizar el API REST <a href="https://github.com/giansalex/peru-consult-api">peru-consult-api</a>  </p>
@@ -443,13 +431,13 @@ Consultas de DNI y RUC sin uso de captcha, ni OCR con cero dependencias.</p>
       <nav class="md-footer-nav__inner md-grid">
         
         
-          <a href="dni/" title="Dni" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="ruc/" title="Ruc" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Siguiente
                 </span>
-                Dni
+                Ruc
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
