@@ -18,13 +18,13 @@ composer require giansalex/peru-consult
 Servicios
 ------------
 - Ruc (SUNAT)
-- Dni (RENIEC)  **[DEPRECATED]**
+- ~~Dni (RENIEC)~~
 - Validez Usuario SOL (SUNAT)
 
 Requerimientos
 ---------------
 - Ruc, Validez Usuario SOL necesita la extension [dom](http://php.net/manual/es/book.dom.php).
-- Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php) y [openssl](http://php.net/manual/es/openssl.installation.php).  **[DEPRECATED]**
+- ~~Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php) y [openssl](http://php.net/manual/es/openssl.installation.php).~~
 
 API
 ----
