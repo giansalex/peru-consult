@@ -1,7 +1,7 @@
 {
     "name": "giansalex/peru-consult",
     "description": "Consultas Perú",
-    "keywords": ["sunat", "ruc", "clavesol"],
+    "keywords": ["sunat", "reniec", "dni", "ruc", "clavesol"],
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,9 @@
         }
     },
     "suggest": {
-        "ext-dom": "Needed to use class Ruc"
+        "ext-dom": "Needed to use class Ruc",
+        "ext-gd": "Needed to use class Dni",
+        "ext-openssl": "Needed to connect to Reniec"
     },
     "autoload-dev": {
         "psr-4": {

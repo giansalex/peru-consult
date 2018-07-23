@@ -1,6 +1,6 @@
 site_name: Perú Consultas
 site_url: https://giansalex.github.io/peru-consult
-site_description: 'Documentación de Perú Consultas, RUC - Sunat'
+site_description: 'Documentación de Perú Consultas, DNI - Reniec, RUC - Sunat'
 site_author: 'Giancarlos Salas'
 
 # Repository
@@ -9,6 +9,7 @@ repo_url: 'https://github.com/giansalex/peru-consult'
 
 pages:
     - Principal: index.md
+    - Dni: dni.md
     - Ruc: ruc.md
     - 'Usuario SOL': user-sol.md
 

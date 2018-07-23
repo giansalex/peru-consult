@@ -6,7 +6,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability)](https://codeclimate.com/github/giansalex/peru-consult/maintainability)
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
-Consultas de RUC sin uso de captcha, ni OCR con cero dependencias.
+Consultas de DNI y RUC sin uso de captcha, ni OCR con cero dependencias.
 
 Instalar
 --------
@@ -18,11 +18,13 @@ composer require giansalex/peru-consult
 Servicios
 ------------
 - Ruc (SUNAT)
+- Dni (RENIEC)
 - Validez Usuario SOL (SUNAT)
 
 Requerimientos
 ---------------
 - Ruc, Validez Usuario SOL necesita la extension [dom](http://php.net/manual/es/book.dom.php).
+- Dni necesita las extensiones [gd](http://php.net/manual/es/image.installation.php) y [openssl](http://php.net/manual/es/openssl.installation.php).
 
 API
 ----

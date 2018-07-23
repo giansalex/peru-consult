@@ -1,4 +1,3 @@
-@deprecated
 Feature: Document DNI
   Consultar del dni de personas
 
