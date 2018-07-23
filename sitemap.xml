@@ -4,7 +4,15 @@
     
     <url>
      <loc>https://giansalex.github.io/peru-consult/</loc>
-     <lastmod>2018-06-19</lastmod>
+     <lastmod>2018-07-23</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>https://giansalex.github.io/peru-consult/dni/</loc>
+     <lastmod>2018-07-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,7 +20,7 @@
     
     <url>
      <loc>https://giansalex.github.io/peru-consult/ruc/</loc>
-     <lastmod>2018-06-19</lastmod>
+     <lastmod>2018-07-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -20,7 +28,7 @@
     
     <url>
      <loc>https://giansalex.github.io/peru-consult/user-sol/</loc>
-     <lastmod>2018-06-19</lastmod>
+     <lastmod>2018-07-23</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
