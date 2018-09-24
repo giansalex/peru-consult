@@ -45,7 +45,7 @@ class FeatureContext implements Context
         $client = new ContextClient();
         switch (strlen($this->document)) {
             case 8:
-                $cs = new \Peru\Reniec\Dni();
+                $cs = new \Peru\Jne\Dni();
                 $cs->setClient($client);
                 $this->result = $cs->get($this->document);
                 break;
