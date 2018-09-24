@@ -14,9 +14,9 @@ composer require giansalex/peru-consult
 ```
 
 ### Servicios Disponibles
-- Ruc (SUNAT).
-- Dni (RENIEC).
-- Validez Usuario SOL (SUNAT).
+- Ruc — SUNAT.
+- Dni — RENIEC.
+- Validez Usuario SOL — SUNAT.
 
 ### Requerimientos
 - Ruc, Validez Usuario Sol requiere la extension `dom`.
