@@ -22,7 +22,7 @@ jobs:
       - run: ./vendor/bin/behat --config behat.yml --tags "~@deprecated"
   deploy:
     docker:
-      - image: circleci/python:3.4.6
+      - image: circleci/python:3.7
     steps:
       - checkout
       - restore_cache:
