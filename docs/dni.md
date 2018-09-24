@@ -1,9 +1,5 @@
 # DNI
-Consulta del DNI usando el servicio público de Reniec.
-
-Requerimientos
----------------
-- Tener cargada las extensiones `gd` y `openssl`.
+Consulta del DNI.
 
 Ejemplo
 --------
