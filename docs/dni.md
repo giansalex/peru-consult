@@ -1,5 +1,5 @@
 # DNI
-**[DEPRECATED]** Consulta del DNI usando el servicio público de Reniec.
+Consulta del DNI usando el servicio público de Reniec.
 
 Requerimientos
 ---------------

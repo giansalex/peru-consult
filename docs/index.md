@@ -17,9 +17,9 @@ composer require giansalex/peru-consult
 
 Servicios
 ------------
-- Ruc (SUNAT)
-- Dni (RENIEC)
-- Validez Usuario SOL (SUNAT)
+- Ruc — SUNAT.
+- Dni — RENIEC.
+- Validez Usuario SOL — SUNAT.
 
 Requerimientos
 ---------------
