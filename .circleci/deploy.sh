@@ -7,6 +7,7 @@ do
     git config user.email "giansalex@gmail.com";
     git remote add gh-token "https://${GH_TOKEN}@github.com/giansalex/peru-consult.git";
     git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
+    pip install --upgrade pip;
     pip install -IU -r requirements.txt;
     mkdocs gh-deploy -v --clean --remote-name gh-token --message "Deployed MkDocs version: 0.17.2 [ci skip]";
     break
