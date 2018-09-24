@@ -15,7 +15,7 @@ class ContextClientTest extends \PHPUnit_Framework_TestCase
     public function testGet()
     {
         $client = new ContextClient();
-        $result = $client->get('https://httpbin.org/get?value=1');
+        $result = $client->get('http://httpbin.org/get?value=1');
 
         $obj = json_decode($result);
 
@@ -25,7 +25,7 @@ class ContextClientTest extends \PHPUnit_Framework_TestCase
     public function testPost()
     {
         $client = new ContextClient();
-        $result = $client->post('https://httpbin.org/post', [
+        $result = $client->post('http://httpbin.org/post', [
             'value' => 1,
         ]);
 
