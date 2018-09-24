@@ -10,6 +10,7 @@
 	<testsuites>
 		<testsuite name="Unit Tests">
 			<directory>tests</directory>
+			<exclude>./tests/Peru/Reniec/DniTest.php</exclude>
 		</testsuite>
 	</testsuites>
 	<filter>
