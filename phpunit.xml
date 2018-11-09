@@ -17,6 +17,7 @@
 		<whitelist processUncoveredFilesFromWhitelist="true">
 			<directory suffix=".php">src</directory>
 			<exclude>
+				<directory>./src/Peru/Reniec</directory>
 				<directory>./tests</directory>
 				<directory>./vendor</directory>
 			</exclude>
