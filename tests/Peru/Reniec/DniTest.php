@@ -10,12 +10,13 @@ namespace Tests\Peru\Reniec;
 
 use Peru\Http\ContextClient;
 use Peru\Reniec\Dni;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DniTest
  * @package Tests\Peru\Reniec
  */
-class DniTest extends \PHPUnit_Framework_TestCase
+class DniTest extends TestCase
 {
     use DniTrait {
         getHttpMock as private getHttp;

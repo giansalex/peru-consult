@@ -9,8 +9,9 @@
 namespace Tests\Peru\Reniec;
 
 use Peru\Reniec\CaptchaCodes;
+use PHPUnit\Framework\TestCase;
 
-class CatpchaCodesTest extends \PHPUnit_Framework_TestCase
+class CatpchaCodesTest extends TestCase
 {
     /**
      * @var CaptchaCodes
