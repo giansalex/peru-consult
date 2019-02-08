@@ -6,6 +6,8 @@
  * Time: 04:21 PM
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Reniec;
 
 use Peru\Http\ContextClient;

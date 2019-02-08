@@ -6,6 +6,8 @@
  * Time: 09:35
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Sunat;
 
 use Peru\Http\ClientInterface;

@@ -6,6 +6,8 @@
  * Time: 17:17
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Reniec;
 
 use Peru\Reniec\CaptchaCodes;
