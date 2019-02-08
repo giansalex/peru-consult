@@ -18,7 +18,7 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
-      - run: ./vendor/bin/phpunit --configuration phpunit.xml
+      - run: ./vendor/bin/phpunit
       - run: ./vendor/bin/behat --config behat.yml --tags "~@deprecated"
   deploy:
     docker:
