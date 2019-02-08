@@ -6,9 +6,7 @@
 .gitignore export-ignore
 .php_cs.dist export-ignore
 *.yml export-ignore
-phpunit.xml export-ignore
-LICENSE export-ignore
-README.md export-ignore
+phpunit.xml.dist export-ignore
 requirements.txt export-ignore
 
 tests/Resources/* linguist-vendored
