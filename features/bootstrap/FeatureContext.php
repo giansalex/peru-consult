@@ -63,7 +63,7 @@ class FeatureContext implements Context
      */
     public function theCompanyNameShouldBe($name)
     {
-        if (empty($name)) {
+        if (empty($this->result)) {
             return;
         }
 
