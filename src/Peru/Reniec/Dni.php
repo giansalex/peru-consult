@@ -45,18 +45,18 @@ class Dni
      */
     public function get($dni)
     {
-        if (strlen($dni) !== 8) {
+        if (8 !== strlen($dni)) {
             $this->error = 'Dni debe tener 8 dígitos';
 
             return false;
         }
         $captcha = $this->getCatpchaValue();
-        if ($captcha === false) {
+        if (false === $captcha) {
             return false;
         }
 
         $person = $this->getResult($dni, $captcha);
-        if ($person === false) {
+        if (false === $person) {
             return false;
         }
         $person->dni = $dni;
@@ -72,7 +72,7 @@ class Dni
             'imagen' => $captcha,
         ]);
 
-        if ($page === false) {
+        if (false === $page) {
             $this->error = 'Ocurrio un problema conectando a Reniec';
 
             return false;
@@ -141,7 +141,7 @@ class Dni
     {
         $image = $this->client->get(self::URL_CAPTCHA);
 
-        if ($image === false) {
+        if (false === $image) {
             $this->error = 'No se pudo cargar el captcha image';
 
             return false;
@@ -159,7 +159,7 @@ class Dni
     {
         $captcha = $this->getCaptchaImage();
 
-        if ($captcha === false) {
+        if (false === $captcha) {
             return false;
         }
 

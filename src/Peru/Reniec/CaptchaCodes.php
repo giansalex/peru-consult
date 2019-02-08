@@ -3,8 +3,7 @@
 namespace Peru\Reniec;
 
 /**
- * Class CaptchaCodes
- * @package Peru\Reniec
+ * Class CaptchaCodes.
  */
 final class CaptchaCodes
 {
@@ -52,6 +51,7 @@ final class CaptchaCodes
      *
      * @param $data
      * @param int $position
+     *
      * @return string|null
      */
     public function getLetter($data, $position)

@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 01/04/2018
- * Time: 09:16
+ * Time: 09:16.
  */
 
 namespace Peru\Sunat;
@@ -11,8 +11,7 @@ namespace Peru\Sunat;
 use Peru\Http\ClientInterface;
 
 /**
- * Class UserValidator
- * @package Peru\Sunat
+ * Class UserValidator.
  */
 class UserValidator
 {
@@ -25,6 +24,7 @@ class UserValidator
 
     /**
      * UserValidator constructor.
+     *
      * @param ClientInterface $client
      */
     public function __construct(ClientInterface $client)
@@ -37,6 +37,7 @@ class UserValidator
      *
      * @param string $ruc
      * @param string $user
+     *
      * @return bool
      */
     public function valid($ruc, $user)
@@ -50,7 +51,7 @@ class UserValidator
 
         $state = $this->getStatus($html);
 
-        return strpos(strtoupper($state), 'ACTIVO') !== false;
+        return false !== strpos(strtoupper($state), 'ACTIVO');
     }
 
     private function getStatus($html)
@@ -58,7 +59,7 @@ class UserValidator
         $xpt = HtmlParser::getXpathFromHtml($html);
         $nodes = $xpt->query('//strong');
 
-        if ($nodes->length !== 1) {
+        if (1 !== $nodes->length) {
             return '';
         }
 

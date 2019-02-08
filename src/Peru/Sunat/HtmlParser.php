@@ -3,13 +3,13 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 13/01/2018
- * Time: 21:36
+ * Time: 21:36.
  */
 
 namespace Peru\Sunat;
 
 /**
- * Class HtmlParser
+ * Class HtmlParser.
  */
 final class HtmlParser
 {
@@ -25,7 +25,7 @@ final class HtmlParser
         $xp = $this->getXpathFromHtml($html);
         $table = $xp->query('./html/body/table[1]');
 
-        if ($table->length == 0) {
+        if (0 == $table->length) {
             return false;
         }
 
@@ -72,7 +72,7 @@ final class HtmlParser
         }
     }
 
-    public static  function getXpathFromHtml($html)
+    public static function getXpathFromHtml($html)
     {
         $dom = new \DOMDocument();
         $prevState = libxml_use_internal_errors(true);
@@ -89,6 +89,7 @@ final class HtmlParser
         preg_match_all($patron, $html, $matches, PREG_SET_ORDER);
         if (count($matches) > 0) {
             $parts = $this->getPhoneParts($matches[0][1]);
+
             return iterator_to_array($parts);
         }
 
@@ -122,7 +123,7 @@ final class HtmlParser
     {
         foreach ($options as $opt) {
             /** @var $opt \DOMNode */
-            if ($opt->nodeName != 'option') {
+            if ('option' != $opt->nodeName) {
                 continue;
             }
             yield trim($opt->textContent);
@@ -131,6 +132,6 @@ final class HtmlParser
 
     private function isNotElement(\DOMNode $node)
     {
-        return $node->nodeType !== XML_ELEMENT_NODE;
+        return XML_ELEMENT_NODE !== $node->nodeType;
     }
 }
