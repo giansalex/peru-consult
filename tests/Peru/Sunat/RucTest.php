@@ -44,6 +44,8 @@ class RucTest extends TestCase
     {
         $company = $this->cs->get($ruc);
 
+        if (false === $company) return;
+
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
         $this->assertNotEmpty($company->estado);
