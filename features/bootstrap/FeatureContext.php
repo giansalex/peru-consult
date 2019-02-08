@@ -2,6 +2,7 @@
 
 use Behat\Behat\Context\Context;
 use Peru\Http\ContextClient;
+use PHPUnit\Framework\Assert;
 
 /**
  * Defines application features from the specific context.
@@ -64,7 +65,7 @@ class FeatureContext implements Context
     {
         /**@var $company \Peru\Sunat\Company */
         $company = $this->result;
-        PHPUnit_Framework_Assert::assertSame(
+        Assert::assertSame(
             $name,
             $company->razonSocial
         );
@@ -80,7 +81,7 @@ class FeatureContext implements Context
         }
         /**@var $person \Peru\Reniec\Person */
         $person = $this->result;
-        PHPUnit_Framework_Assert::assertSame(
+        Assert::assertSame(
             $name,
             $person->nombres
         );
