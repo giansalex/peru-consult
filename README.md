@@ -14,16 +14,17 @@ composer require giansalex/peru-consult
 ```
 
 ### Servicios Disponibles
-- Ruc — SUNAT.
-- Dni — RENIEC.
-- Validez Usuario SOL — SUNAT.
+- RENIEC
+    - Consulta de Dni
+- SUNAT
+    - Consulta Ruc
+    - Validez Usuario SOL
 
 ### Requerimientos
 - Ruc, Validez Usuario Sol requiere la extension `dom`.
-- Dni requiere las extensiones gd, openssl
 
-### API
-Puede utilizar el API REST [peru-consult-api](https://github.com/giansalex/peru-consult-api)  
+### API REST :zap:
+Dirígase a [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
 
 ### Sponsors
 
