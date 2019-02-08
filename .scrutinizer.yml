@@ -29,7 +29,9 @@ build:
       tests:
         override:
           - php-scrutinizer-run
-
+    cache:
+      directories:
+        - vendor/
     tests: true
   tests:
     override:
