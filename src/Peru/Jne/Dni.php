@@ -3,7 +3,7 @@
  * Created by PhpStorm.
  * User: Soporte
  * Date: 24/09/2018
- * Time: 11:25
+ * Time: 11:25.
  */
 
 namespace Peru\Jne;
@@ -12,7 +12,7 @@ use Peru\Http\ClientInterface;
 use Peru\Reniec\Person;
 
 /**
- * Class Dni
+ * Class Dni.
  */
 class Dni
 {
@@ -26,17 +26,16 @@ class Dni
      */
     private $client;
 
-
     public function get(string $dni)
     {
-        if (strlen($dni) !== 8) {
+        if (8 !== strlen($dni)) {
             $this->error = 'Dni debe tener 8 dígitos';
 
             return false;
         }
 
         $raw = $this->getRawResponse($dni);
-        if ($raw === false) {
+        if (false === $raw) {
             return false;
         }
         $person = $this->getPerson($raw);
@@ -72,7 +71,7 @@ class Dni
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $text = $this->client->get($url);
 
-        if ($text === false) {
+        if (false === $text) {
             $this->error = 'No se pudo conectar a JNE';
 
             return false;
@@ -84,11 +83,11 @@ class Dni
     private function getPerson($text)
     {
         $parts = explode('|', $text);
-        if (count($parts) === 3) {
+        if (3 === count($parts)) {
             $person = new Person();
             $person->apellidoPaterno = $parts[0];
             $person->apellidoMaterno = $parts[1];
-            $person->nombres         = $parts[2];
+            $person->nombres = $parts[2];
 
             return $person;
         }

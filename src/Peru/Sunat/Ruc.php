@@ -46,7 +46,7 @@ class Ruc
      */
     public function get(string $ruc)
     {
-        if (strlen($ruc) !== 11) {
+        if (11 !== strlen($ruc)) {
             $this->error = 'Ruc debe tener 11 dígitos';
 
             return false;
@@ -55,7 +55,7 @@ class Ruc
         $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
         $dic = $this->getValuesFromUrl($url);
 
-        if ($dic === false) {
+        if (false === $dic) {
             return false;
         }
 
@@ -93,14 +93,14 @@ class Ruc
     {
         $html = $this->client->get($url);
 
-        if ($html === false) {
+        if (false === $html) {
             $this->error = 'Ocurrio un problema conectando a Sunat';
 
             return false;
         }
 
         $dic = $this->parser->parse($html);
-        if ($dic === false) {
+        if (false === $dic) {
             $this->error = 'No se encontro el ruc';
 
             return false;
@@ -122,7 +122,7 @@ class Ruc
         $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:']);
         $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:']);
         $cp->padrones = $items['Padrones :'];
-        if ($cp->sistElectronica == '-') {
+        if ('-' == $cp->sistElectronica) {
             $cp->sistElectronica = [];
         }
         $this->fixDirection($cp);
@@ -153,19 +153,19 @@ class Ruc
      */
     private function parseDate($text)
     {
-        if (empty($text) || $text == '-') {
+        if (empty($text) || '-' == $text) {
             return null;
         }
 
         $date = \DateTime::createFromFormat('d/m/Y', $text);
 
-        return $date === false ? null : $date->format('Y-m-d').'T00:00:00.000Z';
+        return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
     }
 
     private function fixDirection(Company $company)
     {
         $items = explode('                                               -', $company->direccion);
-        if (count($items) !== 3) {
+        if (3 !== count($items)) {
             $company->direccion = preg_replace("[\s+]", ' ', $company->direccion);
 
             return;
@@ -205,7 +205,7 @@ class Ruc
     private function getCpes($text)
     {
         $cpes = [];
-        if ($text != '-') {
+        if ('-' != $text) {
             $cpes = explode(',', $text);
         }
 
