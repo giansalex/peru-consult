@@ -43,7 +43,6 @@ class RucTest extends TestCase
     public function testGetRuc($ruc)
     {
         $company = $this->cs->get($ruc);
-
         if (false === $company) return;
 
         $this->assertNotEmpty($company->ruc);
@@ -62,6 +61,7 @@ class RucTest extends TestCase
     public function testJsonEncode()
     {
         $company = $this->cs->get('10401510465');
+        if (false === $company) return;
 
         $this->assertNotFalse($company);
         $json = json_encode($company);
