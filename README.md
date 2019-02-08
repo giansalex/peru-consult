@@ -21,6 +21,7 @@ composer require giansalex/peru-consult
     - Validez Usuario SOL
 
 ### Requerimientos
+- PHP 7.1 o superior.
 - Ruc, Validez Usuario Sol requiere la extension `dom`.
 
 ### API REST :zap:

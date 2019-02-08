@@ -25,6 +25,7 @@ Servicios
 
 Requerimientos
 ---------------
+- PHP 7.1 o superior.
 - Ruc, Validez Usuario SOL necesita la extension [dom](http://php.net/manual/es/book.dom.php).
 
 API REST
