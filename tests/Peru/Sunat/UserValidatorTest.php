@@ -8,11 +8,12 @@
 
 namespace Tests\Peru\Sunat;
 use Peru\Sunat\UserValidator;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class UserValidatorTest
  */
-class UserValidatorTest extends \PHPUnit_Framework_TestCase
+class UserValidatorTest extends TestCase
 {
     use UserValidatorTrait;
 

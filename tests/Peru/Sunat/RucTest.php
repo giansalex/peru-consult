@@ -10,12 +10,13 @@ namespace Tests\Peru\Sunat;
 
 use Peru\Http\ContextClient;
 use Peru\Sunat\Ruc;
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class RucTest
  * @package Tests\Peru\Sunat
  */
-class RucTest extends \PHPUnit_Framework_TestCase
+class RucTest extends TestCase
 {
     use RucTrait {
         getHttpMock as private getHttp;

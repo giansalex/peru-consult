@@ -8,14 +8,14 @@
 
 namespace Tests\Peru\Jne;
 
-use Peru\Http\ContextClient;
-use Peru\Jne\Dni;
+use Peru\{Http\ContextClient, Jne\Dni};
+use PHPUnit\Framework\TestCase;
 
 /**
  * Class DniTest
  * @package Tests\Peru\Reniec
  */
-class DniTest extends \PHPUnit_Framework_TestCase
+class DniTest extends TestCase
 {
     use DniTrait;
 

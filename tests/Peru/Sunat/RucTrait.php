@@ -13,8 +13,7 @@ use Peru\Sunat\Ruc;
 
 /**
  * Trait RucTrait
- * @method \PHPUnit_Framework_MockObject_MockBuilder getMockBuilder(string $className)
- * @method \PHPUnit_Framework_MockObject_Stub_Return returnValue(mixed $value)
+ * @method \PHPUnit\Framework\MockObject\MockBuilder getMockBuilder(string $className)
  */
 trait RucTrait
 {

@@ -12,8 +12,7 @@ use Peru\Http\ClientInterface;
 
 /**
  * Trait UserValidatorTrait
- * @method \PHPUnit_Framework_MockObject_MockBuilder getMockBuilder(string $className)
- * @method \PHPUnit_Framework_MockObject_Stub_Return returnValue(mixed $value)
+ * @method \PHPUnit\Framework\MockObject\MockBuilder getMockBuilder(string $className)
  */
 trait UserValidatorTrait
 {

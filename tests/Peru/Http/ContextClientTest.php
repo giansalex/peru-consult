@@ -9,8 +9,9 @@
 namespace Tests\Peru\Http;
 
 use Peru\Http\ContextClient;
+use PHPUnit\Framework\TestCase;
 
-class ContextClientTest extends \PHPUnit_Framework_TestCase
+class ContextClientTest extends TestCase
 {
     public function testGet()
     {
