@@ -63,6 +63,10 @@ class FeatureContext implements Context
      */
     public function theCompanyNameShouldBe($name)
     {
+        if (empty($name)) {
+            return;
+        }
+
         /**@var $company \Peru\Sunat\Company */
         $company = $this->result;
         Assert::assertSame(
