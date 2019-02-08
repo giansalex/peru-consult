@@ -16,7 +16,7 @@ use Peru\Reniec\Person;
  */
 class Dni
 {
-    const URL_CONSULT_FORMAT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI=%s';
+    private const URL_CONSULT_FORMAT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI=%s';
     /**
      * @var string
      */
@@ -27,7 +27,7 @@ class Dni
     private $client;
 
 
-    public function get($dni)
+    public function get(string $dni)
     {
         if (strlen($dni) !== 8) {
             $this->error = 'Dni debe tener 8 dígitos';
@@ -62,12 +62,12 @@ class Dni
      *
      * @return string
      */
-    public function getError()
+    public function getError(): ?string
     {
         return $this->error;
     }
 
-    private function getRawResponse($dni)
+    private function getRawResponse(string $dni)
     {
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $text = $this->client->get($url);

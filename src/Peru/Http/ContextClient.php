@@ -15,7 +15,7 @@ namespace Peru\Http;
  */
 class ContextClient implements ClientInterface
 {
-    const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    private const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
 
     /**
      * Cookies store.
@@ -32,7 +32,7 @@ class ContextClient implements ClientInterface
      *
      * @return string|false
      */
-    public function get($url, array $headers = [])
+    public function get(string $url, array $headers = [])
     {
         $ctx = $this->getContext('GET', null, $headers);
         $response = file_get_contents($url, false, $ctx);
@@ -50,7 +50,7 @@ class ContextClient implements ClientInterface
      *
      * @return string|bool
      */
-    public function post($url, $data, array $headers = [])
+    public function post(string $url, $data, array $headers = [])
     {
         if (is_array($data)) {
             $headers['Content-type'] = self::FORM_CONTENT_TYPE;
@@ -70,7 +70,7 @@ class ContextClient implements ClientInterface
      *
      * @return resource
      */
-    private function getContext($method, $data, array $headers)
+    private function getContext(string $method, $data, array $headers)
     {
         $options = [
             'http' => [
@@ -108,7 +108,7 @@ class ContextClient implements ClientInterface
         return is_array($data) ? http_build_query($data) : $data;
     }
 
-    private function join($glue, array $items, $end = "\r\n")
+    private function join(string $glue, array $items, string $end = "\r\n"): ?string
     {
         $append = '';
         foreach ($items as $key => $value) {

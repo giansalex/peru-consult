@@ -44,7 +44,7 @@ class Ruc
      *
      * @return bool|Company
      */
-    public function get($ruc)
+    public function get(string $ruc)
     {
         if (strlen($ruc) !== 11) {
             $this->error = 'Ruc debe tener 11 dígitos';
@@ -77,12 +77,12 @@ class Ruc
      *
      * @return string
      */
-    public function getError()
+    public function getError(): ?string
     {
         return $this->error;
     }
 
-    private function getRandom()
+    private function getRandom(): ?string
     {
         $code = $this->client->get(self::URL_RANDOM);
 
@@ -109,7 +109,7 @@ class Ruc
         return $dic;
     }
 
-    private function getCompany(array $items)
+    private function getCompany(array $items): ?Company
     {
         $cp = $this->getHeadCompany($items);
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
@@ -130,7 +130,7 @@ class Ruc
         return $cp;
     }
 
-    private function getHeadCompany(array $items)
+    private function getHeadCompany(array $items): ?Company
     {
         $cp = new Company();
 
@@ -180,7 +180,7 @@ class Ruc
         $company->direccion = join(' ', $pieces);
     }
 
-    private function getDepartment($department)
+    private function getDepartment($department): array
     {
         $department = strtoupper($department);
         $words = 1;
