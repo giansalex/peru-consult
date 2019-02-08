@@ -21,7 +21,7 @@ interface ClientInterface
      *
      * @return string|bool
      */
-    public function get($url, array $headers = []);
+    public function get(string $url, array $headers = []);
 
     /**
      * Post Request.
@@ -32,5 +32,5 @@ interface ClientInterface
      *
      * @return string|bool
      */
-    public function post($url, $data, array $headers = []);
+    public function post(string $url, $data, array $headers = []);
 }
