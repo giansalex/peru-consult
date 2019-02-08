@@ -1,0 +1,40 @@
+filter:
+  paths:
+    - 'src/*'
+  excluded_paths:
+    - 'tests/*'
+
+tools:
+  php_code_coverage:
+    test_command: vendor/bin/phpunit
+
+checks:
+  php: true
+
+coding_style:
+  php:
+    indentation:
+      general:
+        size: 1
+
+build:
+  environment:
+    php:
+      version: 7.1
+  nodes:
+    analysis:
+      project_setup:
+        override:
+          - 'true'
+      tests:
+        override:
+          - php-scrutinizer-run
+
+    tests: true
+  tests:
+    override:
+      -
+        command: 'vendor/bin/phpunit --coverage-clover=cover-php-file'
+        coverage:
+          file: 'cover-php-file'
+          format: 'clover'
