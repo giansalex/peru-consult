@@ -6,6 +6,8 @@
  * Time: 22:07
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Http;
 
 use Peru\Http\ContextClient;

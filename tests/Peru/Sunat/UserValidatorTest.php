@@ -6,6 +6,8 @@
  * Time: 09:33
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Sunat;
 use Peru\Sunat\UserValidator;
 use PHPUnit\Framework\TestCase;

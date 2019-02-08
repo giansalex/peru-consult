@@ -6,6 +6,8 @@
  * Time: 19:37
  */
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Jne;
 
 use Peru\Http\ClientInterface;
