@@ -24,11 +24,12 @@ theme:
     accent: 'Amber'
 
 extra_css:
-  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/themes/prism-okaidia.min.css'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css'
 extra_javascript:
-  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/prism.min.js'
-  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-php.min.js'
-  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/components/prism-json.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup-templating.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-php.min.js'
+  - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-json.min.js'
 
 extra:
   social:
