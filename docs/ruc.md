@@ -1,6 +1,7 @@
 # RUC
 
-Consulta del RUC usando el servicio público de Sunat.
+Consulta de RUC.
+> Fuente: **SUNAT**.
 
 Requerimientos
 ---------------

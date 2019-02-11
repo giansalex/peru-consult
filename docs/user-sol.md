@@ -1,9 +1,10 @@
 # Usuario SOL
-Consulta la válidez del usuario SOL segun SUNAT.
+Consulta la válidez del usuario SOL.
+> Fuente: **SUNAT**.
 
 Requerimientos
 ---------------
-- Tener cargada la extensión `dom`.
+- Tener activada la extensión `dom`.
 
 Ejemplo
 --------

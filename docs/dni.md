@@ -1,5 +1,6 @@
 # DNI
-Consulta del DNI.
+Consulta de DNI.
+> Fuente: **JNE**.
 
 Ejemplo
 --------

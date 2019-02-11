@@ -8,7 +8,7 @@ repo_name: 'giansalex/peru-consult'
 repo_url: 'https://github.com/giansalex/peru-consult'
 
 pages:
-    - Principal: index.md
+    - Inicio: index.md
     - Dni: dni.md
     - Ruc: ruc.md
     - 'Usuario SOL': user-sol.md
@@ -21,7 +21,7 @@ theme:
   language: 'es'
   palette:
     primary: 'Red'
-    accent: 'Indigo'
+    accent: 'Amber'
 
 extra_css:
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.10.0/themes/prism-okaidia.min.css'

@@ -6,7 +6,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability)](https://codeclimate.com/github/giansalex/peru-consult/maintainability)
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
-Consultas de DNI y RUC sin uso de captcha, ni OCR con cero dependencias.
+Consulta de DNI y RUC sin uso de captcha, ni OCR, sin dependencias de terceros.
 
 Instalar
 --------
@@ -26,11 +26,11 @@ Servicios
 Requerimientos
 ---------------
 - PHP 7.1 o superior.
-- Ruc, Validez Usuario SOL necesita la extension [dom](http://php.net/manual/es/book.dom.php).
+- Ruc, Validez Usuario SOL necesita la extensión [dom](http://php.net/manual/es/book.dom.php).
 
 API REST
 --------
-Dirígase a [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
+Ir a [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
 
 Sponsors
 ---------
