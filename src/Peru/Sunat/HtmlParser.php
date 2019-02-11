@@ -52,21 +52,21 @@ final class HtmlParser
 
     private function setValuesFromNode(\DOMXPath $xp, \DOMNode $item, &$dic)
     {
-        $start = true;
-        $temp = '';
+        $isTitle = true;
+        $title = '';
         foreach ($item->childNodes as $item2) {
             /** @var $item2 \DOMNode */
             if ($this->isNotElement($item2)) {
                 continue;
             }
 
-            if ($start) {
-                $temp = trim($item2->textContent);
+            if ($isTitle) {
+                $title = trim($item2->textContent);
+                $isTitle = false;
             } else {
-                $dic[$temp] = $this->getContent($xp, $item2);
+                $dic[$title] = $this->getContent($xp, $item2);
+                $isTitle = true;
             }
-
-            $start = !$start;
         }
     }
 
