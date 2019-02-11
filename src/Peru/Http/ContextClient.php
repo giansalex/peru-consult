@@ -48,7 +48,7 @@ class ContextClient implements ClientInterface
      * @param mixed  $data
      * @param array  $headers
      *
-     * @return string|bool
+     * @return string|false
      */
     public function post(string $url, $data, array $headers = [])
     {

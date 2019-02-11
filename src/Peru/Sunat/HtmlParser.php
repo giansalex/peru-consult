@@ -18,7 +18,7 @@ final class HtmlParser
      *
      * @param $html
      *
-     * @return array|bool
+     * @return array|false
      */
     public function parse($html)
     {

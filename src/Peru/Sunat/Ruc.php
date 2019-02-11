@@ -86,7 +86,7 @@ class Ruc
     {
         $code = $this->client->get(self::URL_RANDOM);
 
-        return $code;
+        return false === $code ? '' : $code;
     }
 
     private function getValuesFromUrl($url)

@@ -19,7 +19,7 @@ interface ClientInterface
      * @param string $url
      * @param array  $headers
      *
-     * @return string|bool
+     * @return string|false
      */
     public function get(string $url, array $headers = []);
 
@@ -30,7 +30,7 @@ interface ClientInterface
      * @param mixed  $data
      * @param array  $headers
      *
-     * @return string|bool
+     * @return string|false
      */
     public function post(string $url, $data, array $headers = []);
 }
