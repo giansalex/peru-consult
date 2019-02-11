@@ -7,7 +7,7 @@ site_author: 'Giancarlos Salas'
 repo_name: 'giansalex/peru-consult'
 repo_url: 'https://github.com/giansalex/peru-consult'
 
-pages:
+nav:
     - Inicio: index.md
     - Dni: dni.md
     - Ruc: ruc.md
