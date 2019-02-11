@@ -32,8 +32,6 @@ final class HtmlParser
         $nodes = $table->item(0)->childNodes;
         $dic = $this->getKeyValues($nodes, $xp);
 
-        $dic['Phone'] = $this->getPhone($html);
-
         return $dic;
     }
 
@@ -81,30 +79,6 @@ final class HtmlParser
         libxml_use_internal_errors($prevState);
 
         return new \DOMXPath($dom);
-    }
-
-    private function getPhone($html)
-    {
-        $patron = '/<td class="bgn" colspan=1>Tel&eacute;fono\(s\):<\/td>[ ]*-->\r\n<!--\t[ ]*<td class="bg" colspan=1>(.*)<\/td>/';
-        preg_match_all($patron, $html, $matches, PREG_SET_ORDER);
-        if (count($matches) > 0) {
-            $parts = $this->getPhoneParts($matches[0][1]);
-
-            return iterator_to_array($parts);
-        }
-
-        return [];
-    }
-
-    private function getPhoneParts($text)
-    {
-        $phones = explode('/', $text);
-        foreach ($phones as $phone) {
-            if (empty($phone)) {
-                continue;
-            }
-            yield trim($phone);
-        }
     }
 
     private function getContent(\DOMXPath $xp, \DOMNode $node)

@@ -136,7 +136,7 @@ class Ruc
 
         list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:']);
         $cp->nombreComercial = $items['Nombre Comercial:'];
-        $cp->telefonos = $items['Phone'];
+        $cp->telefonos = [];
         $cp->tipo = $items['Tipo Contribuyente:'];
         $cp->estado = $items['Estado del Contribuyente:'];
         $cp->condicion = $items['Condición del Contribuyente:'];
