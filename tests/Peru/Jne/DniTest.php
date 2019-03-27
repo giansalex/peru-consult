@@ -10,7 +10,6 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Jne;
 
-use ErrorException;
 use Peru\{Http\ContextClient, Jne\Dni};
 use PHPUnit\Framework\TestCase;
 
@@ -29,8 +28,15 @@ class DniTest extends TestCase
 
     public function setUp()
     {
+        $client = new ContextClient();
+        $client->options = [
+            'http' => [
+                'ignore_errors' => true,
+            ]
+        ];
+
         $this->cs = new Dni();
-        $this->cs->setClient(new ContextClient());
+        $this->cs->setClient($client);
     }
 
     /**
@@ -68,25 +74,11 @@ class DniTest extends TestCase
         $this->assertEquals('Dni debe tener 8 dígitos', $this->cs->getError());
     }
 
-    /**
-     * @expectedException ErrorException
-     */
     public function testInvalidDni()
     {
-        $this->setCustomErrorHandler();
         $person = $this->cs->get('00000000');
-        restore_error_handler();
 
         $this->assertFalse($person);
-    }
-
-    private function setCustomErrorHandler()
-    {
-        set_error_handler(
-            function ($severity, $message, $file, $line) {
-                throw new ErrorException($message, $severity, $severity, $file, $line);
-            }
-        );
     }
 
     public function dniProviders()
