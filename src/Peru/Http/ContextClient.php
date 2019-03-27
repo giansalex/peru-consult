@@ -16,6 +16,12 @@ namespace Peru\Http;
 class ContextClient implements ClientInterface
 {
     private const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
+    /**
+     * stream_context extra options.
+     *
+     * @var array
+     */
+    public $options;
 
     /**
      * Cookies store.
@@ -79,6 +85,11 @@ class ContextClient implements ClientInterface
                 'content' => $this->getRawData($data),
             ],
         ];
+
+        if (is_array($this->options)) {
+            $options = array_merge_recursive($options, $this->options);
+        }
+
         if (!empty($this->cookies)) {
             $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies, '; ');
         }
