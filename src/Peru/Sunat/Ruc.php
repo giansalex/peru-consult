@@ -172,34 +172,34 @@ class Ruc
         }
 
         $pieces = explode(' ', trim($items[0]));
-        list($len, $value) = $this->getDepartment(array_pop($pieces));
+        list($removeLen, $value) = $this->getDepartment(end($pieces));
         $company->departamento = $value;
         $company->provincia = trim($items[1]);
         $company->distrito = trim($items[2]);
-        array_splice($pieces, -1 * $len);
+        array_splice($pieces, -1 * $removeLen);
         $company->direccion = join(' ', $pieces);
     }
 
     private function getDepartment($department): array
     {
         $department = strtoupper($department);
-        $words = 1;
+        $wordsToRemove = 1;
         switch ($department) {
             case 'DIOS':
                 $department = 'MADRE DE DIOS';
-                $words = 3;
+                $wordsToRemove = 3;
             break;
             case 'MARTIN':
                 $department = 'SAN MARTIN';
-                $words = 2;
+                $wordsToRemove = 2;
             break;
             case 'LIBERTAD':
                 $department = 'LA LIBERTAD';
-                $words = 2;
+                $wordsToRemove = 2;
             break;
         }
 
-        return [$words, $department];
+        return [$wordsToRemove, $department];
     }
 
     private function getCpes($text)
