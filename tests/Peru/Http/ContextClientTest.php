@@ -36,4 +36,24 @@ class ContextClientTest extends TestCase
 
         $this->assertTrue(isset($obj->form->value));
     }
+
+    public function testNotFoundUrl()
+    {
+        $client = new ContextClient();
+        $result = $client->get('http://httpbin.org/get33');
+        $error = error_get_last();
+
+        $this->assertFalse($result);
+        $this->assertStringContainsString('404 NOT FOUND', $error['message']);
+    }
+
+    public function testNotResolveDomain()
+    {
+        $client = new ContextClient();
+        $result = $client->get('http://http323bin.org');
+        $error = error_get_last();
+
+        $this->assertFalse($result);
+        $this->assertStringContainsString('php_network_getaddresses', $error['message']);
+    }
 }

@@ -41,10 +41,8 @@ class ContextClient implements ClientInterface
     public function get(string $url, array $headers = [])
     {
         $ctx = $this->getContext('GET', null, $headers);
-        $response = file_get_contents($url, false, $ctx);
-        $this->saveCookies($http_response_header);
 
-        return $response;
+        return $this->getResponseAndSaveCookies($url, $ctx);
     }
 
     /**
@@ -63,10 +61,8 @@ class ContextClient implements ClientInterface
         }
 
         $ctx = $this->getContext('POST', $data, $headers);
-        $response = file_get_contents($url, false, $ctx);
-        $this->saveCookies($http_response_header);
 
-        return $response;
+        return $this->getResponseAndSaveCookies($url, $ctx);
     }
 
     /**
@@ -82,7 +78,7 @@ class ContextClient implements ClientInterface
             'http' => [
                 'header' => $this->join(': ', $headers),
                 'method' => $method,
-                'content' => $this->getRawData($data),
+                'content' => $this->getRawData($data)
             ],
         ];
 
@@ -127,5 +123,16 @@ class ContextClient implements ClientInterface
         }
 
         return $append;
+    }
+
+    private function getResponseAndSaveCookies(string $url, $ctx)
+    {
+        $response = @file_get_contents($url, false, $ctx);
+
+        if (isset($http_response_header)) {
+            $this->saveCookies($http_response_header);
+        }
+
+        return $response;
     }
 }
