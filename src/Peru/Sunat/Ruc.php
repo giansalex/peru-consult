@@ -8,6 +8,7 @@
 
 namespace Peru\Sunat;
 
+use DateTime;
 use Peru\Http\ClientInterface;
 
 /**
@@ -157,7 +158,7 @@ class Ruc
             return null;
         }
 
-        $date = \DateTime::createFromFormat('d/m/Y', $text);
+        $date = DateTime::createFromFormat('d/m/Y', $text);
 
         return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
     }
@@ -172,34 +173,31 @@ class Ruc
         }
 
         $pieces = explode(' ', trim($items[0]));
-        list($removeLen, $value) = $this->getDepartment(end($pieces));
-        $company->departamento = $value;
+        $department = $this->getDepartment(end($pieces));
+        $company->departamento = $department;
         $company->provincia = trim($items[1]);
         $company->distrito = trim($items[2]);
-        array_splice($pieces, -1 * $removeLen);
+        $removeLength = count(explode(' ', $department));
+        array_splice($pieces, -1 * $removeLength);
         $company->direccion = join(' ', $pieces);
     }
 
-    private function getDepartment($department): array
+    private function getDepartment($department): string
     {
         $department = strtoupper($department);
-        $wordsToRemove = 1;
         switch ($department) {
             case 'DIOS':
                 $department = 'MADRE DE DIOS';
-                $wordsToRemove = 3;
             break;
             case 'MARTIN':
                 $department = 'SAN MARTIN';
-                $wordsToRemove = 2;
             break;
             case 'LIBERTAD':
                 $department = 'LA LIBERTAD';
-                $wordsToRemove = 2;
             break;
         }
 
-        return [$wordsToRemove, $department];
+        return $department;
     }
 
     private function getCpes($text)
