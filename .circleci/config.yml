@@ -8,7 +8,6 @@ jobs:
       - run: sudo apt install -y git libfreetype6-dev libjpeg62-turbo-dev
       - run: sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/
       - run: sudo docker-php-ext-install -j$(nproc) gd
-      - run: sudo composer self-update
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "composer.json" }}
@@ -18,8 +17,11 @@ jobs:
           paths:
             - ./vendor
           key: v1-dependencies-{{ checksum "composer.json" }}
+      - run: mkdir -p test-results/behat
       - run: ./vendor/bin/phpunit
-      - run: ./vendor/bin/behat --config behat.yml --tags "~@deprecated"
+      - run: ./vendor/bin/behat --config behat.yml --tags "~@deprecated" -f pretty -o std -f junit -o test-results/behat/
+      - store_test_results:
+          path: test-results
   deploy:
     docker:
       - image: circleci/python:3.7
