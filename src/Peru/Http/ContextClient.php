@@ -90,7 +90,7 @@ class ContextClient implements ClientInterface
             ],
         ];
 
-        if (is_array($this->options)) {
+        if (!empty($this->options)) {
             $options = array_merge_recursive($options, $this->options);
         }
 
