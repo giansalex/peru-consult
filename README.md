@@ -8,6 +8,8 @@
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)  
 Consultas de DNI y RUC sin uso de captcha, ni OCR y sin dependencias de terceros.
 
+[![Build Stats](https://buildstats.info/travisci/chart/giansalex/peru-consult?branch=master&includeBuildsFromPullRequest=false)]
+
 # Install
 Usando composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
 ```bash
