@@ -41,23 +41,25 @@ class Ruc
     }
 
     /**
+     * Get Company Information by RUC.
+     *
      * @param string $ruc
      *
-     * @return bool|Company
+     * @return null|Company
      */
-    public function get(string $ruc)
+    public function get(string $ruc): ?Company
     {
         if (11 !== strlen($ruc)) {
             $this->error = 'Ruc debe tener 11 dígitos';
 
-            return false;
+            return null;
         }
         $random = $this->getRandom();
         $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
         $dic = $this->getValuesFromUrl($url);
 
         if (false === $dic) {
-            return false;
+            return null;
         }
 
         return $this->getCompany($dic);
