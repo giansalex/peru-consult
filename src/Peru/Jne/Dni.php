@@ -10,11 +10,12 @@ namespace Peru\Jne;
 
 use Peru\Http\ClientInterface;
 use Peru\Reniec\Person;
+use Peru\Services\DniInterface;
 
 /**
  * Class Dni.
  */
-class Dni
+class Dni implements DniInterface
 {
     private const URL_CONSULT_FORMAT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI=%s';
     /**
@@ -26,18 +27,19 @@ class Dni
      */
     private $client;
 
-    public function get(string $dni)
+    public function get(string $dni): ?Person
     {
         if (8 !== strlen($dni)) {
             $this->error = 'Dni debe tener 8 dígitos';
 
-            return false;
+            return null;
         }
 
         $raw = $this->getRawResponse($dni);
         if (false === $raw) {
-            return false;
+            return null;
         }
+
         $person = $this->getPerson($raw);
         if ($person) {
             $person->dni = $dni;
@@ -80,13 +82,13 @@ class Dni
         return $text;
     }
 
-    private function getPerson($text)
+    private function getPerson($text): ?Person
     {
         $parts = explode('|', $text);
         if (count($parts) < 3) {
             $this->error = $text;
 
-            return false;
+            return null;
         }
 
         $person = new Person();
