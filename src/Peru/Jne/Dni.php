@@ -83,16 +83,17 @@ class Dni
     private function getPerson($text)
     {
         $parts = explode('|', $text);
-        if (3 === count($parts)) {
-            $person = new Person();
-            $person->apellidoPaterno = $parts[0];
-            $person->apellidoMaterno = $parts[1];
-            $person->nombres = $parts[2];
+        if (count($parts) < 3) {
+            $this->error = $text;
 
-            return $person;
+            return false;
         }
-        $this->error = $text;
 
-        return false;
+        $person = new Person();
+        $person->apellidoPaterno = $parts[0];
+        $person->apellidoMaterno = $parts[1];
+        $person->nombres = $parts[2];
+
+        return $person;
     }
 }
