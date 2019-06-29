@@ -48,7 +48,7 @@ class DniTest extends TestCase
         $person = $this->cs->get($dni);
 
         echo $this->cs->getError().PHP_EOL;
-        $this->assertNotFalse($person);
+        $this->assertNotNull($person);
         $this->assertEquals($dni, $person->dni);
         $this->assertNotEmpty($person->nombres);
         $this->assertNotEmpty($person->apellidoMaterno);
@@ -62,7 +62,7 @@ class DniTest extends TestCase
 
         $cs = $dni->get('00000001');
 
-        $this->assertFalse($cs);
+        $this->assertNull($cs);
         $this->assertEquals('No se pudo conectar a JNE', $dni->getError());
     }
 
@@ -70,7 +70,7 @@ class DniTest extends TestCase
     {
         $person = $this->cs->get('2323');
 
-        $this->assertFalse($person);
+        $this->assertNull($person);
         $this->assertEquals('Dni debe tener 8 dígitos', $this->cs->getError());
     }
 
@@ -78,7 +78,7 @@ class DniTest extends TestCase
     {
         $person = $this->cs->get('00000000');
 
-        $this->assertFalse($person);
+        $this->assertNull($person);
     }
 
     public function dniProviders()
