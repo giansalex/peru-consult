@@ -8,10 +8,12 @@
 
 namespace Peru\Sunat;
 
+use JsonSerializable;
+
 /**
  * Class Company.
  */
-class Company implements \JsonSerializable
+class Company implements JsonSerializable
 {
     /**
      * @var string

@@ -8,10 +8,12 @@
 
 namespace Peru\Reniec;
 
+use JsonSerializable;
+
 /**
  * Class Person.
  */
-class Person implements \JsonSerializable
+class Person implements JsonSerializable
 {
     /**
      * @var string
