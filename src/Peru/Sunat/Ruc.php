@@ -10,6 +10,7 @@ namespace Peru\Sunat;
 
 use DateTime;
 use Peru\Http\ClientInterface;
+use Peru\Http\ContextClient;
 
 /**
  * Class Ruc.
@@ -33,14 +34,6 @@ class Ruc
     private $parser;
 
     /**
-     * Ruc constructor.
-     */
-    public function __construct()
-    {
-        $this->parser = new HtmlParser();
-    }
-
-    /**
      * Get Company Information by RUC.
      *
      * @param string $ruc
@@ -54,6 +47,8 @@ class Ruc
 
             return null;
         }
+        $this->validateDependencies();
+
         $random = $this->getRandom();
         $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
         $dic = $this->getValuesFromUrl($url);
@@ -76,6 +71,16 @@ class Ruc
     }
 
     /**
+     * Set Html Parser.
+     *
+     * @param HtmlParser $parser
+     */
+    public function setParser(HtmlParser $parser)
+    {
+        $this->parser = $parser;
+    }
+
+    /**
      * Get Last error message.
      *
      * @return string
@@ -83,6 +88,17 @@ class Ruc
     public function getError(): ?string
     {
         return $this->error;
+    }
+
+    private function validateDependencies()
+    {
+        if (empty($this->client)) {
+            $this->client = new ContextClient();
+        }
+
+        if (empty($this->parser)) {
+            $this->parser = new HtmlParser();
+        }
     }
 
     private function getRandom(): ?string
