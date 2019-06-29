@@ -63,7 +63,7 @@ class RucTest extends TestCase
         $company = $this->cs->get('10401510465');
         if (false === $company) return;
 
-        $this->assertNotFalse($company);
+        $this->assertNotNull($company);
         $json = json_encode($company);
         $this->assertJson($json);
         $obj = json_decode($json);
@@ -77,7 +77,7 @@ class RucTest extends TestCase
 
         $cp = $ruc->get('20440374248');
 
-        $this->assertNotFalse($cp);
+        $this->assertNotNull($cp);
         $this->assertNull($cp->departamento);
         $this->assertNull($cp->provincia);
         $this->assertNull($cp->distrito);
@@ -90,7 +90,7 @@ class RucTest extends TestCase
 
         $cs = $ruc->get('20000000001');
 
-        $this->assertFalse($cs);
+        $this->assertNull($cs);
         $this->assertEquals('Ocurrio un problema conectando a Sunat', $ruc->getError());
     }
 
@@ -101,7 +101,7 @@ class RucTest extends TestCase
 
         $cs = $ruc->get('20000000001');
 
-        $this->assertFalse($cs);
+        $this->assertNull($cs);
         $this->assertEquals('No se encontro el ruc', $ruc->getError());
     }
 
@@ -109,7 +109,7 @@ class RucTest extends TestCase
     {
         $company = $this->cs->get('2323');
 
-        $this->assertFalse($company);
+        $this->assertNull($company);
         $this->assertContains('11', $this->cs->getError());
     }
 
@@ -117,7 +117,7 @@ class RucTest extends TestCase
     {
         $company = $this->cs->get('20000000001');
 
-        $this->assertFalse($company);
+        $this->assertNull($company);
         $this->assertEquals('No se encontro el ruc', $this->cs->getError());
     }
 
