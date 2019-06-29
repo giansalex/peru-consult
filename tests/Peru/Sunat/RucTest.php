@@ -38,15 +38,15 @@ class RucTest extends TestCase
     }
 
     /**
-     * @testWith
+     * @dataProvider rucProviders
      *
      * @param string $ruc
      * @throws Exception
      */
     public function testGetRuc($ruc)
     {
-        $company = $this->cs->get($ruc);
-        if (false === $company) return;
+        $company = $this->getRucRetry($ruc);
+        if (empty($company)) return;
 
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
@@ -131,10 +131,24 @@ class RucTest extends TestCase
             ['20440374248'], // LA LIBERTAD
             ['20513176962'],
             ['20600055519'],
+            ['20512530517'],
             ['20100070970'],
             ['20601197503'],
             ['20493919271'], // MADRE DE DIOS
             ['20146806679'], // SAN MARTIN
         ];
+    }
+
+    private function getRucRetry($ruc, $retry = 5)
+    {
+        while ($retry-->0) {
+            echo "$ruc: retry: $retry".PHP_EOL;
+            $company = $this->cs->get($ruc);
+            if ($company) {
+                return $company;
+            }
+        }
+
+        return null;
     }
 }

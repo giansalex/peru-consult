@@ -11,7 +11,6 @@ declare(strict_types=1);
 namespace Tests\Peru\Sunat;
 
 use Peru\Http\ClientInterface;
-use Peru\Sunat\Ruc;
 use PHPUnit\Framework\MockObject\MockBuilder;
 
 /**
@@ -54,7 +53,7 @@ trait RucTrait
 
         $stub->method('get')
             ->willReturnCallback(function ($param) {
-                if ($param == Ruc::URL_RANDOM) {
+                if ($param == 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random') {
                     return '-3234111';
                 }
 
