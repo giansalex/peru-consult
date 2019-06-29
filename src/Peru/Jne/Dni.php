@@ -27,6 +27,13 @@ class Dni implements DniInterface
      */
     private $client;
 
+    /**
+     * Get Person Information by DNI.
+     *
+     * @param string $dni
+     *
+     * @return Person|null
+     */
     public function get(string $dni): ?Person
     {
         if (8 !== strlen($dni)) {
