@@ -91,7 +91,7 @@ class Dni
 
             return $person;
         }
-        $this->error = implode('', $parts);
+        $this->error = $text;
 
         return false;
     }
