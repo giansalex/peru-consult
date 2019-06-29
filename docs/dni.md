@@ -15,7 +15,7 @@ $dni = '46658592';
 $cs = new Dni();
 
 $person = $cs->get($dni);
-if (empty($person)) {
+if (!$person) {
     echo $cs->getError();
     exit();
 }

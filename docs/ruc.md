@@ -20,7 +20,7 @@ $ruc = '20100070970';
 $cs = new Ruc();
 
 $company = $cs->get($ruc);
-if (empty($company)) {
+if (!$company) {
     echo $cs->getError();
     exit();
 }
