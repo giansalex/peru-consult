@@ -95,7 +95,7 @@ class ContextClient implements ClientInterface
         }
 
         if (!empty($this->cookies)) {
-            $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies, '; ');
+            $options['http']['header'] .= 'Cookie: ' . $this->join('=', $this->cookies, '; ');
         }
 
         $context = stream_context_create($options);
