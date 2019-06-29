@@ -9,12 +9,14 @@
 namespace Peru\Jne;
 
 use Peru\Http\ClientInterface;
+use Peru\Http\ContextClient;
 use Peru\Reniec\Person;
+use Peru\Services\DniInterface;
 
 /**
  * Class Dni.
  */
-class Dni
+class Dni implements DniInterface
 {
     private const URL_CONSULT_FORMAT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI=%s';
     /**
@@ -26,18 +28,27 @@ class Dni
      */
     private $client;
 
-    public function get(string $dni)
+    /**
+     * Get Person Information by DNI.
+     *
+     * @param string $dni
+     *
+     * @return Person|null
+     */
+    public function get(string $dni): ?Person
     {
         if (8 !== strlen($dni)) {
             $this->error = 'Dni debe tener 8 dígitos';
 
-            return false;
+            return null;
         }
 
+        $this->validateDependencies();
         $raw = $this->getRawResponse($dni);
         if (false === $raw) {
-            return false;
+            return null;
         }
+
         $person = $this->getPerson($raw);
         if ($person) {
             $person->dni = $dni;
@@ -66,6 +77,13 @@ class Dni
         return $this->error;
     }
 
+    private function validateDependencies()
+    {
+        if (empty($this->client)) {
+            $this->client = new ContextClient();
+        }
+    }
+
     private function getRawResponse(string $dni)
     {
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
@@ -80,19 +98,20 @@ class Dni
         return $text;
     }
 
-    private function getPerson($text)
+    private function getPerson($text): ?Person
     {
         $parts = explode('|', $text);
-        if (3 === count($parts)) {
-            $person = new Person();
-            $person->apellidoPaterno = $parts[0];
-            $person->apellidoMaterno = $parts[1];
-            $person->nombres = $parts[2];
+        if (count($parts) < 3) {
+            $this->error = $text;
 
-            return $person;
+            return null;
         }
-        $this->error = implode('', $parts);
 
-        return false;
+        $person = new Person();
+        $person->apellidoPaterno = $parts[0];
+        $person->apellidoMaterno = $parts[1];
+        $person->nombres = $parts[2];
+
+        return $person;
     }
 }

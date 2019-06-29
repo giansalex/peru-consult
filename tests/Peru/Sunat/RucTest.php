@@ -10,7 +10,9 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Sunat;
 
-use Peru\Http\ContextClient;
+use DateTime;
+use Exception;
+use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
 use PHPUnit\Framework\TestCase;
 
@@ -20,6 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class RucTest extends TestCase
 {
+    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
     use RucTrait {
         getHttpMock as private getHttp;
     }
@@ -32,18 +35,18 @@ class RucTest extends TestCase
     public function setUp()
     {
         $this->cs = new Ruc();
-        $this->cs->setClient(new ContextClient());
     }
 
     /**
      * @dataProvider rucProviders
      *
      * @param string $ruc
+     * @throws Exception
      */
     public function testGetRuc($ruc)
     {
-        $company = $this->cs->get($ruc);
-        if (false === $company) return;
+        $company = $this->getRucRetry($ruc);
+        if (!$company) return;
 
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
@@ -52,7 +55,7 @@ class RucTest extends TestCase
         $this->assertNotEmpty($company->direccion);
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertTrue(is_array($company->cpeElectronico));
-        $this->assertTrue(new \DateTime($company->fechaInscripcion) !== false);
+        $this->assertTrue(new DateTime($company->fechaInscripcion) !== false);
         $this->assertNotEmpty($company->departamento);
         $this->assertNotEmpty($company->provincia);
         $this->assertNotEmpty($company->distrito);
@@ -61,9 +64,9 @@ class RucTest extends TestCase
     public function testJsonEncode()
     {
         $company = $this->cs->get('10401510465');
-        if (false === $company) return;
+        if (!$company) return;
 
-        $this->assertNotFalse($company);
+        $this->assertNotNull($company);
         $json = json_encode($company);
         $this->assertJson($json);
         $obj = json_decode($json);
@@ -77,7 +80,7 @@ class RucTest extends TestCase
 
         $cp = $ruc->get('20440374248');
 
-        $this->assertNotFalse($cp);
+        $this->assertNotNull($cp);
         $this->assertNull($cp->departamento);
         $this->assertNull($cp->provincia);
         $this->assertNull($cp->distrito);
@@ -86,11 +89,11 @@ class RucTest extends TestCase
     public function testInvalidRequest()
     {
         $ruc = new Ruc();
-        $ruc->setClient($this->getClientMock(Ruc::URL_CONSULT));
+        $ruc->setClient($this->getClientMock(self::URL_CONSULT));
 
         $cs = $ruc->get('20000000001');
 
-        $this->assertFalse($cs);
+        $this->assertNull($cs);
         $this->assertEquals('Ocurrio un problema conectando a Sunat', $ruc->getError());
     }
 
@@ -98,10 +101,11 @@ class RucTest extends TestCase
     {
         $ruc = new Ruc();
         $ruc->setClient($this->getClientMock(''));
+        $ruc->setParser(new HtmlParser());
 
         $cs = $ruc->get('20000000001');
 
-        $this->assertFalse($cs);
+        $this->assertNull($cs);
         $this->assertEquals('No se encontro el ruc', $ruc->getError());
     }
 
@@ -109,7 +113,7 @@ class RucTest extends TestCase
     {
         $company = $this->cs->get('2323');
 
-        $this->assertFalse($company);
+        $this->assertNull($company);
         $this->assertContains('11', $this->cs->getError());
     }
 
@@ -117,7 +121,7 @@ class RucTest extends TestCase
     {
         $company = $this->cs->get('20000000001');
 
-        $this->assertFalse($company);
+        $this->assertNull($company);
         $this->assertEquals('No se encontro el ruc', $this->cs->getError());
     }
 
@@ -126,7 +130,6 @@ class RucTest extends TestCase
         return [
             ['20440374248'], // LA LIBERTAD
             ['20513176962'],
-//            ['10401510465'], // Direccion fiscal no disponible por SUNAT
             ['20600055519'],
             ['20512530517'],
             ['20100070970'],
@@ -134,5 +137,17 @@ class RucTest extends TestCase
             ['20493919271'], // MADRE DE DIOS
             ['20146806679'], // SAN MARTIN
         ];
+    }
+
+    private function getRucRetry($ruc, $retry = 5)
+    {
+        while ($retry-->0) {
+            $company = $this->cs->get($ruc);
+            if ($company) {
+                return $company;
+            }
+        }
+
+        return null;
     }
 }

@@ -6,34 +6,29 @@
 [![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability)](https://codeclimate.com/github/giansalex/peru-consult/maintainability)
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
-Consulta de DNI y RUC sin uso de captcha, ni OCR, sin dependencias de terceros.
+Consulta gratuita de DNI y RUC sin uso de captcha, ni OCR, sin dependencias de terceros.
 
-Instalar
---------
+## Instalar
 Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult).
 ```bash
 composer require giansalex/peru-consult
 ```
 
-Servicios
-------------
+### Servicios
+
 - RENIEC
     - Consulta de Dni
 - SUNAT
     - Consulta Ruc
     - Validez Usuario SOL
 
-Requerimientos
----------------
+### Requerimientos
 - PHP 7.1 o superior.
-- Ruc, Validez Usuario SOL necesita la extensión [dom](http://php.net/manual/es/book.dom.php).
 
-API REST
---------
-Ir a [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
+### API REST
+Visitar [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
 
-Sponsors
----------
+### Sponsors
 
-Powered by [Quertium](http://quertium.com/)  
+[Quertium](http://quertium.com/)  
 ![Quertium](img/quertium.png)

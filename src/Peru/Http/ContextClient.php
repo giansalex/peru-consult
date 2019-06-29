@@ -95,7 +95,7 @@ class ContextClient implements ClientInterface
         }
 
         if (!empty($this->cookies)) {
-            $options['http']['header'] .= 'Cookie: '.$this->join('=', $this->cookies, '; ');
+            $options['http']['header'] .= 'Cookie: ' . $this->join('=', $this->cookies, '; ');
         }
 
         $context = stream_context_create($options);
@@ -127,7 +127,7 @@ class ContextClient implements ClientInterface
     {
         $append = '';
         foreach ($items as $key => $value) {
-            $append .= $key.$glue.$value.$end;
+            $append .= $key . $glue . $value . $end;
         }
 
         return $append;

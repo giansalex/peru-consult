@@ -7,17 +7,15 @@ Ejemplo
 
 ```php
 use Peru\Jne\Dni;
-use Peru\Http\ContextClient;
 
 require 'vendor/autoload.php';
 
 $dni = '46658592';
 
 $cs = new Dni();
-$cs->setClient(new ContextClient());
 
 $person = $cs->get($dni);
-if ($person === false) {
+if (!$person) {
     echo $cs->getError();
     exit();
 }

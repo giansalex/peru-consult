@@ -44,10 +44,10 @@ workflows:
   version: 2
   build_test_and_deploy:
     jobs:
-      - build:
-          filters:
-            branches:
-              ignore: gh-pages
+      - build
       - deploy:
           requires:
             - build
+          filters:
+            branches:
+              only: master

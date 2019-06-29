@@ -10,14 +10,15 @@ namespace Peru\Sunat;
 
 use DateTime;
 use Peru\Http\ClientInterface;
+use Peru\Http\ContextClient;
 
 /**
  * Class Ruc.
  */
 class Ruc
 {
-    const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
+    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
+    private const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
 
     /**
      * @var string
@@ -33,31 +34,27 @@ class Ruc
     private $parser;
 
     /**
-     * Ruc constructor.
-     */
-    public function __construct()
-    {
-        $this->parser = new HtmlParser();
-    }
-
-    /**
+     * Get Company Information by RUC.
+     *
      * @param string $ruc
      *
-     * @return bool|Company
+     * @return null|Company
      */
-    public function get(string $ruc)
+    public function get(string $ruc): ?Company
     {
         if (11 !== strlen($ruc)) {
             $this->error = 'Ruc debe tener 11 dígitos';
 
-            return false;
+            return null;
         }
+        $this->validateDependencies();
+
         $random = $this->getRandom();
-        $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+        $url = self::URL_CONSULT . "?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
         $dic = $this->getValuesFromUrl($url);
 
         if (false === $dic) {
-            return false;
+            return null;
         }
 
         return $this->getCompany($dic);
@@ -74,6 +71,16 @@ class Ruc
     }
 
     /**
+     * Set Html Parser.
+     *
+     * @param HtmlParser $parser
+     */
+    public function setParser(HtmlParser $parser)
+    {
+        $this->parser = $parser;
+    }
+
+    /**
      * Get Last error message.
      *
      * @return string
@@ -81,6 +88,17 @@ class Ruc
     public function getError(): ?string
     {
         return $this->error;
+    }
+
+    private function validateDependencies()
+    {
+        if (empty($this->client)) {
+            $this->client = new ContextClient();
+        }
+
+        if (empty($this->parser)) {
+            $this->parser = new HtmlParser();
+        }
     }
 
     private function getRandom(): ?string
@@ -160,7 +178,7 @@ class Ruc
 
         $date = DateTime::createFromFormat('d/m/Y', $text);
 
-        return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
+        return false === $date ? null : $date->format('Y-m-d') . 'T00:00:00.000Z';
     }
 
     private function fixDirection(Company $company)

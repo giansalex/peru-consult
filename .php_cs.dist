@@ -3,7 +3,10 @@
 $config = PhpCsFixer\Config::create()
     ->setRules([
         '@Symfony' => true,
-        'yoda_style' => false
+        'yoda_style' => false,
+        'concat_space' => [
+            'spacing' => 'one'
+        ],
     ])
     ->setFinder(
         PhpCsFixer\Finder::create()
@@ -24,4 +27,5 @@ try {
 } catch (InvalidArgumentException $e) {
     $config->setRules([]);
 }
+
 return $config;

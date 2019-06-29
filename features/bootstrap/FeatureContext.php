@@ -1,7 +1,6 @@
 <?php
 
 use Behat\Behat\Context\Context;
-use Peru\Http\ContextClient;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -43,16 +42,13 @@ class FeatureContext implements Context
      */
     public function executeConsult()
     {
-        $client = new ContextClient();
         switch (strlen($this->document)) {
             case 8:
                 $cs = new \Peru\Jne\Dni();
-                $cs->setClient($client);
                 $this->result = $cs->get($this->document);
                 break;
             case 11:
                 $cs = new \Peru\Sunat\Ruc();
-                $cs->setClient($client);
                 $this->result = $cs->get($this->document);
                 break;
         }
