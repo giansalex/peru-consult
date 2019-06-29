@@ -8,6 +8,11 @@
 
 namespace Peru\Sunat;
 
+use DOMDocument;
+use DOMNode;
+use DOMNodeList;
+use DOMXPath;
+
 /**
  * Class HtmlParser.
  */
@@ -35,11 +40,11 @@ final class HtmlParser
         return $dic;
     }
 
-    private function getKeyValues(\DOMNodeList $nodes, \DOMXPath $xp)
+    private function getKeyValues(DOMNodeList $nodes, DOMXPath $xp)
     {
         $dic = [];
         foreach ($nodes as $item) {
-            /** @var $item \DOMNode */
+            /** @var $item DOMNode */
             if ($this->isNotElement($item)) {
                 continue;
             }
@@ -50,12 +55,12 @@ final class HtmlParser
         return $dic;
     }
 
-    private function setValuesFromNode(\DOMXPath $xp, \DOMNode $item, &$dic)
+    private function setValuesFromNode(DOMXPath $xp, DOMNode $item, &$dic)
     {
         $isTitle = true;
         $title = '';
         foreach ($item->childNodes as $item2) {
-            /** @var $item2 \DOMNode */
+            /** @var $item2 DOMNode */
             if ($this->isNotElement($item2)) {
                 continue;
             }
@@ -72,16 +77,16 @@ final class HtmlParser
 
     public static function getXpathFromHtml($html)
     {
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         $prevState = libxml_use_internal_errors(true);
         $dom->loadHTML($html);
         libxml_clear_errors();
         libxml_use_internal_errors($prevState);
 
-        return new \DOMXPath($dom);
+        return new DOMXPath($dom);
     }
 
-    private function getContent(\DOMXPath $xp, \DOMNode $node)
+    private function getContent(DOMXPath $xp, DOMNode $node)
     {
         $select = $xp->query('./select', $node);
         if ($select->length > 0) {
@@ -93,10 +98,10 @@ final class HtmlParser
         return trim($node->textContent);
     }
 
-    private function getValuesFromOption(\DOMNodeList $options)
+    private function getValuesFromOption(DOMNodeList $options)
     {
         foreach ($options as $opt) {
-            /** @var $opt \DOMNode */
+            /** @var $opt DOMNode */
             if ('option' != $opt->nodeName) {
                 continue;
             }
@@ -104,7 +109,7 @@ final class HtmlParser
         }
     }
 
-    private function isNotElement(\DOMNode $node)
+    private function isNotElement(DOMNode $node)
     {
         return XML_ELEMENT_NODE !== $node->nodeType;
     }
