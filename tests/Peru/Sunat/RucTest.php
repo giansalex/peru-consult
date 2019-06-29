@@ -10,7 +10,8 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Sunat;
 
-use Peru\Http\ContextClient;
+use DateTime;
+use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
 use PHPUnit\Framework\TestCase;
 
@@ -32,7 +33,6 @@ class RucTest extends TestCase
     public function setUp()
     {
         $this->cs = new Ruc();
-        $this->cs->setClient(new ContextClient());
     }
 
     /**
@@ -52,7 +52,7 @@ class RucTest extends TestCase
         $this->assertNotEmpty($company->direccion);
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertTrue(is_array($company->cpeElectronico));
-        $this->assertTrue(new \DateTime($company->fechaInscripcion) !== false);
+        $this->assertTrue(new DateTime($company->fechaInscripcion) !== false);
         $this->assertNotEmpty($company->departamento);
         $this->assertNotEmpty($company->provincia);
         $this->assertNotEmpty($company->distrito);
@@ -98,6 +98,7 @@ class RucTest extends TestCase
     {
         $ruc = new Ruc();
         $ruc->setClient($this->getClientMock(''));
+        $ruc->setParser(new HtmlParser());
 
         $cs = $ruc->get('20000000001');
 
