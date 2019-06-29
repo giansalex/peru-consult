@@ -46,7 +46,7 @@ class RucTest extends TestCase
     public function testGetRuc($ruc)
     {
         $company = $this->getRucRetry($ruc);
-        if (empty($company)) return;
+        if (!$company) return;
 
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
@@ -64,7 +64,7 @@ class RucTest extends TestCase
     public function testJsonEncode()
     {
         $company = $this->cs->get('10401510465');
-        if (false === $company) return;
+        if (!$company) return;
 
         $this->assertNotNull($company);
         $json = json_encode($company);
@@ -142,7 +142,6 @@ class RucTest extends TestCase
     private function getRucRetry($ruc, $retry = 5)
     {
         while ($retry-->0) {
-            echo "$ruc: retry: $retry".PHP_EOL;
             $company = $this->cs->get($ruc);
             if ($company) {
                 return $company;
