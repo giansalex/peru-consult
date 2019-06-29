@@ -12,17 +12,15 @@ Ejemplo
 
 ```php
 use Peru\Sunat\Ruc;
-use Peru\Http\ContextClient;
 
 require 'vendor/autoload.php';
 
 $ruc = '20100070970';
 
 $cs = new Ruc();
-$cs->setClient(new ContextClient());
 
 $company = $cs->get($ruc);
-if ($company === false) {
+if (empty($company)) {
     echo $cs->getError();
     exit();
 }
