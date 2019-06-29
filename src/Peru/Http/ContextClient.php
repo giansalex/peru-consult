@@ -127,7 +127,7 @@ class ContextClient implements ClientInterface
     {
         $append = '';
         foreach ($items as $key => $value) {
-            $append .= $key.$glue.$value.$end;
+            $append .= $key . $glue . $value . $end;
         }
 
         return $append;
