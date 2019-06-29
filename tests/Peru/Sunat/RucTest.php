@@ -11,6 +11,7 @@ declare(strict_types=1);
 namespace Tests\Peru\Sunat;
 
 use DateTime;
+use Exception;
 use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
 use PHPUnit\Framework\TestCase;
@@ -39,6 +40,7 @@ class RucTest extends TestCase
      * @dataProvider rucProviders
      *
      * @param string $ruc
+     * @throws Exception
      */
     public function testGetRuc($ruc)
     {

@@ -12,10 +12,11 @@ namespace Tests\Peru\Sunat;
 
 use Peru\Http\ClientInterface;
 use Peru\Sunat\Ruc;
+use PHPUnit\Framework\MockObject\MockBuilder;
 
 /**
  * Trait RucTrait
- * @method \PHPUnit\Framework\MockObject\MockBuilder getMockBuilder(string $className)
+ * @method MockBuilder getMockBuilder(string $className)
  */
 trait RucTrait
 {
