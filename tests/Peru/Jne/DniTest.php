@@ -45,7 +45,8 @@ class DniTest extends TestCase
      */
     public function testGetDni($dni)
     {
-        $person = $this->cs->get($dni);
+        $client = new Dni();
+        $person = $client->get($dni);
 
         echo $this->cs->getError().PHP_EOL;
         $this->assertNotNull($person);
