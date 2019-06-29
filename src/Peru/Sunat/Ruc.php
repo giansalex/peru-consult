@@ -17,8 +17,8 @@ use Peru\Http\ContextClient;
  */
 class Ruc
 {
-    const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
+    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
+    private const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
 
     /**
      * @var string
@@ -50,7 +50,7 @@ class Ruc
         $this->validateDependencies();
 
         $random = $this->getRandom();
-        $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+        $url = self::URL_CONSULT . "?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
         $dic = $this->getValuesFromUrl($url);
 
         if (false === $dic) {
@@ -178,7 +178,7 @@ class Ruc
 
         $date = DateTime::createFromFormat('d/m/Y', $text);
 
-        return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
+        return false === $date ? null : $date->format('Y-m-d') . 'T00:00:00.000Z';
     }
 
     private function fixDirection(Company $company)

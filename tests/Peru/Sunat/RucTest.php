@@ -22,6 +22,7 @@ use PHPUnit\Framework\TestCase;
  */
 class RucTest extends TestCase
 {
+    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
     use RucTrait {
         getHttpMock as private getHttp;
     }
@@ -37,7 +38,7 @@ class RucTest extends TestCase
     }
 
     /**
-     * @dataProvider rucProviders
+     * @testWith
      *
      * @param string $ruc
      * @throws Exception
@@ -88,7 +89,7 @@ class RucTest extends TestCase
     public function testInvalidRequest()
     {
         $ruc = new Ruc();
-        $ruc->setClient($this->getClientMock(Ruc::URL_CONSULT));
+        $ruc->setClient($this->getClientMock(self::URL_CONSULT));
 
         $cs = $ruc->get('20000000001');
 
@@ -129,9 +130,7 @@ class RucTest extends TestCase
         return [
             ['20440374248'], // LA LIBERTAD
             ['20513176962'],
-//            ['10401510465'], // Direccion fiscal no disponible por SUNAT
             ['20600055519'],
-            ['20512530517'],
             ['20100070970'],
             ['20601197503'],
             ['20493919271'], // MADRE DE DIOS
