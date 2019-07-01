@@ -415,15 +415,17 @@
 </blockquote>
 <h2 id="ejemplo">Ejemplo<a class="headerlink" href="#ejemplo" title="Permanent link">&para;</a></h2>
 <pre class="code"><code class="language-php">use Peru\Jne\Dni;
+use Peru\Http\ContextClient;
 
 require 'vendor/autoload.php';
 
 $dni = '46658592';
 
 $cs = new Dni();
+$cs-&gt;setClient(new ContextClient());
 
 $person = $cs-&gt;get($dni);
-if (!$person) {
+if ($person === false) {
     echo $cs-&gt;getError();
     exit();
 }
