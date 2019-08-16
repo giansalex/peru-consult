@@ -48,13 +48,8 @@ class Ruc
         }
         $this->validateDependencies();
 
-        $random = $this->getRandom();
-        $url = self::URL_CONSULT . "?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
-        $html = $this->loadHtml($url);
-
-        if (false === $html) {
-            return null;
-        }
+        $random = $this->getHttpResponse(self::URL_RANDOM);
+        $html = $this->getHttpResponse(self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
 
         return $this->parser->parse($html);
     }
@@ -100,23 +95,10 @@ class Ruc
         }
     }
 
-    private function getRandom(): ?string
+    private function getHttpResponse(string $url): ?string
     {
-        $code = $this->client->get(self::URL_RANDOM);
+        $body = $this->client->get($url);
 
-        return false === $code ? '' : $code;
-    }
-
-    private function loadHtml($url)
-    {
-        $html = $this->client->get($url);
-
-        if (false === $html) {
-            $this->error = 'Ocurrio un problema conectando a Sunat';
-
-            return false;
-        }
-
-        return $html;
+        return false === $body ? '' : $body;
     }
 }
