@@ -3,7 +3,7 @@
 namespace Peru\Sunat\Async;
 
 use Peru\Http\Async\ClientInterface;
-use Peru\Sunat\RucHtmlParser;
+use Peru\Sunat\RucParser;
 use React\Promise\PromiseInterface;
 
 class Ruc
@@ -17,7 +17,7 @@ class Ruc
     private $client;
 
     /**
-     * @var RucHtmlParser
+     * @var RucParser
      */
     private $parser;
 
@@ -25,9 +25,9 @@ class Ruc
      * Ruc constructor.
      *
      * @param ClientInterface $client
-     * @param RucHtmlParser   $parser
+     * @param RucParser   $parser
      */
-    public function __construct(ClientInterface $client, RucHtmlParser $parser)
+    public function __construct(ClientInterface $client, RucParser $parser)
     {
         $this->client = $client;
         $this->parser = $parser;
@@ -35,7 +35,7 @@ class Ruc
 
     public function get(string $ruc): PromiseInterface
     {
-        $promise = $this->client
+        return $this->client
             ->getAsync(self::URL_RANDOM)
             ->then(function ($random) use ($ruc) {
                 $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
@@ -45,7 +45,5 @@ class Ruc
             ->then(function ($html) {
                 return $this->parser->parse($html);
             });
-
-        return $promise;
     }
 }

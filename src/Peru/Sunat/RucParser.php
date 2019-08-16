@@ -4,7 +4,7 @@ namespace Peru\Sunat;
 
 use DateTime;
 
-class RucHtmlParser
+class RucParser
 {
     /**
      * @var string

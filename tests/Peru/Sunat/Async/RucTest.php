@@ -6,7 +6,7 @@ use Peru\Http\Async\HttpClient;
 use Peru\Sunat\Async\Ruc;
 use Peru\Sunat\Company;
 use Peru\Sunat\HtmlParser;
-use Peru\Sunat\RucHtmlParser;
+use Peru\Sunat\RucParser;
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Factory;
 
@@ -15,7 +15,7 @@ class RucTest extends TestCase
     public function testGetRuc()
     {
         $loop = Factory::create();
-        $cs = new Ruc(new HttpClient($loop), new RucHtmlParser(new HtmlParser()));
+        $cs = new Ruc(new HttpClient($loop), new RucParser(new HtmlParser()));
         $promise = $cs->get('10401510465');
         $promise->then(function (?Company $company) {
             $this->assertNotNull($company);

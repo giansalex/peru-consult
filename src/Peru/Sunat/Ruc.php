@@ -28,7 +28,7 @@ class Ruc
      */
     public $client;
     /**
-     * @var RucHtmlParser
+     * @var RucParser
      */
     private $parser;
 
@@ -91,7 +91,7 @@ class Ruc
         }
 
         if (empty($this->parser)) {
-            $this->parser = new RucHtmlParser(new HtmlParser());
+            $this->parser = new RucParser(new HtmlParser());
         }
     }
 
