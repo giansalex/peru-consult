@@ -51,10 +51,7 @@ class Dni implements DniInterface
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $raw = $this->getRawResponse($url);
 
-        $person = $this->parser->parse($raw);
-        if ($person) {
-            $person->dni = $dni;
-        }
+        $person = $this->parser->parse($dni, $raw);
 
         return $person;
     }
