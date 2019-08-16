@@ -27,6 +27,10 @@ class Dni implements DniInterface
      * @var ClientInterface
      */
     private $client;
+    /**
+     * @var DniParser
+     */
+    private $parser;
 
     /**
      * Get Person Information by DNI.
@@ -44,12 +48,10 @@ class Dni implements DniInterface
         }
 
         $this->validateDependencies();
-        $raw = $this->getRawResponse($dni);
-        if (false === $raw) {
-            return null;
-        }
+        $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
+        $raw = $this->getRawResponse($url);
 
-        $person = $this->getPerson($raw);
+        $person = $this->parser->parse($raw);
         if ($person) {
             $person->dni = $dni;
         }
@@ -62,9 +64,17 @@ class Dni implements DniInterface
      *
      * @param ClientInterface $client
      */
-    public function setClient(ClientInterface $client)
+    public function setClient(ClientInterface $client): void
     {
         $this->client = $client;
+    }
+
+    /**
+     * @param DniParser $parser
+     */
+    public function setParser(DniParser $parser): void
+    {
+        $this->parser = $parser;
     }
 
     /**
@@ -82,36 +92,16 @@ class Dni implements DniInterface
         if (empty($this->client)) {
             $this->client = new ContextClient();
         }
+
+        if (empty($this->parser)) {
+            $this->parser = new DniParser();
+        }
     }
 
-    private function getRawResponse(string $dni)
+    private function getRawResponse(string $url)
     {
-        $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $text = $this->client->get($url);
 
-        if (false === $text) {
-            $this->error = 'No se pudo conectar a JNE';
-
-            return false;
-        }
-
-        return $text;
-    }
-
-    private function getPerson($text): ?Person
-    {
-        $parts = explode('|', $text);
-        if (count($parts) < 3) {
-            $this->error = $text;
-
-            return null;
-        }
-
-        $person = new Person();
-        $person->apellidoPaterno = $parts[0];
-        $person->apellidoMaterno = $parts[1];
-        $person->nombres = $parts[2];
-
-        return $person;
+        return false === $text ? $text : '';
     }
 }
