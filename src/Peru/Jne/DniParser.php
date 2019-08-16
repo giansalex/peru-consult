@@ -18,7 +18,7 @@ class DniParser
         $person->apellidoPaterno = $parts[0];
         $person->apellidoMaterno = $parts[1];
         $person->nombres = $parts[2];
-        $person->codVerifica = $this->getVerifyCode($dni);
+        $person->codVerifica = strval($this->getVerifyCode($dni));
 
         return $person;
     }
