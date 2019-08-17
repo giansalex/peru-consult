@@ -17,8 +17,8 @@ use Peru\Http\EmptyResponseDecorator;
  */
 class Ruc
 {
-    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    private const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
+    public $urlConsult = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
+    public $urlRandom = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
 
     /**
      * @var string
@@ -49,8 +49,8 @@ class Ruc
         }
         $this->validateDependencies();
 
-        $random = $this->client->get(self::URL_RANDOM);
-        $html = $this->client->get(self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
+        $random = $this->client->get($this->urlRandom);
+        $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
 
         return $this->parser->parse($html);
     }
