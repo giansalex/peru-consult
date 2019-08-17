@@ -67,9 +67,9 @@ class Ruc
     /**
      * Set Html Parser.
      *
-     * @param HtmlParser $parser
+     * @param RucParser $parser
      */
-    public function setParser(HtmlParser $parser)
+    public function setParser(RucParser $parser)
     {
         $this->parser = $parser;
     }
