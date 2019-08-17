@@ -15,13 +15,6 @@ use React\Promise\PromiseInterface;
 class HttpClient extends Client implements ClientInterface
 {
     /**
-     * Temporal result store.
-     *
-     * @var string
-     */
-    private $result;
-
-    /**
      * @var array
      */
     public $cookies;
@@ -43,13 +36,13 @@ class HttpClient extends Client implements ClientInterface
         $request->on('response', function (Response $response) use ($deferred) {
             $this->saveCookies($response->getHeaders());
 
-            $this->result = '';
-            $response->on('data', function ($data) {
-                $this->result .= $data;
+            $result = '';
+            $response->on('data', function ($data) use (&$result) {
+                $result .= $data;
             });
 
-            $response->on('end', function () use ($deferred) {
-                $deferred->resolve($this->result);
+            $response->on('end', function () use (&$result, $deferred) {
+                $deferred->resolve($result);
             });
         });
         $request->on('error', function ($e) use ($deferred) {
