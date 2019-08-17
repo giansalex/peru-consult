@@ -99,6 +99,6 @@ class Dni implements DniInterface
     {
         $text = $this->client->get($url);
 
-        return false === $text ? $text : '';
+        return false === $text ? '' : $text;
     }
 }

@@ -19,8 +19,6 @@ use PHPUnit\Framework\TestCase;
  */
 class DniTest extends TestCase
 {
-    use DniTrait;
-
     /**
      * @var Dni
      */
@@ -40,31 +38,20 @@ class DniTest extends TestCase
     }
 
     /**
-     * @dataProvider dniProviders
      * @param string $dni
+     *
+     * @testWith    ["48004836"]
      */
     public function testGetDni($dni)
     {
         $client = new Dni();
         $person = $client->get($dni);
 
-        echo $this->cs->getError().PHP_EOL;
         $this->assertNotNull($person);
         $this->assertEquals($dni, $person->dni);
         $this->assertNotEmpty($person->nombres);
         $this->assertNotEmpty($person->apellidoMaterno);
         $this->assertNotEmpty($person->apellidoPaterno);
-    }
-
-    public function testInvalidRequest()
-    {
-        $dni = new Dni();
-        $dni->setClient($this->getClientMock());
-
-        $cs = $dni->get('00000001');
-
-        $this->assertNull($cs);
-        $this->assertEquals('No se pudo conectar a JNE', $dni->getError());
     }
 
     public function testInvalidDniLength()
@@ -80,17 +67,5 @@ class DniTest extends TestCase
         $person = $this->cs->get('00000000');
 
         $this->assertNull($person);
-    }
-
-    public function dniProviders()
-    {
-        return [
-            ['00000004'],
-            ['00000012'],
-            ['00000005'],
-            ['00000023'],
-            ['00000010'],
-            ['48004836'],
-        ];
     }
 }
