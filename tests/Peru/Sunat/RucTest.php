@@ -12,8 +12,10 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
+use Peru\Http\EmptyResponseDecorator;
 use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
+use Peru\Sunat\RucParser;
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -76,7 +78,7 @@ class RucTest extends TestCase
     public function testExtraDirection()
     {
         $ruc = new Ruc();
-        $ruc->setClient($this->getClientHtmlMock());
+        $ruc->setClient(new EmptyResponseDecorator($this->getClientHtmlMock()));
 
         $cp = $ruc->get('20440374248');
 
@@ -94,19 +96,17 @@ class RucTest extends TestCase
         $cs = $ruc->get('20000000001');
 
         $this->assertNull($cs);
-        $this->assertEquals('Ocurrio un problema conectando a Sunat', $ruc->getError());
     }
 
     public function testInvalidResponse()
     {
         $ruc = new Ruc();
         $ruc->setClient($this->getClientMock(''));
-        $ruc->setParser(new HtmlParser());
+        $ruc->setParser(new RucParser(new HtmlParser()));
 
         $cs = $ruc->get('20000000001');
 
         $this->assertNull($cs);
-        $this->assertEquals('No se encontro el ruc', $ruc->getError());
     }
 
     public function testInvalidRucLength()
@@ -122,7 +122,6 @@ class RucTest extends TestCase
         $company = $this->cs->get('20000000001');
 
         $this->assertNull($company);
-        $this->assertEquals('No se encontro el ruc', $this->cs->getError());
     }
 
     public function rucProviders()

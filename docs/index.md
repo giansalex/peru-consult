@@ -9,24 +9,21 @@
 Consulta gratuita de DNI y RUC sin uso de captcha, ni OCR, sin dependencias de terceros.
 
 ## Instalar
-Via composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult).
+Vía composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult).
 ```bash
 composer require giansalex/peru-consult
 ```
-
-### Servicios
-
-- RENIEC
-    - Consulta de Dni
-- SUNAT
-    - Consulta Ruc
-    - Validez Usuario SOL
-
 ### Requerimientos
 - PHP 7.1 o superior.
 
+### Servicios
+
+- Consulta de Dni
+- Consulta de Ruc
+- Validez de usuario SOL
+
 ### API REST
-Visitar [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
+Ir a [@giansalex/peru-consult-api](https://github.com/giansalex/peru-consult-api).  
 
 ### Sponsors
 

@@ -8,9 +8,9 @@
 
 namespace Peru\Sunat;
 
-use DateTime;
 use Peru\Http\ClientInterface;
 use Peru\Http\ContextClient;
+use Peru\Http\EmptyResponseDecorator;
 
 /**
  * Class Ruc.
@@ -29,7 +29,7 @@ class Ruc
      */
     public $client;
     /**
-     * @var HtmlParser
+     * @var RucParser
      */
     private $parser;
 
@@ -49,15 +49,10 @@ class Ruc
         }
         $this->validateDependencies();
 
-        $random = $this->getRandom();
-        $url = self::URL_CONSULT . "?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
-        $dic = $this->getValuesFromUrl($url);
+        $random = $this->client->get(self::URL_RANDOM);
+        $html = $this->client->get(self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
 
-        if (false === $dic) {
-            return null;
-        }
-
-        return $this->getCompany($dic);
+        return $this->parser->parse($html);
     }
 
     /**
@@ -73,9 +68,9 @@ class Ruc
     /**
      * Set Html Parser.
      *
-     * @param HtmlParser $parser
+     * @param RucParser $parser
      */
-    public function setParser(HtmlParser $parser)
+    public function setParser(RucParser $parser)
     {
         $this->parser = $parser;
     }
@@ -93,148 +88,11 @@ class Ruc
     private function validateDependencies()
     {
         if (empty($this->client)) {
-            $this->client = new ContextClient();
+            $this->client = new EmptyResponseDecorator(new ContextClient());
         }
 
         if (empty($this->parser)) {
-            $this->parser = new HtmlParser();
+            $this->parser = new RucParser(new HtmlParser());
         }
-    }
-
-    private function getRandom(): ?string
-    {
-        $code = $this->client->get(self::URL_RANDOM);
-
-        return false === $code ? '' : $code;
-    }
-
-    private function getValuesFromUrl($url)
-    {
-        $html = $this->client->get($url);
-
-        if (false === $html) {
-            $this->error = 'Ocurrio un problema conectando a Sunat';
-
-            return false;
-        }
-
-        $dic = $this->parser->parse($html);
-        if (false === $dic) {
-            $this->error = 'No se encontro el ruc';
-
-            return false;
-        }
-
-        return $dic;
-    }
-
-    private function getCompany(array $items): ?Company
-    {
-        $cp = $this->getHeadCompany($items);
-        $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
-        $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
-        $cp->actExterior = $items['Actividad de Comercio Exterior:'];
-        $cp->actEconomicas = $items['Actividad(es) Económica(s):'];
-        $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'];
-        $cp->sistElectronica = $items['Sistema de Emision Electronica:'];
-        $cp->fechaEmisorFe = $this->parseDate($items['Emisor electrónico desde:']);
-        $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:']);
-        $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:']);
-        $cp->padrones = $items['Padrones :'];
-        if ('-' == $cp->sistElectronica) {
-            $cp->sistElectronica = [];
-        }
-        $this->fixDirection($cp);
-
-        return $cp;
-    }
-
-    private function getHeadCompany(array $items): ?Company
-    {
-        $cp = new Company();
-
-        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:']);
-        $cp->nombreComercial = $items['Nombre Comercial:'];
-        $cp->telefonos = [];
-        $cp->tipo = $items['Tipo Contribuyente:'];
-        $cp->estado = $items['Estado del Contribuyente:'];
-        $cp->condicion = $items['Condición del Contribuyente:'];
-        $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
-        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
-
-        return $cp;
-    }
-
-    /**
-     * @param $text
-     *
-     * @return null|string
-     */
-    private function parseDate($text)
-    {
-        if (empty($text) || '-' == $text) {
-            return null;
-        }
-
-        $date = DateTime::createFromFormat('d/m/Y', $text);
-
-        return false === $date ? null : $date->format('Y-m-d') . 'T00:00:00.000Z';
-    }
-
-    private function fixDirection(Company $company)
-    {
-        $items = explode('                                               -', $company->direccion);
-        if (3 !== count($items)) {
-            $company->direccion = preg_replace("[\s+]", ' ', $company->direccion);
-
-            return;
-        }
-
-        $pieces = explode(' ', trim($items[0]));
-        $department = $this->getDepartment(end($pieces));
-        $company->departamento = $department;
-        $company->provincia = trim($items[1]);
-        $company->distrito = trim($items[2]);
-        $removeLength = count(explode(' ', $department));
-        array_splice($pieces, -1 * $removeLength);
-        $company->direccion = join(' ', $pieces);
-    }
-
-    private function getDepartment($department): string
-    {
-        $department = strtoupper($department);
-        switch ($department) {
-            case 'DIOS':
-                $department = 'MADRE DE DIOS';
-            break;
-            case 'MARTIN':
-                $department = 'SAN MARTIN';
-            break;
-            case 'LIBERTAD':
-                $department = 'LA LIBERTAD';
-            break;
-        }
-
-        return $department;
-    }
-
-    private function getCpes($text)
-    {
-        $cpes = [];
-        if ('-' != $text) {
-            $cpes = explode(',', $text);
-        }
-
-        return $cpes;
-    }
-
-    private function getRucRzSocial($text)
-    {
-        $pos = strpos($text, '-');
-
-        $ruc = trim(substr($text, 0, $pos));
-        $rzSocial = trim(substr($text, $pos + 1));
-
-        return [$ruc, $rzSocial];
     }
 }

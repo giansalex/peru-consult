@@ -10,6 +10,7 @@ namespace Peru\Jne;
 
 use Peru\Http\ClientInterface;
 use Peru\Http\ContextClient;
+use Peru\Http\EmptyResponseDecorator;
 use Peru\Reniec\Person;
 use Peru\Services\DniInterface;
 
@@ -27,6 +28,10 @@ class Dni implements DniInterface
      * @var ClientInterface
      */
     private $client;
+    /**
+     * @var DniParser
+     */
+    private $parser;
 
     /**
      * Get Person Information by DNI.
@@ -44,15 +49,10 @@ class Dni implements DniInterface
         }
 
         $this->validateDependencies();
-        $raw = $this->getRawResponse($dni);
-        if (false === $raw) {
-            return null;
-        }
+        $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
+        $raw = $this->client->get($url);
 
-        $person = $this->getPerson($raw);
-        if ($person) {
-            $person->dni = $dni;
-        }
+        $person = $this->parser->parse($dni, $raw);
 
         return $person;
     }
@@ -62,9 +62,17 @@ class Dni implements DniInterface
      *
      * @param ClientInterface $client
      */
-    public function setClient(ClientInterface $client)
+    public function setClient(ClientInterface $client): void
     {
         $this->client = $client;
+    }
+
+    /**
+     * @param DniParser $parser
+     */
+    public function setParser(DniParser $parser): void
+    {
+        $this->parser = $parser;
     }
 
     /**
@@ -80,38 +88,11 @@ class Dni implements DniInterface
     private function validateDependencies()
     {
         if (empty($this->client)) {
-            $this->client = new ContextClient();
-        }
-    }
-
-    private function getRawResponse(string $dni)
-    {
-        $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
-        $text = $this->client->get($url);
-
-        if (false === $text) {
-            $this->error = 'No se pudo conectar a JNE';
-
-            return false;
+            $this->client = new EmptyResponseDecorator(new ContextClient());
         }
 
-        return $text;
-    }
-
-    private function getPerson($text): ?Person
-    {
-        $parts = explode('|', $text);
-        if (count($parts) < 3) {
-            $this->error = $text;
-
-            return null;
+        if (empty($this->parser)) {
+            $this->parser = new DniParser();
         }
-
-        $person = new Person();
-        $person->apellidoPaterno = $parts[0];
-        $person->apellidoMaterno = $parts[1];
-        $person->nombres = $parts[2];
-
-        return $person;
     }
 }
