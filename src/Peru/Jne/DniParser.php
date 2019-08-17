@@ -32,12 +32,7 @@ class DniParser
         }
         $entero = (int) ($suma / 11);
         $digito = 11 - ($suma - $entero * 11);
-        if ($digito == 10) {
-            $digito = 0;
-        } elseif ($digito == 11) {
-            $digito = 1;
-        }
 
-        return $digito;
+        return $digito > 9 ? $digito - 10 : $digito;
     }
 }
