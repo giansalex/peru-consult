@@ -9,7 +9,8 @@ do
     git fetch gh-token && git fetch gh-token gh-pages:gh-pages;
     pip install --upgrade pip;
     pip install -IU -r requirements.txt;
-    mkdocs gh-deploy -v --clean --remote-name gh-token --message "Deployed MkDocs version: 0.17.2 [ci skip]";
+    mkdocsVersion=$(pip show mkdocs | grep Version)
+    mkdocs gh-deploy -v --clean --remote-name gh-token --message "Deployed MkDocs $mkdocsVersion [ci skip]";
     break
   fi
 done
