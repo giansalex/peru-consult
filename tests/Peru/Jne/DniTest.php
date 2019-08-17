@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Jne;
 
-use Peru\{Http\ContextClient, Jne\Dni, Jne\DniParser};
+use Peru\{Http\ContextClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -34,7 +34,7 @@ class DniTest extends TestCase
         ];
 
         $this->cs = new Dni();
-        $this->cs->setClient($client);
+        $this->cs->setClient(new EmptyResponseDecorator($client));
         $this->cs->setParser(new DniParser());
     }
 

@@ -10,6 +10,7 @@ namespace Peru\Sunat;
 
 use Peru\Http\ClientInterface;
 use Peru\Http\ContextClient;
+use Peru\Http\EmptyResponseDecorator;
 
 /**
  * Class Ruc.
@@ -48,8 +49,8 @@ class Ruc
         }
         $this->validateDependencies();
 
-        $random = $this->getHttpResponse(self::URL_RANDOM);
-        $html = $this->getHttpResponse(self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
+        $random = $this->client->get(self::URL_RANDOM);
+        $html = $this->client->get(self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
 
         return $this->parser->parse($html);
     }
@@ -87,18 +88,11 @@ class Ruc
     private function validateDependencies()
     {
         if (empty($this->client)) {
-            $this->client = new ContextClient();
+            $this->client = new EmptyResponseDecorator(new ContextClient());
         }
 
         if (empty($this->parser)) {
             $this->parser = new RucParser(new HtmlParser());
         }
-    }
-
-    private function getHttpResponse(string $url): ?string
-    {
-        $body = $this->client->get($url);
-
-        return false === $body ? '' : $body;
     }
 }

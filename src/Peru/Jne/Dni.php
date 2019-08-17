@@ -10,6 +10,7 @@ namespace Peru\Jne;
 
 use Peru\Http\ClientInterface;
 use Peru\Http\ContextClient;
+use Peru\Http\EmptyResponseDecorator;
 use Peru\Reniec\Person;
 use Peru\Services\DniInterface;
 
@@ -49,7 +50,7 @@ class Dni implements DniInterface
 
         $this->validateDependencies();
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
-        $raw = $this->getRawResponse($url);
+        $raw = $this->client->get($url);
 
         $person = $this->parser->parse($dni, $raw);
 
@@ -87,18 +88,11 @@ class Dni implements DniInterface
     private function validateDependencies()
     {
         if (empty($this->client)) {
-            $this->client = new ContextClient();
+            $this->client = new EmptyResponseDecorator(new ContextClient());
         }
 
         if (empty($this->parser)) {
             $this->parser = new DniParser();
         }
-    }
-
-    private function getRawResponse(string $url)
-    {
-        $text = $this->client->get($url);
-
-        return false === $text ? '' : $text;
     }
 }

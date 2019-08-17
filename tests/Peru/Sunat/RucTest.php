@@ -12,6 +12,7 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
+use Peru\Http\EmptyResponseDecorator;
 use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
 use Peru\Sunat\RucParser;
@@ -77,7 +78,7 @@ class RucTest extends TestCase
     public function testExtraDirection()
     {
         $ruc = new Ruc();
-        $ruc->setClient($this->getClientHtmlMock());
+        $ruc->setClient(new EmptyResponseDecorator($this->getClientHtmlMock()));
 
         $cp = $ruc->get('20440374248');
 
