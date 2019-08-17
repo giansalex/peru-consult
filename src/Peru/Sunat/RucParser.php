@@ -74,6 +74,7 @@ class RucParser
         $cp->condicion = $items['Condición del Contribuyente:'];
         $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
+        $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '-');
 
         return $cp;
     }
