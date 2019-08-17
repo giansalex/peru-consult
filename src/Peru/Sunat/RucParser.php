@@ -27,6 +27,10 @@ class RucParser
 
     public function parse(string $html): ?Company
     {
+        if (empty($html)) {
+            return null;
+        }
+
         $dic = $this->parser->parse($html);
         if (false === $dic) {
             $this->error = 'No se encontro el ruc';
