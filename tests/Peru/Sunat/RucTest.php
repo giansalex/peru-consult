@@ -85,7 +85,8 @@ class RucTest extends TestCase
 
     public function testInvalidRuc()
     {
-        $company = $this->cs->get('20000000001');
+        $cs = new Ruc(new ContextClient(), new RucParser(new HtmlParser()));
+        $company = $cs->get('20000000001');
 
         $this->assertNull($company);
     }
