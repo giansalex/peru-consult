@@ -7,11 +7,6 @@ use DateTime;
 class RucParser
 {
     /**
-     * @var string
-     */
-    private $error;
-
-    /**
      * @var HtmlParser
      */
     private $parser;
@@ -33,7 +28,6 @@ class RucParser
 
         $dic = $this->parser->parse($html);
         if (false === $dic) {
-            $this->error = 'No se encontro el ruc';
 
             return null;
         }
