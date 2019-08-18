@@ -8,6 +8,8 @@
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)  
 Consultas gratuita de DNI y RUC sin uso de captcha, ni OCR.
 
+[![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=giansalex_peru-consult)](https://sonarcloud.io/dashboard?id=giansalex_peru-consult)  
+
 ![Build Stats](https://buildstats.info/travisci/chart/giansalex/peru-consult?branch=master&includeBuildsFromPullRequest=false)
 
 ## Install
