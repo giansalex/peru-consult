@@ -9,8 +9,6 @@
 namespace Peru\Sunat;
 
 use Peru\Http\ClientInterface;
-use Peru\Http\ContextClient;
-use Peru\Http\EmptyResponseDecorator;
 
 /**
  * Class Ruc.
@@ -34,6 +32,18 @@ class Ruc
     private $parser;
 
     /**
+     * Ruc constructor.
+     *
+     * @param ClientInterface $client
+     * @param RucParser       $parser
+     */
+    public function __construct(ClientInterface $client, RucParser $parser)
+    {
+        $this->client = $client;
+        $this->parser = $parser;
+    }
+
+    /**
      * Get Company Information by RUC.
      *
      * @param string $ruc
@@ -47,52 +57,10 @@ class Ruc
 
             return null;
         }
-        $this->validateDependencies();
 
         $random = $this->client->get($this->urlRandom);
         $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
 
         return $this->parser->parse($html);
-    }
-
-    /**
-     * Set Custom Http Client.
-     *
-     * @param ClientInterface $client
-     */
-    public function setClient(ClientInterface $client)
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * Set Html Parser.
-     *
-     * @param RucParser $parser
-     */
-    public function setParser(RucParser $parser)
-    {
-        $this->parser = $parser;
-    }
-
-    /**
-     * Get Last error message.
-     *
-     * @return string
-     */
-    public function getError(): ?string
-    {
-        return $this->error;
-    }
-
-    private function validateDependencies()
-    {
-        if (empty($this->client)) {
-            $this->client = new EmptyResponseDecorator(new ContextClient());
-        }
-
-        if (empty($this->parser)) {
-            $this->parser = new RucParser(new HtmlParser());
-        }
     }
 }

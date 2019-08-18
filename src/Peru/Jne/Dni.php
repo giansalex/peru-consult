@@ -9,8 +9,6 @@
 namespace Peru\Jne;
 
 use Peru\Http\ClientInterface;
-use Peru\Http\ContextClient;
-use Peru\Http\EmptyResponseDecorator;
 use Peru\Reniec\Person;
 use Peru\Services\DniInterface;
 
@@ -34,6 +32,18 @@ class Dni implements DniInterface
     private $parser;
 
     /**
+     * Dni constructor.
+     *
+     * @param ClientInterface $client
+     * @param DniParser       $parser
+     */
+    public function __construct(ClientInterface $client, DniParser $parser)
+    {
+        $this->client = $client;
+        $this->parser = $parser;
+    }
+
+    /**
      * Get Person Information by DNI.
      *
      * @param string $dni
@@ -48,31 +58,10 @@ class Dni implements DniInterface
             return null;
         }
 
-        $this->validateDependencies();
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $raw = $this->client->get($url);
 
-        $person = $this->parser->parse($dni, $raw);
-
-        return $person;
-    }
-
-    /**
-     * Set Custom Http Client.
-     *
-     * @param ClientInterface $client
-     */
-    public function setClient(ClientInterface $client): void
-    {
-        $this->client = $client;
-    }
-
-    /**
-     * @param DniParser $parser
-     */
-    public function setParser(DniParser $parser): void
-    {
-        $this->parser = $parser;
+        return $this->parser->parse($dni, $raw);
     }
 
     /**
@@ -83,16 +72,5 @@ class Dni implements DniInterface
     public function getError(): ?string
     {
         return $this->error;
-    }
-
-    private function validateDependencies()
-    {
-        if (empty($this->client)) {
-            $this->client = new EmptyResponseDecorator(new ContextClient());
-        }
-
-        if (empty($this->parser)) {
-            $this->parser = new DniParser();
-        }
     }
 }
