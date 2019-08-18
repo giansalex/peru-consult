@@ -9,11 +9,12 @@
 namespace Peru\Sunat;
 
 use Peru\Http\ClientInterface;
+use Peru\Services\RucInterface;
 
 /**
  * Class Ruc.
  */
-class Ruc
+class Ruc implements RucInterface
 {
     public $urlConsult = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
     public $urlRandom = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
