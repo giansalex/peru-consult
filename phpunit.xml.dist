@@ -5,6 +5,9 @@
         bootstrap="vendor/autoload.php"
         colors="true"
         stopOnFailure="true">
+	<php>
+		<env name="MOCK_URL" value="http://localhost"/>
+	</php>
 	<testsuites>
 		<testsuite name="Unit Tests">
 			<directory>tests</directory>

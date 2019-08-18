@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Sunat\Async;
 
 use function Clue\React\Block\await;

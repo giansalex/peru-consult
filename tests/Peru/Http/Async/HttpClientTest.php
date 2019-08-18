@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Tests\Peru\Http\Async;
 
 use function Clue\React\Block\await;
@@ -40,10 +42,11 @@ class HttpClientTest extends TestCase
 
     /**
      * @expectedException \RuntimeException
+     * @throws \Exception
      */
     public function testGetWithError()
     {
-        $result = await($this->client->getAsync('http://http323bin.org'), $this->loop);
+        await($this->client->getAsync('http://http323bin.org'), $this->loop);
     }
 
     protected function tearDown()

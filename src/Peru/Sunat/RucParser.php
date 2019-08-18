@@ -7,9 +7,15 @@ use DateTime;
 class RucParser
 {
     /**
-     * @var string
+     * Override Departments.
+     *
+     * @var array
      */
-    private $error;
+    private $overridDeps = [
+        'DIOS' => 'MADRE DE DIOS',
+        'MARTIN' => 'SAN MARTIN',
+        'LIBERTAD' => 'LA LIBERTAD',
+    ];
 
     /**
      * @var HtmlParser
@@ -33,7 +39,6 @@ class RucParser
 
         $dic = $this->parser->parse($html);
         if (false === $dic) {
-            $this->error = 'No se encontro el ruc';
 
             return null;
         }
@@ -44,16 +49,16 @@ class RucParser
     private function getCompany(array $items): ?Company
     {
         $cp = $this->getHeadCompany($items);
-        $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'];
-        $cp->sistContabilidad = $items['Sistema de Contabilidad:'];
-        $cp->actExterior = $items['Actividad de Comercio Exterior:'];
-        $cp->actEconomicas = $items['Actividad(es) Económica(s):'];
-        $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'];
-        $cp->sistElectronica = $items['Sistema de Emision Electronica:'];
-        $cp->fechaEmisorFe = $this->parseDate($items['Emisor electrónico desde:']);
-        $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:']);
-        $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:']);
-        $cp->padrones = $items['Padrones :'];
+        $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'] ?? '';
+        $cp->sistContabilidad = $items['Sistema de Contabilidad:'] ?? '';
+        $cp->actExterior = $items['Actividad de Comercio Exterior:'] ?? '';
+        $cp->actEconomicas = $items['Actividad(es) Económica(s):'] ?? [];
+        $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'] ?? [];
+        $cp->sistElectronica = $items['Sistema de Emision Electronica:'] ?? $items['Sistema de Emisión Electrónica:'];
+        $cp->fechaEmisorFe = $this->parseDate($items['Emisor electrónico desde:'] ?? '');
+        $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:'] ?? '');
+        $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:'] ?? '');
+        $cp->padrones = $items['Padrones :'] ?? [];
         if ('-' == $cp->sistElectronica) {
             $cp->sistElectronica = [];
         }
@@ -66,15 +71,15 @@ class RucParser
     {
         $cp = new Company();
 
-        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:']);
-        $cp->nombreComercial = $items['Nombre Comercial:'];
+        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:'] ?? $items['RUC:']);
+        $cp->nombreComercial = $items['Nombre Comercial:'] ?? '';
         $cp->telefonos = [];
-        $cp->tipo = $items['Tipo Contribuyente:'];
-        $cp->estado = $items['Estado del Contribuyente:'];
-        $cp->condicion = $items['Condición del Contribuyente:'];
-        $cp->direccion = $items['Dirección del Domicilio Fiscal:'];
-        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:']);
-        $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '-');
+        $cp->tipo = $items['Tipo Contribuyente:'] ?? '';
+        $cp->estado = $items['Estado del Contribuyente:'] ?? $items['Estado:'];
+        $cp->condicion = $items['Condición del Contribuyente:'] ?? $items['Condición:'];
+        $cp->direccion = $items['Dirección del Domicilio Fiscal:'] ?? $items['Domicilio Fiscal:'];
+        $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:'] ?? '');
+        $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '');
 
         return $cp;
     }
@@ -117,16 +122,8 @@ class RucParser
     private function getDepartment($department): string
     {
         $department = strtoupper($department);
-        switch ($department) {
-            case 'DIOS':
-                $department = 'MADRE DE DIOS';
-                break;
-            case 'MARTIN':
-                $department = 'SAN MARTIN';
-                break;
-            case 'LIBERTAD':
-                $department = 'LA LIBERTAD';
-                break;
+        if (isset($this->overridDeps[$department])) {
+            $department = $this->overridDeps[$department];
         }
 
         return $department;
@@ -135,7 +132,7 @@ class RucParser
     private function getCpes($text)
     {
         $cpes = [];
-        if ('-' != $text) {
+        if (!empty($text) && '-' != $text) {
             $cpes = explode(',', $text);
         }
 

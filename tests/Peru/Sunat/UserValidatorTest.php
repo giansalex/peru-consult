@@ -3,36 +3,41 @@
  * Created by PhpStorm.
  * User: Giansalex
  * Date: 01/04/2018
- * Time: 09:33
+ * Time: 09:33.
  */
-
 declare(strict_types=1);
 
 namespace Tests\Peru\Sunat;
+
+use Peru\Http\ContextClient;
 use Peru\Sunat\UserValidator;
 use PHPUnit\Framework\TestCase;
 
 /**
- * Class UserValidatorTest
+ * Class UserValidatorTest.
  */
 class UserValidatorTest extends TestCase
 {
-    use UserValidatorTrait;
+    /**
+     * @var UserValidator
+     */
+    private $validator;
+
+    protected function setUp()
+    {
+        $this->validator = new UserValidator(new ClientStubDecorator(new ContextClient()));
+    }
 
     public function testValidezCorrect()
     {
-        $consulta = new UserValidator($this->getClientMock(true));
-
-        $result = $consulta->valid('20000000001', 'HUAFDSMU');
+        $result = $this->validator->valid('20000000001', 'HUAFDSMU');
 
         $this->assertTrue($result);
     }
 
     public function testValidezInCorrect()
     {
-        $consulta = new UserValidator($this->getClientMock(false));
-
-        $result = $consulta->valid('20000000001', 'HUAFDSMU');
+        $result = $this->validator->valid('20000000001', 'INVALID');
 
         $this->assertFalse($result);
     }
