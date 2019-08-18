@@ -7,6 +7,17 @@ use DateTime;
 class RucParser
 {
     /**
+     * Override Departments.
+     *
+     * @var array
+     */
+    private $overridDeps = [
+        'DIOS' => 'MADRE DE DIOS',
+        'MARTIN' => 'SAN MARTIN',
+        'LIBERTAD' => 'LA LIBERTAD',
+    ];
+
+    /**
      * @var HtmlParser
      */
     private $parser;
@@ -111,16 +122,8 @@ class RucParser
     private function getDepartment($department): string
     {
         $department = strtoupper($department);
-        switch ($department) {
-            case 'DIOS':
-                $department = 'MADRE DE DIOS';
-                break;
-            case 'MARTIN':
-                $department = 'SAN MARTIN';
-                break;
-            case 'LIBERTAD':
-                $department = 'LA LIBERTAD';
-                break;
+        if (isset($this->overridDeps[$department])) {
+            $department = $this->overridDeps[$department];
         }
 
         return $department;
