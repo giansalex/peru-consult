@@ -2,21 +2,21 @@
 Consulta de DNI.
 > Fuente: **JNE**.
 
-Ejemplo
---------
+## Ejemplo
 
 ```php
-use Peru\Jne\Dni;
+use Peru\Http\ContextClient;
+use Peru\Jne\{Dni, DniParser};
 
 require 'vendor/autoload.php';
 
 $dni = '46658592';
 
-$cs = new Dni();
+$cs = new Dni(new ContextClient(), new DniParser());
 
 $person = $cs->get($dni);
 if (!$person) {
-    echo $cs->getError();
+    echo 'Not found';
     exit();
 }
 
@@ -24,8 +24,7 @@ echo json_encode($person);
 
 ```
 
-Resultado
----------
+## Resultado
 
 Resultado en formato json.
 

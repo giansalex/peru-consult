@@ -2,16 +2,14 @@
 Consulta la válidez del usuario SOL.
 > Fuente: **SUNAT**.
 
-Requerimientos
----------------
+## Requerimientos
 - Tener activada la extensión `dom`.
 
-Ejemplo
---------
+## Ejemplo
 
 ```php
-use Peru\Sunat\UserValidator;
 use Peru\Http\ContextClient;
+use Peru\Sunat\UserValidator;
 
 require 'vendor/autoload.php';
 
@@ -28,8 +26,7 @@ if ($valid) {
 
 ```
 
-Resultado
----------
+## Resultado
 
 Resultado en consola
 

@@ -3,25 +3,24 @@
 Consulta de RUC.
 > Fuente: **SUNAT**.
 
-Requerimientos
----------------
+## Requerimientos
 - Tener cargada la extension `dom`.
 
-Ejemplo
---------
+## Ejemplo
 
 ```php
-use Peru\Sunat\Ruc;
+use Peru\Http\ContextClient;
+use Peru\Sunat\{HtmlParser, Ruc, RucParser};
 
 require 'vendor/autoload.php';
 
 $ruc = '20100070970';
 
-$cs = new Ruc();
+$cs = new Ruc(new ContextClient(), new RucParser(new HtmlParser()));
 
 $company = $cs->get($ruc);
 if (!$company) {
-    echo $cs->getError();
+    echo 'Not found';
     exit();
 }
 
@@ -29,8 +28,7 @@ echo json_encode($company);
 
 ```
 
-Resultado
----------
+## Resultado
 
 Resultado en formato json.
 
@@ -82,3 +80,4 @@ Resultado en formato json.
     ]
 }
 ```
+
