@@ -1,6 +1,15 @@
 <?php
 
 use Behat\Behat\Context\Context;
+use Peru\Http\ContextClient;
+use Peru\Http\EmptyResponseDecorator;
+use Peru\Jne\Dni;
+use Peru\Jne\DniParser;
+use Peru\Reniec\Person;
+use Peru\Sunat\Company;
+use Peru\Sunat\HtmlParser;
+use Peru\Sunat\Ruc;
+use Peru\Sunat\RucParser;
 use PHPUnit\Framework\Assert;
 
 /**
@@ -42,13 +51,14 @@ class FeatureContext implements Context
      */
     public function executeConsult()
     {
+        $client = new EmptyResponseDecorator(new ContextClient());
         switch (strlen($this->document)) {
             case 8:
-                $cs = new \Peru\Jne\Dni();
+                $cs = new Dni($client, new DniParser());
                 $this->result = $cs->get($this->document);
                 break;
             case 11:
-                $cs = new \Peru\Sunat\Ruc();
+                $cs = new Ruc($client, new RucParser(new HtmlParser()));
                 $this->result = $cs->get($this->document);
                 break;
         }
@@ -63,7 +73,7 @@ class FeatureContext implements Context
             return;
         }
 
-        /**@var $company \Peru\Sunat\Company */
+        /**@var $company Company */
         $company = $this->result;
         Assert::assertSame(
             $name,
@@ -79,7 +89,7 @@ class FeatureContext implements Context
         if (empty($this->result)) {
             return;
         }
-        /**@var $person \Peru\Reniec\Person */
+        /**@var $person Person */
         $person = $this->result;
         Assert::assertSame(
             $name,

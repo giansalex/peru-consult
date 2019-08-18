@@ -33,9 +33,7 @@ class DniTest extends TestCase
             ]
         ];
 
-        $this->cs = new Dni();
-        $this->cs->setClient(new EmptyResponseDecorator($client));
-        $this->cs->setParser(new DniParser());
+        $this->cs = new Dni(new EmptyResponseDecorator($client), new DniParser());
     }
 
     /**
@@ -45,22 +43,13 @@ class DniTest extends TestCase
      */
     public function testGetDni($dni)
     {
-        $client = new Dni();
-        $person = $client->get($dni);
+        $person = $this->cs->get($dni);
 
         $this->assertNotNull($person);
         $this->assertEquals($dni, $person->dni);
         $this->assertNotEmpty($person->nombres);
         $this->assertNotEmpty($person->apellidoMaterno);
         $this->assertNotEmpty($person->apellidoPaterno);
-    }
-
-    public function testInvalidDniLength()
-    {
-        $person = $this->cs->get('2323');
-
-        $this->assertNull($person);
-        $this->assertEquals('Dni debe tener 8 dígitos', $this->cs->getError());
     }
 
     public function testInvalidDni()

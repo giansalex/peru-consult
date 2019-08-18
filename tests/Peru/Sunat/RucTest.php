@@ -12,11 +12,8 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
-use Peru\Http\ContextClient;
-use Peru\Http\EmptyResponseDecorator;
-use Peru\Sunat\HtmlParser;
-use Peru\Sunat\Ruc;
-use Peru\Sunat\RucParser;
+use Peru\Http\{ContextClient, EmptyResponseDecorator};
+use Peru\Sunat\{HtmlParser, Ruc, RucParser};
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -40,8 +37,9 @@ class RucTest extends TestCase
                 'verify_peer_name' => false,
             ],
         ];
-        $this->cs = new Ruc();
-        $this->cs->setClient(new ClientStubDecorator(new EmptyResponseDecorator($client)));
+        $this->cs = new Ruc(
+            new ClientStubDecorator(new EmptyResponseDecorator($client)),
+            new RucParser(new HtmlParser()));
     }
 
     /**
@@ -80,20 +78,9 @@ class RucTest extends TestCase
 
     public function testInvalidResponse()
     {
-        $ruc = new Ruc();
-        $ruc->setParser(new RucParser(new HtmlParser()));
-
-        $company = $ruc->get('20000000001');
+        $company = $this->cs->get('20000000001');
 
         $this->assertNull($company);
-    }
-
-    public function testInvalidRucLength()
-    {
-        $company = $this->cs->get('2323');
-
-        $this->assertNull($company);
-        $this->assertContains('11', $this->cs->getError());
     }
 
     public function testInvalidRuc()
