@@ -83,11 +83,6 @@ class ContextClient implements ClientInterface
                 'content' => $this->getRawData($data),
                 'user_agent' => self::USER_AGENT,
             ],
-            'ssl' => [
-                'allow_self_signed' => true,
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ],
         ];
 
         if (!empty($this->options)) {
