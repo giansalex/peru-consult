@@ -19,10 +19,6 @@ class Dni implements DniInterface
 {
     private const URL_CONSULT_FORMAT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/Afiliado/GetNombresCiudadano?DNI=%s';
     /**
-     * @var string
-     */
-    private $error;
-    /**
      * @var ClientInterface
      */
     private $client;
@@ -52,25 +48,9 @@ class Dni implements DniInterface
      */
     public function get(string $dni): ?Person
     {
-        if (8 !== strlen($dni)) {
-            $this->error = 'Dni debe tener 8 dígitos';
-
-            return null;
-        }
-
         $url = sprintf(self::URL_CONSULT_FORMAT, $dni);
         $raw = $this->client->get($url);
 
         return $this->parser->parse($dni, $raw);
-    }
-
-    /**
-     * Get Last error message.
-     *
-     * @return string
-     */
-    public function getError(): ?string
-    {
-        return $this->error;
     }
 }

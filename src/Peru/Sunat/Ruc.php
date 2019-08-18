@@ -19,10 +19,6 @@ class Ruc
     public $urlRandom = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
 
     /**
-     * @var string
-     */
-    private $error;
-    /**
      * @var ClientInterface
      */
     public $client;
@@ -52,12 +48,6 @@ class Ruc
      */
     public function get(string $ruc): ?Company
     {
-        if (11 !== strlen($ruc)) {
-            $this->error = 'Ruc debe tener 11 dígitos';
-
-            return null;
-        }
-
         $random = $this->client->get($this->urlRandom);
         $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
 
