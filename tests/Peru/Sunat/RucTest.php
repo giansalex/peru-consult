@@ -12,6 +12,7 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
+use Peru\Http\ContextClient;
 use Peru\Http\EmptyResponseDecorator;
 use Peru\Sunat\HtmlParser;
 use Peru\Sunat\Ruc;
@@ -24,19 +25,23 @@ use PHPUnit\Framework\TestCase;
  */
 class RucTest extends TestCase
 {
-    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    use RucTrait {
-        getHttpMock as private getHttp;
-    }
-
-    /**s
+    /**
      * @var Ruc
      */
     private $cs;
 
     public function setUp()
     {
+        $client = new ContextClient();
+        $client->options = [
+            'ssl' => [
+                'allow_self_signed' => true,
+                'verify_peer' => false,
+                'verify_peer_name' => false,
+            ],
+        ];
         $this->cs = new Ruc();
+        $this->cs->setClient(new ClientStubDecorator(new EmptyResponseDecorator($client)));
     }
 
     /**
@@ -47,8 +52,7 @@ class RucTest extends TestCase
      */
     public function testGetRuc($ruc)
     {
-        $company = $this->getRucRetry($ruc);
-        if (!$company) return;
+        $company = $this->cs->get($ruc);
 
         $this->assertNotEmpty($company->ruc);
         $this->assertNotEmpty($company->razonSocial);
@@ -66,7 +70,6 @@ class RucTest extends TestCase
     public function testJsonEncode()
     {
         $company = $this->cs->get('10401510465');
-        if (!$company) return;
 
         $this->assertNotNull($company);
         $json = json_encode($company);
@@ -75,38 +78,14 @@ class RucTest extends TestCase
         $this->assertNotEmpty($obj->ruc);
     }
 
-    public function testExtraDirection()
-    {
-        $ruc = new Ruc();
-        $ruc->setClient(new EmptyResponseDecorator($this->getClientHtmlMock()));
-
-        $cp = $ruc->get('20440374248');
-
-        $this->assertNotNull($cp);
-        $this->assertNull($cp->departamento);
-        $this->assertNull($cp->provincia);
-        $this->assertNull($cp->distrito);
-    }
-
-    public function testInvalidRequest()
-    {
-        $ruc = new Ruc();
-        $ruc->setClient($this->getClientMock(self::URL_CONSULT));
-
-        $cs = $ruc->get('20000000001');
-
-        $this->assertNull($cs);
-    }
-
     public function testInvalidResponse()
     {
         $ruc = new Ruc();
-        $ruc->setClient($this->getClientMock(''));
         $ruc->setParser(new RucParser(new HtmlParser()));
 
-        $cs = $ruc->get('20000000001');
+        $company = $ruc->get('20000000001');
 
-        $this->assertNull($cs);
+        $this->assertNull($company);
     }
 
     public function testInvalidRucLength()
@@ -127,26 +106,10 @@ class RucTest extends TestCase
     public function rucProviders()
     {
         return [
-            ['20440374248'], // LA LIBERTAD
-            ['20513176962'],
-            ['20600055519'],
-            ['20512530517'],
-            ['20100070970'],
-            ['20601197503'],
+            ['20440374248'], // 20550263948LA LIBERTAD
+            ['20550263948'],
             ['20493919271'], // MADRE DE DIOS
             ['20146806679'], // SAN MARTIN
         ];
-    }
-
-    private function getRucRetry($ruc, $retry = 5)
-    {
-        while ($retry-->0) {
-            $company = $this->cs->get($ruc);
-            if ($company) {
-                return $company;
-            }
-        }
-
-        return null;
     }
 }
