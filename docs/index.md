@@ -6,7 +6,7 @@
 [![Build Status](https://scrutinizer-ci.com/g/giansalex/peru-consult/badges/build.png?b=master)](https://scrutinizer-ci.com/g/giansalex/peru-consult/build-status/master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability)](https://codeclimate.com/github/giansalex/peru-consult/maintainability)
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
-Consulta gratuita de DNI y RUC sin uso de captcha, ni OCR, sin dependencias de terceros.
+Consulta gratuita de DNI y RUC sin uso de captcha, ni OCR.
 
 ## Instalar
 Vía composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult).
