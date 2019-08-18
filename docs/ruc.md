@@ -81,6 +81,7 @@ Resultado en formato json.
     "fechaPle": "2011-09-08T00:00:00.000Z",
     "padrones": [
         "Incorporado al Régimen de Agentes de Retención de IGV (R.S.037-2002) a partir del 01/06/2002"
-    ]
+    ],
+    "fechaBaja": null
 }
 ```
