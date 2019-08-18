@@ -50,7 +50,7 @@ class Ruc
         $this->validateDependencies();
 
         $random = $this->client->get($this->urlRandom);
-        $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=");
+        $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
 
         return $this->parser->parse($html);
     }
