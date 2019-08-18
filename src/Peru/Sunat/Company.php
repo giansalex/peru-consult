@@ -107,6 +107,10 @@ class Company implements JsonSerializable
      * @var string
      */
     public $fechaBaja;
+    /**
+     * @var string
+     */
+    public $profesion;
 
     /**
      * Specify data which should be serialized to JSON.

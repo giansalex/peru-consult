@@ -71,7 +71,7 @@ class RucParser
     {
         $cp = new Company();
 
-        list($cp->ruc, $cp->razonSocial) = $this->getRucRzSocial($items['Número de RUC:'] ?? $items['RUC:']);
+        [$cp->ruc, $cp->razonSocial] = $this->getRucRzSocial($items['Número de RUC:'] ?? $items['RUC:']);
         $cp->nombreComercial = $items['Nombre Comercial:'] ?? '';
         $cp->telefonos = [];
         $cp->tipo = $items['Tipo Contribuyente:'] ?? '';
@@ -80,6 +80,7 @@ class RucParser
         $cp->direccion = $items['Dirección del Domicilio Fiscal:'] ?? $items['Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:'] ?? '');
         $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '');
+        $cp->profesion = $items['Profesión u Oficio:'] ?? '';
 
         return $cp;
     }

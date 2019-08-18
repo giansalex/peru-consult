@@ -82,6 +82,7 @@ Resultado en formato json.
     "padrones": [
         "Incorporado al Régimen de Agentes de Retención de IGV (R.S.037-2002) a partir del 01/06/2002"
     ],
-    "fechaBaja": null
+    "fechaBaja": null,
+    "profesion": ""
 }
 ```
