@@ -28,6 +28,10 @@ echo json_encode($company);
 
 ```
 
+!!! tip "Cambiar URL utilizada"
+    Si necesita cambiar la url utilizada internamente para obtener la información del RUC, puede hacerlo de esta forma:  
+    `$cs->urlConsult='http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS03Alias';`
+
 ## Resultado
 
 Resultado en formato json.
@@ -80,4 +84,3 @@ Resultado en formato json.
     ]
 }
 ```
-
