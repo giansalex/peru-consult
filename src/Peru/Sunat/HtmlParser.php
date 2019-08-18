@@ -35,9 +35,8 @@ final class HtmlParser
         }
 
         $nodes = $table->item(0)->childNodes;
-        $dic = $this->getKeyValues($nodes, $xp);
 
-        return $dic;
+        return $this->getKeyValues($nodes, $xp);
     }
 
     private function getKeyValues(DOMNodeList $nodes, DOMXPath $xp)

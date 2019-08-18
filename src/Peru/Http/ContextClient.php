@@ -76,7 +76,7 @@ class ContextClient implements ClientInterface
      */
     private function getContext(string $method, $data, array $headers)
     {
-        $options = [
+        $defaultOptions = [
             'http' => [
                 'header' => $this->join(': ', $headers),
                 'method' => $method,
@@ -86,30 +86,28 @@ class ContextClient implements ClientInterface
         ];
 
         if (!empty($this->options)) {
-            $options = array_merge_recursive($options, $this->options);
+            $defaultOptions = array_merge_recursive($defaultOptions, $this->options);
         }
 
         if (!empty($this->cookies)) {
-            $options['http']['header'] .= 'Cookie: ' . $this->join('=', $this->cookies, '; ');
+            $defaultOptions['http']['header'] .= 'Cookie: ' . $this->join('=', $this->cookies, '; ');
         }
 
-        $context = stream_context_create($options);
-
-        return $context;
+        return stream_context_create($defaultOptions);
     }
 
     private function saveCookies(array $headers)
     {
-        $cookies = [];
+        $responseCookies = [];
         foreach ($headers as $hdr) {
             if (preg_match('/^Set-Cookie:\s*([^;]+)/', $hdr, $matches)) {
                 parse_str($matches[1], $tmp);
-                $cookies = array_merge($cookies, $tmp);
+                $responseCookies = array_merge($responseCookies, $tmp);
             }
         }
 
-        if (!empty($cookies)) {
-            $this->cookies = $cookies;
+        if (!empty($responseCookies)) {
+            $this->cookies = $responseCookies;
         }
     }
 
