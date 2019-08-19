@@ -6,10 +6,7 @@ namespace Tests\Peru\Sunat\Async;
 
 use function Clue\React\Block\await;
 use Peru\Http\Async\HttpClient;
-use Peru\Sunat\Async\Ruc;
-use Peru\Sunat\Company;
-use Peru\Sunat\HtmlParser;
-use Peru\Sunat\RucParser;
+use Peru\Sunat\{Async\Ruc, Company, HtmlParser, RucParser};
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Factory;
 
@@ -21,7 +18,7 @@ class RucTest extends TestCase
     public function testGetRuc()
     {
         $loop = Factory::create();
-        $cs = new Ruc(new HttpClient($loop), new RucParser(new HtmlParser()));
+        $cs = new Ruc(new HttpClientStub(new HttpClient($loop)), new RucParser(new HtmlParser()));
         $promise = $cs->get('10401510465');
         /**@var $company Company */
         $company = await($promise, $loop);

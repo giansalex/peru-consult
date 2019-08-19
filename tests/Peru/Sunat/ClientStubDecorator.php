@@ -38,7 +38,7 @@ class ClientStubDecorator implements ClientInterface
      */
     public function get(string $url, array $headers = [])
     {
-        return $this->client->get($this->getNewUrl($url), $headers);
+        return $this->client->get(self::getNewUrl($url), $headers);
     }
 
     /**
@@ -52,10 +52,10 @@ class ClientStubDecorator implements ClientInterface
      */
     public function post(string $url, $data, array $headers = [])
     {
-        return $this->client->post($this->getNewUrl($url), $data, $headers);
+        return $this->client->post(self::getNewUrl($url), $data, $headers);
     }
 
-    private function getNewUrl($url)
+    public static function getNewUrl($url)
     {
         $urlBase = getenv('MOCK_URL');
         $u = parse_url($url);
