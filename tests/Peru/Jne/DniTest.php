@@ -54,7 +54,7 @@ class DniTest extends TestCase
         $json = json_encode($person);
         $this->assertJson($json);
         $obj = json_decode($json);
-        $this->assertNotEmpty($obj->ruc);
+        $this->assertNotEmpty($obj->dni);
     }
 
     public function testInvalidDni()
