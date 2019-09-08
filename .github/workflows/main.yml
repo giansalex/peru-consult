@@ -20,4 +20,6 @@ jobs:
         php-version: 7.1
     - run: composer install
     - run: vendor/bin/phpunit
+      env:
+        MOCK_URL: ${{ secrets.MockServer }}
     - run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
