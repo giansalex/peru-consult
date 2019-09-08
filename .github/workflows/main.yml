@@ -19,6 +19,7 @@ jobs:
       with:
         php-version: 7.1
     - run: composer install
+    - run: mkdir -p test-results/behat
     - run: vendor/bin/phpunit
       env:
         MOCK_URL: ${{ secrets.MockServer }}
