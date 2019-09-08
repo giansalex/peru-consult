@@ -1,0 +1,24 @@
+name: Github Pages
+
+on:
+  push:
+    branches:
+      - master
+      - release/*
+
+jobs:
+  deploy:
+    name: Deploy to Github Pages
+    runs-on: ubuntu-latest    steps:
+    - uses: actions/checkout@v1
+      with:
+        fetch-depth: 1
+    - name: Setup Python
+      uses: actions/setup-python@v1.0.0
+      with:
+        python-version: '3.7'
+    - run: |
+        python3 -m venv venv
+        . venv/bin/activate
+        chmod +x bin/deploy.sh
+        ./bin/deploy.sh
