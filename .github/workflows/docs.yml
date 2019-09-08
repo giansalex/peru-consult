@@ -23,3 +23,5 @@ jobs:
         . venv/bin/activate
         chmod +x bin/deploy.sh
         ./bin/deploy.sh
+      env:
+        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
