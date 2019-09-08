@@ -15,8 +15,13 @@ jobs:
       with:
         php-version: 7.1
     - run: composer install
-    - run: mkdir -p test-results/behat
+    - name: Install Coveralls
+      run: composer require php-coveralls/php-coveralls;
+    - name: Create test directory
+      run: mkdir -p test-results/behat
     - run: vendor/bin/phpunit
       env:
         MOCK_URL: ${{ secrets.MockServer }}
     - run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
+    - name: Report code coverage
+      run: vendor/bin/php-coveralls -v
