@@ -19,10 +19,12 @@ jobs:
       run: composer require php-coveralls/php-coveralls;
     - name: Create test directory
       run: mkdir -p test-results/behat
-    - run: vendor/bin/phpunit
+    - name: PHPUnit Tests
+      run: vendor/bin/phpunit
       env:
         MOCK_URL: ${{ secrets.MockServer }}
-    - run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
+    - name: BDD Tests
+      run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
     - name: Report code coverage
       run: vendor/bin/php-coveralls -v
       env:
