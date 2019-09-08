@@ -39,11 +39,11 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Given hay un documento :document
+     * @Given un documento :documento
      */
-    public function thereIsADocument($document)
+    public function thereIsADocument($documento)
     {
-        $this->document = $document;
+        $this->document = $documento;
     }
 
     /**
@@ -65,9 +65,9 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Then La empresa deberia llamarse :name
+     * @Then la empresa deberia llamarse :nombres
      */
-    public function theCompanyNameShouldBe($name)
+    public function theCompanyNameShouldBe($nombres)
     {
         if (empty($this->result)) {
             return;
@@ -76,15 +76,15 @@ class FeatureContext implements Context
         /**@var $company Company */
         $company = $this->result;
         Assert::assertSame(
-            $name,
+            $nombres,
             $company->razonSocial
         );
     }
 
     /**
-     * @Then La persona deberia llamarse :name
+     * @Then la persona deberia llamarse :nombres
      */
-    public function thePersonNameShouldBe($name)
+    public function thePersonNameShouldBe($nombres)
     {
         if (empty($this->result)) {
             return;
@@ -92,7 +92,7 @@ class FeatureContext implements Context
         /**@var $person Person */
         $person = $this->result;
         Assert::assertSame(
-            $name,
+            $nombres,
             $person->nombres
         );
     }

@@ -1,17 +1,18 @@
-Feature: Document RUC
-  Consultar del ruc de empresas
+# language: es
+Característica: RUC
+  Consulta del ruc de empresas
 
   Rules:
   - RUC tiene 11 digitos
 
-  @important
-  Scenario Outline: Consultar
-    Given hay un documento <document>
-    When ejecuto la consulta
-    Then La empresa deberia llamarse <name>
+  @network
+  Esquema del escenario: Consultar
+    Dado un documento <documento>
+    Cuando ejecuto la consulta
+    Entonces la empresa deberia llamarse <nombres>
 
-    Examples:
-      |    document      |          name               |
+    Ejemplos:
+      |    documento     |         nombres             |
       |  "20513176962"   |  "ABLIMATEX EXPORT S.A.C."  |
       |  "10401510465"   |  "PEREZ - JUAN"             |
       |  "20601197503"   |  "IBM CAPITAL PERU S.A.C."  |

@@ -1,4 +1,6 @@
 default:
+    translation:
+        locale: es
     suites:
         default:
             contexts:
