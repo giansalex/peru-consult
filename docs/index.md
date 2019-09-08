@@ -16,8 +16,8 @@ composer require giansalex/peru-consult
 
 ### Servicios
 
-- Consulta de Dni
-- Consulta de Ruc
+- Consulta de DNI
+- Consulta de RUC
 - Validez de usuario SOL
 
 ### API REST
