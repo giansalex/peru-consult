@@ -9,7 +9,8 @@ on:
 jobs:
   deploy:
     name: Deploy to Github Pages
-    runs-on: ubuntu-latest    steps:
+    runs-on: ubuntu-latest
+    steps:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
