@@ -1,1 +1,2 @@
 coverage_clover: test-results/phpunit/clover.xml
+json_path: test-results/phpunit/coveralls.json
