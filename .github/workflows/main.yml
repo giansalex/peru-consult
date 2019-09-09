@@ -28,5 +28,7 @@ jobs:
     - name: Report code coverage
       run: vendor/bin/php-coveralls -v
       env:
-        COVERALLS_RUN_LOCALLY: 1
+        CI_NAME: Github Actions
+        CI_BRANCH: ${GITHUB_REF}
+        CI_PULL_REQUEST: $([ "${GITHUB_EVENT_NAME}" == "pull_request" ] && echo "true" || echo "false")
         COVERALLS_REPO_TOKEN: ${{ secrets.coverallsToken }}
