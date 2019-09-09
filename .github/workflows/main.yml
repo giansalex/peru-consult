@@ -30,7 +30,7 @@ jobs:
       env:
         GIT_REMOTE_BRANCH: ${{ github.ref }}
     - name: Report code coverage
-      run: vendor/bin/php-coveralls && echo "Current branch $CI_BRANCH"
+      run: vendor/bin/php-coveralls
       env:
         CI_NAME: Github Actions
         CI_BRANCH: ${GITHUB_REF}
