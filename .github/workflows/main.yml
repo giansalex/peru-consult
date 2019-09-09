@@ -10,7 +10,6 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
-        ref: ${{ github.ref }}
     - name: Setup PHP
       uses: shivammathur/setup-php@1.1.1
       with:
@@ -26,6 +25,10 @@ jobs:
         MOCK_URL: ${{ secrets.MockServer }}
     - name: BDD Tests
       run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
+    - name: Create branch for coveralls
+      run: git checkout -b ${GIT_REMOTE_BRANCH:11}
+      env:
+        GIT_REMOTE_BRANCH: ${{ github.ref }}
     - name: Report code coverage
       run: vendor/bin/php-coveralls && echo "Current branch $CI_BRANCH"
       env:
