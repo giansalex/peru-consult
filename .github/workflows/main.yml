@@ -4,8 +4,12 @@ on: [push, pull_request]
 
 jobs:
   test:
-    name: PHP Tests
-    runs-on: ubuntu-latest
+    name: PHP Tests on ${{ matrix.operating-system }}
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      max-parallel: 2
+      matrix:
+        operating-system: [ubuntu-latest, windows-latest]
     steps:
     - uses: actions/checkout@v1
       with:
@@ -36,3 +40,4 @@ jobs:
         CI_BRANCH: ${GITHUB_REF}
         CI_PULL_REQUEST: $([ "${GITHUB_EVENT_NAME}" == "pull_request" ] && echo "true" || echo "false")
         COVERALLS_REPO_TOKEN: ${{ secrets.coverallsToken }}
+      if: matrix.operating-system == 'ubuntu-latest'
