@@ -1,6 +1,6 @@
 # Perú Consultas
 
-[![Github Actions](https://github.com/giansalex/peru-consult/workflows/CI/badge.svg)](https://github.com/giansalex/greenter-core/actions)
+[![Github Actions](https://github.com/giansalex/peru-consult/workflows/CI/badge.svg)](https://github.com/giansalex/peru-consult/actions)
 [![Coverage Status](https://coveralls.io/repos/github/giansalex/peru-consult/badge.svg?branch=master)](https://coveralls.io/github/giansalex/peru-consult?branch=master)
 [![Maintainability](https://api.codeclimate.com/v1/badges/c307caea39f1101cbc5d/maintainability)](https://codeclimate.com/github/giansalex/peru-consult/maintainability)
 [![Packagist](https://img.shields.io/packagist/v/giansalex/peru-consult.svg?style=flat-square)](https://packagist.org/packages/giansalex/peru-consult)   
