@@ -21,21 +21,26 @@ jobs:
         extension-csv: mbstring
     - run: composer install
     - name: Install Coveralls
-      run: composer require php-coveralls/php-coveralls;
+      run: composer require php-coveralls/php-coveralls
     - name: Create test directory
       run: mkdir -p test-results/behat
+      shell: bash
     - name: PHPUnit Tests
       run: vendor/bin/phpunit
+      shell: bash
       env:
         MOCK_URL: ${{ secrets.MockServer }}
     - name: BDD Tests
       run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
+      shell: bash
     - name: Create branch for coveralls
       run: git checkout -b ${GIT_REMOTE_BRANCH:11}
+      shell: bash
       env:
         GIT_REMOTE_BRANCH: ${{ github.ref }}
     - name: Report code coverage
       run: vendor/bin/php-coveralls
+      shell: bash
       env:
         CI_NAME: Github Actions
         CI_BRANCH: ${GITHUB_REF}
