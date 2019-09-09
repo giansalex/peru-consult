@@ -10,6 +10,7 @@ jobs:
     - uses: actions/checkout@v1
       with:
         fetch-depth: 1
+        ref: ${{ github.ref }}
     - name: Setup PHP
       uses: shivammathur/setup-php@1.1.1
       with:
@@ -26,9 +27,9 @@ jobs:
     - name: BDD Tests
       run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
     - name: Report code coverage
-      run: vendor/bin/php-coveralls -v
+      run: vendor/bin/php-coveralls && echo "Current branch $CI_BRANCH"
       env:
         CI_NAME: Github Actions
-        CI_BRANCH: $(git branch --contains ${GITHUB_SHA} | grep \* | cut -d ' ' -f2)
+        CI_BRANCH: ${GITHUB_REF}
         CI_PULL_REQUEST: $([ "${GITHUB_EVENT_NAME}" == "pull_request" ] && echo "true" || echo "false")
         COVERALLS_REPO_TOKEN: ${{ secrets.coverallsToken }}
