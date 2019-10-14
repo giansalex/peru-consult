@@ -13,6 +13,7 @@ Usando composer desde [packagist.org](https://packagist.org/packages/giansalex/p
 ```bash
 composer require giansalex/peru-consult
 ```
+[Documentación](https://giansalex.github.io/peru-consult/)
 
 ### Requerimientos
 - PHP 7.1 o superior.
@@ -22,13 +23,12 @@ composer require giansalex/peru-consult
 - Consulta de RUC
 - Validez de Usuario SOL
 
-
 ### API REST :zap:
 Visitar [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
 
 ### Sponsors
 
-[Quertium](http://quertium.com/)  
+[Quertium](https://quertium.com/)  
 ![Quertium](https://raw.githubusercontent.com/giansalex/peru-consult/master/docs/img/quertium.png)
 
 **JetBrains**
