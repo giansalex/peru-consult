@@ -33,4 +33,9 @@ interface ClientInterface
      * @return string|false
      */
     public function post(string $url, $data, array $headers = []);
+    
+    /**
+     * Curl request
+     */
+    public function curl(string $url, $data, array $headers=[]);
 }
