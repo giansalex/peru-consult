@@ -11,7 +11,6 @@ namespace Peru\Jne;
 use Peru\Http\ClientInterface;
 use Peru\Reniec\Person;
 use Peru\Services\DniInterface;
-
 /**
  * Class Dni.
  */
