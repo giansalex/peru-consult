@@ -63,25 +63,4 @@ class DniTest extends TestCase
 
         $this->assertNull($person);
     }
-
-        /**
-     * @param string $dni
-     *
-     * @testWith    ["48004836"]
-     */
-    public function testCurlDni($dni)
-    {
-        $person = $this->cs->get($dni);
-
-        $this->assertNotNull($person);
-        $this->assertEquals($dni, $person->dni);
-        $this->assertNotEmpty($person->nombres);
-        $this->assertNotEmpty($person->apellidoMaterno);
-        $this->assertNotEmpty($person->apellidoPaterno);
-
-        $json = json_encode($person);
-        $this->assertJson($json);
-        $obj = json_decode($json);
-        $this->assertNotEmpty($obj->dni);
-    }
 }

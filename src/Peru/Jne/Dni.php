@@ -48,13 +48,15 @@ class Dni implements DniInterface
      */
     public function get(string $dni): ?Person
     {
-        $data='{"CODDNI":"'.$dni.'"}';
-        $headers = array();
-		$headers[] = 'Requestverificationtoken: 30OB7qfO2MmL2Kcr1z4S0ttQcQpxH9pDUlZnkJPVgUhZOGBuSbGU4qM83JcSu7DZpZw-IIIfaDZgZ4vDbwE5-L9EPoBIHOOC1aSPi4FS_Sc1:clDOiaq7mKcLTK9YBVGt2R3spEU8LhtXEe_n5VG5VLPfG9UkAQfjL_WT9ZDmCCqtJypoTD26ikncynlMn8fPz_F_Y88WFufli38cUM-24PE1';
-        $headers[] = 'Content-Type: application/json;chartset=utf-8';
-        
-        $json_result = $this->client->curl($url, $data, $headers);
-        $raw = $json_result->data;
+        $url = self::URL_CONSULT_JSON_FORMAT;
+       
+        $json = $this->client->post(
+            $url, 
+            json_encode(['CODDNI' => $dni]), 
+            ['Content-Type' => 'application/json;chartset=utf-8',
+            'Requestverificationtoken' => '30OB7qfO2MmL2Kcr1z4S0ttQcQpxH9pDUlZnkJPVgUhZOGBuSbGU4qM83JcSu7DZpZw-IIIfaDZgZ4vDbwE5-L9EPoBIHOOC1aSPi4FS_Sc1:clDOiaq7mKcLTK9YBVGt2R3spEU8LhtXEe_n5VG5VLPfG9UkAQfjL_WT9ZDmCCqtJypoTD26ikncynlMn8fPz_F_Y88WFufli38cUM-24PE1',
+           ]);
+           $raw = json_decode($json)->data;
         return $this->parser->parse($dni, $raw);
     }
 }

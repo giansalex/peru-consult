@@ -37,5 +37,5 @@ interface ClientInterface
     /**
      * Curl request
      */
-    public function curl(string $url, $data, array $headers=[]);
+   // public function curl(string $url, $data, array $headers=[]);
 }
