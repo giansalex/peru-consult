@@ -136,27 +136,4 @@ class ContextClient implements ClientInterface
 
         return $response;
     }
-
-
-    // public function curl(string $url, $data, array $headers = [])
-    // {
-    //     $ch = curl_init();
-	// 	curl_setopt($ch, CURLOPT_URL, $url);
-	// 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-	// 	curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
-	// 	curl_setopt($ch, CURLOPT_POST, 1);
-	// 	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-
-	// 	$result = curl_exec($ch);
-	// 	if (curl_errno($ch)) {
-	// 		throw new \Exception(curl_error($ch));
-	// 	}
-    //     curl_close($ch);
-        
-    //     $json_result= json_decode($result);
-	// 	if( !property_exists($json_result,"success") ){
-	// 		throw new \Exception("ERROR Processing CURL");
-    //     }
-    //     return $this->$json_result;
-    // }
 }
