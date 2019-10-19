@@ -36,4 +36,18 @@ class HttpClientStub implements ClientInterface
     {
         return $this->client->getAsync(ClientStubDecorator::getNewUrl($url), $headers);
     }
+
+    /**
+     * Post Request.
+     *
+     * @param string $url
+     * @param mixed $data
+     * @param array $headers
+     *
+     * @return PromiseInterface
+     */
+    public function postAsync(string $url, $data, array $headers = []): PromiseInterface
+    {
+        return $this->client->postAsync(ClientStubDecorator::getNewUrl($url), $data, $headers);
+    }
 }
