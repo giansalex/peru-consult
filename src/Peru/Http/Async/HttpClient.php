@@ -29,10 +29,29 @@ class HttpClient extends Client implements ClientInterface
      */
     public function getAsync(string $url, array $headers = []): PromiseInterface
     {
+        return $this->requestAsync('GET', $url, null, $headers);
+    }
+
+    /**
+     * Post Request.
+     *
+     * @param string $url
+     * @param mixed $data
+     * @param array $headers
+     *
+     * @return PromiseInterface
+     */
+    public function postAsync(string $url, $data, array $headers = []): PromiseInterface
+    {
+        return $this->requestAsync('POST', $url, $data, $headers);
+    }
+
+    private function requestAsync($method, $url, $data, $headers)
+    {
         $deferred = new Deferred();
         $headers = $this->buildHeaders($headers);
-        $request = $this->request('GET', $url, $headers);
 
+        $request = $this->request($method, $url, $headers);
         $request->on('response', function (Response $response) use ($deferred) {
             $this->saveCookies($response->getHeaders());
 
@@ -48,7 +67,7 @@ class HttpClient extends Client implements ClientInterface
         $request->on('error', function ($e) use ($deferred) {
             $deferred->reject($e);
         });
-        $request->end();
+        $request->end($data);
 
         return $deferred->promise();
     }
@@ -79,40 +98,5 @@ class HttpClient extends Client implements ClientInterface
         $headers['Cookie'] = implode('; ', $this->cookies);
 
         return $headers;
-    }
-
-    /**
-     * Post Request.
-     *
-     * @param string $url
-     * @param mixed $data
-     * @param array $headers
-     *
-     * @return PromiseInterface
-     */
-    public function postAsync(string $url, $data, array $headers = []): PromiseInterface
-    {
-        $deferred = new Deferred();
-        $headers = $this->buildHeaders($headers);
-
-        $request = $this->request('POST', $url, $headers);
-        $request->on('response', function (Response $response) use ($deferred) {
-            $this->saveCookies($response->getHeaders());
-
-            $result = '';
-            $response->on('data', function ($data) use (&$result) {
-                $result .= $data;
-            });
-
-            $response->on('end', function () use (&$result, $deferred) {
-                $deferred->resolve($result);
-            });
-        });
-        $request->on('error', function ($e) use ($deferred) {
-            $deferred->reject($e);
-        });
-        $request->end($data);
-
-        return $deferred->promise();
     }
 }
