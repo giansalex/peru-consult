@@ -12,6 +12,7 @@ namespace Tests\Peru\Jne;
 
 use Peru\{Http\ContextClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
 use PHPUnit\Framework\TestCase;
+use Tests\Peru\Sunat\ClientStubDecorator;
 
 /**
  * Class DniTest
@@ -33,7 +34,7 @@ class DniTest extends TestCase
             ]
         ];
 
-        $this->cs = new Dni(new EmptyResponseDecorator($client), new DniParser());
+        $this->cs = new Dni(new ClientStubDecorator(new EmptyResponseDecorator($client)), new DniParser());
     }
 
     /**

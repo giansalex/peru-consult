@@ -49,6 +49,31 @@ class HttpClientTest extends TestCase
         await($this->client->getAsync('http://http323bin.org'), $this->loop);
     }
 
+    /**
+     * @throws \Exception
+     */
+    public function testPost()
+    {
+        $data = json_encode(['result' => 42]);
+        $result = await($this->client->postAsync('https://httpbin.org/post', $data, [
+            'Content-Type' => 'application/json',
+            'Content-Length' => strlen($data)
+        ]), $this->loop);
+
+        $obj = json_decode($result);
+
+        $this->assertEquals(42, $obj->json->result);
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @throws \Exception
+     */
+    public function testPostWithError()
+    {
+        await($this->client->postAsync('https://httpbin323.org/post', ''), $this->loop);
+    }
+
     protected function tearDown()
     {
         $this->loop->run();

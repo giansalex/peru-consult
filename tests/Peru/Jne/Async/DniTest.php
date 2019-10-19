@@ -12,6 +12,7 @@ use Peru\Reniec\Person;
 use PHPUnit\Framework\TestCase;
 use React\EventLoop\Factory;
 use React\EventLoop\LoopInterface;
+use Tests\Peru\Sunat\Async\HttpClientStub;
 
 class DniTest extends TestCase
 {
@@ -27,7 +28,7 @@ class DniTest extends TestCase
     protected function setUp()
     {
         $this->loop = Factory::create();
-        $this->consult = new Dni(new HttpClient($this->loop), new DniParser());
+        $this->consult = new Dni(new HttpClientStub(new HttpClient($this->loop)), new DniParser());
     }
 
     /**
@@ -35,12 +36,12 @@ class DniTest extends TestCase
      */
     public function testGetDni()
     {
-        $promise = $this->consult->get('48004836');
-        /**@var $person Person */
-        $person = await($promise, $this->loop);
+         $promise = $this->consult->get('48004836');
+         /**@var $person Person */
+         $person = await($promise, $this->loop);
 
-        $this->assertNotNull($person);
-        $this->assertEquals('48004836', $person->dni);
+         $this->assertNotNull($person);
+         $this->assertEquals('48004836', $person->dni);
     }
 
     protected function tearDown()

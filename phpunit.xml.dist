@@ -6,7 +6,7 @@
         colors="true"
         stopOnFailure="true">
 	<php>
-		<env name="MOCK_URL" value="http://localhost"/>
+		<env name="MOCK_URL" value=""/>
 	</php>
 	<testsuites>
 		<testsuite name="Unit Tests">

@@ -17,7 +17,7 @@ class ContextClient implements ClientInterface
 {
     private const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
     private const USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/3.0.0.1';
-
+    
     /**
      * stream_context extra options.
      *
