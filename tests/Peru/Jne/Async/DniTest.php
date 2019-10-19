@@ -35,13 +35,12 @@ class DniTest extends TestCase
      */
     public function testGetDni()
     {
-        // $promise = $this->consult->get('48004836');
-        // /**@var $person Person */
-        // $person = await($promise, $this->loop);
+         $promise = $this->consult->get('48004836');
+         /**@var $person Person */
+         $person = await($promise, $this->loop);
 
-        // $this->assertNotNull($person);
-        // $this->assertEquals('48004836', $person->dni);
-        $this->assertEquals('48004836','48004836');
+         $this->assertNotNull($person);
+         $this->assertEquals('48004836', $person->dni);
     }
 
     protected function tearDown()
