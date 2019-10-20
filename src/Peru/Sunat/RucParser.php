@@ -15,6 +15,7 @@ class RucParser
         'DIOS' => 'MADRE DE DIOS',
         'MARTIN' => 'SAN MARTIN',
         'LIBERTAD' => 'LA LIBERTAD',
+        'CALLAO' => 'PROV. CONST. DEL CALLAO',
     ];
 
     /**
@@ -117,7 +118,7 @@ class RucParser
         $company->distrito = trim($items[2]);
         $removeLength = count(explode(' ', $department));
         array_splice($pieces, -1 * $removeLength);
-        $company->direccion = join(' ', $pieces);
+        $company->direccion = rtrim(join(' ', $pieces));
     }
 
     private function getDepartment($department): string
