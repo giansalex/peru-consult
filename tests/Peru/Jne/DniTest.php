@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Jne;
 
-use Peru\{Http\ContextClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
+use Peru\{Http\ClientInterface, Http\ContextClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
 use PHPUnit\Framework\TestCase;
 use Tests\Peru\Sunat\ClientStubDecorator;
 
@@ -62,6 +62,21 @@ class DniTest extends TestCase
     {
         $person = $this->cs->get('00000000');
 
+        $this->assertNull($person);
+    }
+
+    public function testServerEmptyResponse()
+    {
+        // arrange
+        $stub = $this->getMockBuilder(ClientInterface::class)->getMock();
+        $stub->method('get')->willReturn('');
+        /**@var $stub ClientInterface */
+        $client = new Dni($stub, new DniParser());
+
+        // act
+        $person = $client->get('0999');
+
+        // assert
         $this->assertNull($person);
     }
 }
