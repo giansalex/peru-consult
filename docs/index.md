@@ -22,8 +22,3 @@ composer require giansalex/peru-consult
 
 ### API REST
 Ir a [@giansalex/peru-consult-api](https://github.com/giansalex/peru-consult-api).  
-
-### Sponsors
-
-[Quertium](http://quertium.com/)  
-![Quertium](img/quertium.png)
