@@ -22,14 +22,14 @@ class DniParserTest extends TestCase
     /**
      * @param string $dni
      *
-     * @testWith ["000000009"]
-     *           ["000000003"]
+     * @testWith ["00000009"]
+     *           ["00000003"]
      */
     public function testParseDni($dni)
     {
         $person = $this->parser->parse($dni, 'A|B|C');
 
         $this->assertNotNull($person);
-        $this->assertNotEmpty($person->codVerifica);
+        $this->assertNotNull($person->codVerifica);
     }
 }

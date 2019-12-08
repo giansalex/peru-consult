@@ -26,9 +26,10 @@ class DniParser
     private function getVerifyCode($dni)
     {
         $suma = 5;
-        $hash = [5, 4, 3, 2, 7, 6, 5, 4, 3, 2];
-        for ($i = 2; $i < 10; ++$i) {
-            $suma += ($dni[$i - 2] * $hash[$i]);
+        $len = strlen($dni);
+        $hash = [3, 2, 7, 6, 5, 4, 3, 2];
+        for ($i = 0; $i < $len; ++$i) {
+            $suma += $dni[$i] * $hash[$i];
         }
         $entero = (int) ($suma / 11);
         $digito = 11 - ($suma - $entero * 11);
