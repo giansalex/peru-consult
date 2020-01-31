@@ -57,8 +57,8 @@ class ClientStubDecorator implements ClientInterface
 
     public static function getNewUrl($url)
     {
-        $urlBase = $_ENV['MOCK_URL'];
-        if (empty($urlBase)) {
+        if (!isset($_ENV['MOCK_URL']) || empty($urlBase = $_ENV['MOCK_URL'])) {
+
             return $url;
         }
 
