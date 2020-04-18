@@ -18,6 +18,10 @@ theme:
   name: 'material'
   favicon: 'img/peru.png'
   logo: 'img/peru.png'
+  include_search_page: false
+  search_index_only: true
+  static_templates:
+    - 404.html
   language: 'es'
   palette:
     primary: 'Red'
@@ -25,6 +29,8 @@ theme:
 
 extra_css:
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/themes/prism-okaidia.min.css'
+  - 'https://rawcdn.githack.com/markusressel/MkDocs-Material-Dark-Theme/7d9804adb85251a75696a3b24f7602e5df465e2a/docs/stylesheets/dark_theme.css'
+  - 'https://rawcdn.githack.com/markusressel/MkDocs-Material-Dark-Theme/7d9804adb85251a75696a3b24f7602e5df465e2a/docs/stylesheets/codehilite.css'
 extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/prism.min.js'
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-markup-templating.min.js'
@@ -33,7 +39,7 @@ extra_javascript:
 
 extra:
   social:
-    - type: 'github'
+    - icon: fontawesome/brands/github
       link: 'https://github.com/giansalex'
   author:
     github: giansalex
@@ -43,6 +49,11 @@ extra:
 google_analytics:
   - 'UA-90097417-4'
   - 'auto'
+
+plugins:
+  - search
+  - minify:
+      minify_html: true
 
 # Extensions
 markdown_extensions:
