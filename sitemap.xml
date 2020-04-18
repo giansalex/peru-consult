@@ -1,23 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-    <url>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://giansalex.github.io/peru-consult/</loc>
-     <lastmod>2020-01-31</lastmod>
+     <lastmod>2020-04-18</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://giansalex.github.io/peru-consult/dni/</loc>
-     <lastmod>2020-01-31</lastmod>
+     <lastmod>2020-04-18</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://giansalex.github.io/peru-consult/ruc/</loc>
-     <lastmod>2020-01-31</lastmod>
+     <lastmod>2020-04-18</lastmod>
      <changefreq>daily</changefreq>
-    </url>
-    <url>
+    </url><url>
      <loc>https://giansalex.github.io/peru-consult/user-sol/</loc>
-     <lastmod>2020-01-31</lastmod>
+     <lastmod>2020-04-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>
