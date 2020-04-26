@@ -37,6 +37,7 @@ extra_javascript:
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-php.min.js'
   - 'https://cdnjs.cloudflare.com/ajax/libs/prism/1.15.0/components/prism-json.min.js'
 
+# Mkdocs material extras
 extra:
   social:
     - icon: fontawesome/brands/github
