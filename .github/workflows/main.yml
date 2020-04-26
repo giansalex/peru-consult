@@ -42,11 +42,6 @@ jobs:
     - name: BDD Tests
       run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
       shell: bash
-    - name: Create branch for coveralls
-      run: git checkout -b ${GIT_REMOTE_BRANCH:11}
-      shell: bash
-      env:
-        GIT_REMOTE_BRANCH: ${{ github.ref }}
     - name: Report code coverage
       run: vendor/bin/php-coveralls
       shell: bash
