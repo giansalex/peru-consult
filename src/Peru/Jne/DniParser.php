@@ -9,7 +9,7 @@ class DniParser
     public function parse(string $dni, string $raw): ?Person
     {
         $parts = explode('|', $raw);
-        if (count($parts) !== 3) {
+        if (count($parts) !== 3 || empty($parts[0])) {
             return null;
         }
 
