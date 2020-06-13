@@ -44,7 +44,7 @@ class ContextClientTest extends TestCase
         $error = error_get_last();
 
         $this->assertFalse($result);
-        $this->assertStringContainsString('404 NOT FOUND', $error['message']);
+        $this->assertStringContainsString('404 NOT FOUND', strtoupper($error['message']));
     }
 
     public function testNotResolveDomain()
