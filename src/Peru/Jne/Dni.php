@@ -16,7 +16,7 @@ use Peru\Services\DniInterface;
  */
 class Dni implements DniInterface
 {
-    private const URL_CONSULT = 'http://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano';
+    private const URL_CONSULT = 'https://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano';
     /**
      * @var ClientInterface
      */
