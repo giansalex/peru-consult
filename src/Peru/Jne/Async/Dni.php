@@ -54,12 +54,12 @@ class Dni
                     'Requestverificationtoken' => '30OB7qfO2MmL2Kcr1z4S0ttQcQpxH9pDUlZnkJPVgUhZOGBuSbGU4qM83JcSu7DZpZw-IIIfaDZgZ4vDbwE5-L9EPoBIHOOC1aSPi4FS_Sc1:clDOiaq7mKcLTK9YBVGt2R3spEU8LhtXEe_n5VG5VLPfG9UkAQfjL_WT9ZDmCCqtJypoTD26ikncynlMn8fPz_F_Y88WFufli38cUM-24PE1',
                 ])
             ->then(function ($json) use ($dni) {
-                if (!$json) {
+                $result = json_decode($json);
+                if (!$result) {
                     return null;
                 }
 
-                $raw = json_decode($json)->data;
-                return $this->parser->parse($dni, $raw);
+                return $this->parser->parse($dni, $result->data);
             });
     }
 }

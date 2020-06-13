@@ -69,7 +69,7 @@ class DniTest extends TestCase
     {
         // arrange
         $stub = $this->getMockBuilder(ClientInterface::class)->getMock();
-        $stub->method('get')->willReturn('');
+        $stub->method('post')->willReturn('<html lang="en"></html>');
         /**@var $stub ClientInterface */
         $client = new Dni($stub, new DniParser());
 
