@@ -9,7 +9,13 @@ use React\Promise\PromiseInterface;
 class Dni
 {
     private const URL_CONSULT = 'https://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano';
-    private const REQUEST_TOKEN = '30OB7qfO2MmL2Kcr1z4S0ttQcQpxH9pDUlZnkJPVgUhZOGBuSbGU4qM83JcSu7DZpZw-IIIfaDZgZ4vDbwE5-L9EPoBIHOOC1aSPi4FS_Sc1:clDOiaq7mKcLTK9YBVGt2R3spEU8LhtXEe_n5VG5VLPfG9UkAQfjL_WT9ZDmCCqtJypoTD26ikncynlMn8fPz_F_Y88WFufli38cUM-24PE1';
+
+    /**
+     * JNE Request Token
+     *
+     * @var string
+     */
+    private $requestToken = 'Dmfiv1Unnsv8I9EoXEzbyQExSD8Q1UY7viyyf_347vRCfO-1xGFvDddaxDAlvm0cZ8XgAKTaWclVFnnsGgoy4aLlBGB5m-E8rGw_ymEcCig1:eq4At-H2zqgXPrPnoiDGFZH0Fdx5a-1UiyVaR4nQlCvYZzAhzmvWxLwkUk6-yORYrBBxEnoG5sm-Hkiyc91so6-nHHxIeLee5p700KE47Cw1';
 
     /**
      * @var ClientInterface
@@ -34,6 +40,16 @@ class Dni
     }
 
     /**
+     * Override JNE Request token
+     *
+     * @param string $requestToken
+     */
+    public function setRequestToken(string $requestToken): void
+    {
+        $this->requestToken = $requestToken;
+    }
+
+    /**
      * Get Person Information by DNI.
      *
      * @param string $dni
@@ -52,7 +68,7 @@ class Dni
                 [
                     'Content-Type' => 'application/json;chartset=utf-8',
                     'Content-Length' => strlen($payload),
-                    'Requestverificationtoken' => self::REQUEST_TOKEN,
+                    'Requestverificationtoken' => $this->requestToken,
                 ])
             ->then(function ($json) use ($dni) {
                 $result = json_decode($json);
