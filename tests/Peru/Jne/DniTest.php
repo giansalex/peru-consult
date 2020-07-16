@@ -60,6 +60,7 @@ class DniTest extends TestCase
 
     public function testInvalidDni()
     {
+        $this->cs->setRequestToken('097n0wui1QSNq9fIvsgrvRMD3HpX94k_daIKOOtfB909CCH4I6yIMF2xGS-oL5f9JcuQLxi0r7NaifLl7ywzetCamoqIInRRVLFNGwvf_-o1:gwx3eTdFP_Dluq92Nv3eX7qSJKg-MgnbxwHnhR57Q_JIfdvuXJsT1vDd926nUDXsvv7HcpJFuDh3yCyMfYEMY8BOZ4YkTFVyHC6EFW4Hboo1');
         $person = $this->cs->get('00000000');
 
         $this->assertNull($person);
