@@ -23,6 +23,8 @@ if (!$person) {
 echo json_encode($person);
 
 ```
+> Para cambiar el __JNE token__, puedes hacerlo con el metodo `$cs->setRequestToken('097n0wui1....4I6yIMF2xGS')`
+> Más información en [issue #29](https://github.com/giansalex/peru-consult/issues/29)
 
 ## Resultado
 
