@@ -60,7 +60,7 @@ class Dni implements DniInterface
             ]);
 
         $result = json_decode($json);
-        if (!$result) {
+        if (!$result || !isset($result->data)) {
             return null;
         }
 

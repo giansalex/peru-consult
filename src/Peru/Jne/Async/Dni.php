@@ -56,7 +56,7 @@ class Dni
                 ])
             ->then(function ($json) use ($dni) {
                 $result = json_decode($json);
-                if (!$result) {
+                if (!$result || !isset($result->data)) {
                     return null;
                 }
 
