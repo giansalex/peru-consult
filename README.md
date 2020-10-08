@@ -23,7 +23,7 @@ composer require giansalex/peru-consult
 ### Servicios Disponibles
 - Consulta de DNI
 - Consulta de RUC
-- Validez de Usuario SOL
+- Validez de Usuario SOL (extras)
 
 ### API REST :zap:
 Visitar [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
