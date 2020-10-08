@@ -1,7 +1,15 @@
 {
     "name": "giansalex/peru-consult",
-    "description": "Consultas gratuita de RUC y DNI en Perú",
-    "keywords": ["sunat", "reniec", "dni", "ruc", "clave-sol", "peru"],
+    "description": "Consulta gratuita de DNI, RUC en Perú",
+    "keywords": [
+        "sunat",
+        "reniec",
+        "dni",
+        "ruc",
+        "consulta-dni",
+        "consulta-ruc",
+        "peru"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -15,14 +23,16 @@
 		"php": "^7.1",
         "ext-json": "*",
         "ext-dom": "*",
-        "ext-libxml": "*",
-        "react/http-client": "^0.5.9"
+        "ext-libxml": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "^7",
         "behat/behat": "^3.5",
         "clue/block-react": "^1.3",
         "phpstan/phpstan": "^0.11.15"
+    },
+    "suggest": {
+        "react/http": "Allow Dni, Ruc async requests"
     },
 	"autoload": {
         "psr-4": {
