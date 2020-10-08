@@ -33,7 +33,7 @@ class HttpClient extends Browser implements ClientInterface
                     ->then(function (ResponseInterface $response) {
                         $this->saveCookies($response->getHeaders());
 
-                        return $response->getBody();
+                        return (string)$response->getBody();
                     });
     }
 
@@ -53,7 +53,7 @@ class HttpClient extends Browser implements ClientInterface
             ->then(function (ResponseInterface $response) {
                 $this->saveCookies($response->getHeaders());
 
-                return $response->getBody();
+                return (string)$response->getBody();
             });
     }
 
