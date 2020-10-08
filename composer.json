@@ -1,7 +1,15 @@
 {
     "name": "giansalex/peru-consult",
-    "description": "Consultas gratuita de RUC y DNI en Perú",
-    "keywords": ["sunat", "reniec", "dni", "ruc", "clave-sol", "peru"],
+    "description": "Consulta gratuita de DNI, RUC en Perú",
+    "keywords": [
+        "sunat",
+        "reniec",
+        "dni",
+        "ruc",
+        "consulta-dni",
+        "consulta-ruc",
+        "peru"
+    ],
     "license": "MIT",
     "authors": [
         {
