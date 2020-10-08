@@ -25,5 +25,5 @@ composer require giansalex/peru-consult
 - Consulta de RUC
 - Validez de Usuario SOL (extras)
 
-### API REST :zap:
+### API :cloud:
 Visitar [peru-consult-api](https://github.com/giansalex/peru-consult-api).  
