@@ -23,6 +23,8 @@ jobs:
       run: composer install --prefer-dist --no-progress --no-suggest
     - name: Install Coveralls
       run: composer require php-coveralls/php-coveralls
+    - name: Install React HTTP
+      run: composer require react/http
     - name: Create test directory
       run: mkdir -p test-results/behat
       shell: bash
