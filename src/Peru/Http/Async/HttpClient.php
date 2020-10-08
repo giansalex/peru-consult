@@ -2,9 +2,8 @@
 
 namespace Peru\Http\Async;
 
-use React\HttpClient\Client;
-use React\HttpClient\Response;
-use React\Promise\Deferred;
+use Psr\Http\Message\ResponseInterface;
+use React\Http\Browser;
 use React\Promise\PromiseInterface;
 
 /**
@@ -12,7 +11,7 @@ use React\Promise\PromiseInterface;
  *
  * HttpClient based on ReactPHP
  */
-class HttpClient extends Client implements ClientInterface
+class HttpClient extends Browser implements ClientInterface
 {
     /**
      * @var array
@@ -29,7 +28,13 @@ class HttpClient extends Client implements ClientInterface
      */
     public function getAsync(string $url, array $headers = []): PromiseInterface
     {
-        return $this->requestAsync('GET', $url, null, $headers);
+        $headers = $this->buildHeaders($headers);
+        return $this->get($url, $headers)
+                    ->then(function (ResponseInterface $response) {
+                        $this->saveCookies($response->getHeaders());
+
+                        return $response->getBody();
+                    });
     }
 
     /**
@@ -43,33 +48,13 @@ class HttpClient extends Client implements ClientInterface
      */
     public function postAsync(string $url, $data, array $headers = []): PromiseInterface
     {
-        return $this->requestAsync('POST', $url, $data, $headers);
-    }
-
-    private function requestAsync($method, $url, $data, $headers)
-    {
-        $deferred = new Deferred();
         $headers = $this->buildHeaders($headers);
+        return $this->post($url, $headers, $data)
+            ->then(function (ResponseInterface $response) {
+                $this->saveCookies($response->getHeaders());
 
-        $request = $this->request($method, $url, $headers);
-        $request->on('response', function (Response $response) use ($deferred) {
-            $this->saveCookies($response->getHeaders());
-
-            $result = '';
-            $response->on('data', function ($data) use (&$result) {
-                $result .= $data;
+                return $response->getBody();
             });
-
-            $response->on('end', function () use (&$result, $deferred) {
-                $deferred->resolve($result);
-            });
-        });
-        $request->on('error', function ($e) use ($deferred) {
-            $deferred->reject($e);
-        });
-        $request->end($data);
-
-        return $deferred->promise();
     }
 
     private function saveCookies(array $headers)
