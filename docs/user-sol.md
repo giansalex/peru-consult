@@ -17,7 +17,7 @@ $ruc = '20123456789'; // colocar un ruc válido
 $user = 'TGGMMSYY'; // colocar un usuario según el ruc
 
 $cs = new UserValidator(new ContextClient());
-$valid = $cs->valid($dni);
+$valid = $cs->valid($ruc, $user);
 if ($valid) {
     echo 'Válido';
 } else {

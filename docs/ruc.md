@@ -5,23 +5,24 @@ Consulta de RUC.
 
 ## Requerimientos
 - Tener cargada la extension `dom`.
+- Tener activo [allow_url_fopen](https://www.php.net/manual/es/filesystem.configuration.php#ini.allow-url-fopen).
 
 ## Ejemplo
 
 ```php
-use Peru\Http\ContextClient;
-use Peru\Sunat\{HtmlParser, Ruc, RucParser};
+use Peru\Sunat\RucFactory;
 
 require 'vendor/autoload.php';
 
 $ruc = '20100070970';
 
-$cs = new Ruc(new ContextClient(), new RucParser(new HtmlParser()));
+$factory = new RucFactory();
+$cs = $factory->create();
 
 $company = $cs->get($ruc);
 if (!$company) {
     echo 'Not found';
-    exit();
+    return;
 }
 
 echo json_encode($company);
@@ -29,7 +30,7 @@ echo json_encode($company);
 ```
 
 !!! tip "Cambiar URL utilizada"
-    Si necesita cambiar la url utilizada internamente para obtener la información del RUC, puede hacerlo de esta forma:  
+    Si necesita cambiar la url utilizada internamente para obtener la información del RUC, este es un ejemplo:  
     `$cs->urlConsult='http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS03Alias';`
 
 ## Resultado

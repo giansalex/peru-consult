@@ -17,7 +17,8 @@ class ContextClient implements ClientInterface
 {
     private const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
     private const USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/3.0.0.1';
-    
+    private const HTTP_VERSION = 1.1;
+
     /**
      * stream_context extra options.
      *
@@ -76,17 +77,19 @@ class ContextClient implements ClientInterface
      */
     private function getContext(string $method, $data, array $headers)
     {
+        $headers['Connection'] = 'close';
         $defaultOptions = [
             'http' => [
                 'header' => $this->join(': ', $headers),
                 'method' => $method,
                 'content' => $this->getRawData($data),
                 'user_agent' => self::USER_AGENT,
+                'protocol_version' => self::HTTP_VERSION,
             ],
         ];
 
-        if (!empty($this->options)) {
-            $defaultOptions = array_merge_recursive($defaultOptions, $this->options);
+        if (!empty($this->options) && is_array($this->options)) {
+            $defaultOptions = $this->mergeOptions($defaultOptions, $this->options);
         }
 
         if (!empty($this->cookies)) {
@@ -135,5 +138,19 @@ class ContextClient implements ClientInterface
         }
 
         return $response;
+    }
+
+    private function mergeOptions(array $default, array $overwrite): array
+    {
+        $merged = $default;
+        foreach($overwrite as $key => $value) {
+            if (array_key_exists($key, $default) && is_array($value)) {
+                $merged[$key] = $this->mergeOptions($default[$key], $overwrite[$key]);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
     }
 }
