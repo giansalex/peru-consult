@@ -5,19 +5,19 @@ Consulta de DNI.
 ## Ejemplo
 
 ```php
-use Peru\Http\ContextClient;
-use Peru\Jne\{Dni, DniParser};
+use Peru\Jne\DniFactory;
 
 require 'vendor/autoload.php';
 
 $dni = '46658592';
 
-$cs = new Dni(new ContextClient(), new DniParser());
+$factory = new DniFactory();
+$cs = $factory->create();
 
 $person = $cs->get($dni);
 if (!$person) {
     echo 'Not found';
-    exit();
+    return;
 }
 
 echo json_encode($person);
