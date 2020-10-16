@@ -85,8 +85,8 @@ class ContextClient implements ClientInterface
             ],
         ];
 
-        if (!empty($this->options)) {
-            $defaultOptions = array_merge_recursive($defaultOptions, $this->options);
+        if (!empty($this->options) && is_array($this->options)) {
+            $defaultOptions = $this->mergeOptions($defaultOptions, $this->options);
         }
 
         if (!empty($this->cookies)) {
@@ -135,5 +135,19 @@ class ContextClient implements ClientInterface
         }
 
         return $response;
+    }
+
+    private function mergeOptions(array $default, array $overwrite): array
+    {
+        $merged = $default;
+        foreach($overwrite as $key => $value) {
+            if (array_key_exists($key, $default) && is_array($value)) {
+                $merged[$key] = $this->mergeOptions($default[$key], $overwrite[$key]);
+            } else {
+                $merged[$key] = $value;
+            }
+        }
+
+        return $merged;
     }
 }
