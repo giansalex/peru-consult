@@ -31,6 +31,9 @@ class RucTest extends TestCase
     {
         $client = new ContextClient();
         $client->options = [
+            'http' => [
+                'protocol_version' => 1.1
+            ],
             'ssl' => [
                 'allow_self_signed' => true,
                 'verify_peer' => false,
