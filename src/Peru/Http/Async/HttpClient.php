@@ -13,6 +13,8 @@ use React\Promise\PromiseInterface;
  */
 class HttpClient extends Browser implements ClientInterface
 {
+    private const USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/3.0.0.1';
+
     /**
      * @var array
      */
@@ -76,12 +78,14 @@ class HttpClient extends Browser implements ClientInterface
 
     private function buildHeaders(array $headers)
     {
-        if (empty($this->cookies)) {
-            return $headers;
+        $defaultHeaders = [
+            'User-Agent' => self::USER_AGENT,
+        ];
+
+        if (!empty($this->cookies)) {
+            $defaultHeaders['Cookie'] = implode('; ', $this->cookies);
         }
 
-        $headers['Cookie'] = implode('; ', $this->cookies);
-
-        return $headers;
+        return array_merge($defaultHeaders, $headers);
     }
 }
