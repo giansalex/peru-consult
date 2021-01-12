@@ -72,7 +72,7 @@ class HttpClient extends Browser implements ClientInterface
         $this->cookies = array_map(function ($cookie) {
             $pos = strpos($cookie, ';');
 
-            return substr($cookie, 0, $pos);
+            return $pos === false ? $cookie : substr($cookie, 0, $pos);
         }, $responseCookies);
     }
 

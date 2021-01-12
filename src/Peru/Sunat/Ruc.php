@@ -52,6 +52,6 @@ class Ruc implements RucInterface
         $random = $this->client->get($this->urlRandom);
         $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
 
-        return $this->parser->parse($html);
+        return $html === false ? null : $this->parser->parse($html);
     }
 }

@@ -59,7 +59,7 @@ class Dni
     public function get(string $dni): PromiseInterface
     {
         $url = self::URL_CONSULT;
-        $payload = json_encode(['CODDNI' => $dni]);
+        $payload = '{"CODDNI": "'.$dni.'"}';
 
         return $this->client
             ->postAsync(

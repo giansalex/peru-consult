@@ -70,7 +70,7 @@ class ContextClient implements ClientInterface
 
     /**
      * @param string $method
-     * @param $data
+     * @param mixed $data
      * @param array $headers
      *
      * @return resource
@@ -119,7 +119,7 @@ class ContextClient implements ClientInterface
         return is_array($data) ? http_build_query($data) : $data;
     }
 
-    private function join(string $glue, array $items, string $end = "\r\n"): ?string
+    private function join(string $glue, array $items, string $end = "\r\n"): string
     {
         $append = '';
         foreach ($items as $key => $value) {

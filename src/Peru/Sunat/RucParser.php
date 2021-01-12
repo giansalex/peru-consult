@@ -47,7 +47,7 @@ class RucParser
         return $this->getCompany($dic);
     }
 
-    private function getCompany(array $items): ?Company
+    private function getCompany(array $items): Company
     {
         $cp = $this->getHeadCompany($items);
         $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'] ?? '';
@@ -68,7 +68,7 @@ class RucParser
         return $cp;
     }
 
-    private function getHeadCompany(array $items): ?Company
+    private function getHeadCompany(array $items): Company
     {
         $cp = new Company();
 
@@ -87,11 +87,11 @@ class RucParser
     }
 
     /**
-     * @param $text
+     * @param string $text
      *
      * @return null|string
      */
-    private function parseDate($text)
+    private function parseDate(string $text): ?string
     {
         if (empty($text) || '-' == $text) {
             return null;
@@ -102,7 +102,7 @@ class RucParser
         return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
     }
 
-    private function fixDirection(Company $company)
+    private function fixDirection(Company $company): void
     {
         $items = explode('                                               -', $company->direccion);
         if (3 !== count($items)) {

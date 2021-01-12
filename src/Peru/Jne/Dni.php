@@ -68,15 +68,14 @@ class Dni implements DniInterface
         $url = self::URL_CONSULT;
        
         $json = $this->client->post(
-            $url, 
-            json_encode(['CODDNI' => $dni]),
+            $url,
+            '{"CODDNI": "'.$dni.'"}',
             [
                 'Content-Type' => 'application/json;chartset=utf-8',
                 'Requestverificationtoken' => $this->requestToken,
             ]);
 
-        $result = json_decode($json);
-        if (!$result || !isset($result->data)) {
+        if ($json === false || !($result = json_decode($json)) || !isset($result->data)) {
             return null;
         }
 

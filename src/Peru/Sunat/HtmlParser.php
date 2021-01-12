@@ -12,6 +12,7 @@ use DOMDocument;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
+use Generator;
 
 /**
  * Class HtmlParser.
@@ -21,11 +22,11 @@ final class HtmlParser
     /**
      * Parse html to dictionary.
      *
-     * @param $html
+     * @param string $html
      *
      * @return array|false
      */
-    public function parse($html)
+    public function parse(string $html)
     {
         $xp = $this->getXpathFromHtml($html);
         $table = $xp->query('./html/body/table[1]');
@@ -39,7 +40,7 @@ final class HtmlParser
         return $this->getKeyValues($nodes, $xp);
     }
 
-    private function getKeyValues(DOMNodeList $nodes, DOMXPath $xp)
+    private function getKeyValues(DOMNodeList $nodes, DOMXPath $xp): array
     {
         $dic = [];
         foreach ($nodes as $item) {
@@ -54,7 +55,7 @@ final class HtmlParser
         return $dic;
     }
 
-    private function setValuesFromNode(DOMXPath $xp, DOMNode $item, &$dic)
+    private function setValuesFromNode(DOMXPath $xp, DOMNode $item, &$dic): void
     {
         $isTitle = true;
         $title = '';
@@ -97,7 +98,7 @@ final class HtmlParser
         return trim($node->textContent);
     }
 
-    private function getValuesFromOption(DOMNodeList $options)
+    private function getValuesFromOption(DOMNodeList $options): Generator
     {
         foreach ($options as $opt) {
             /** @var $opt DOMNode */
