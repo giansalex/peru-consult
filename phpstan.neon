@@ -1,0 +1,6 @@
+parameters:
+    level: 5
+    paths:
+    - src
+    ignoreErrors:
+        - "#^Variable \\$http_response_header in isset\\(\\) always exists and is not nullable\\.$#"
