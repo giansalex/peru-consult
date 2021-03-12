@@ -15,8 +15,6 @@ use Peru\Http\ClientInterface;
  */
 class UserValidator
 {
-    const URL_VALIDEZ = 'http://www.sunat.gob.pe/cl-ti-itestadousr/usrS00Alias';
-
     /**
      * @var ClientInterface
      */
@@ -42,8 +40,8 @@ class UserValidator
      */
     public function valid($ruc, $user)
     {
-        $this->client->get(self::URL_VALIDEZ);
-        $html = $this->client->post(self::URL_VALIDEZ, [
+        $this->client->get(Endpoints::USER_VALIDEZ);
+        $html = $this->client->post(Endpoints::USER_VALIDEZ, [
             'accion' => 'e1',
             'ruc' => $ruc,
             'usr' => $user,

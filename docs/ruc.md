@@ -42,10 +42,6 @@ Resultado en formato json.
     "ruc": "20100070970",
     "razonSocial": "SUPERMERCADOS PERUANOS SOCIEDAD ANONIMA 'O ' S.P.S.A.",
     "nombreComercial": "-",
-    "telefonos": [
-        "6188000",
-        "993548438"
-    ],
     "tipo": "SOCIEDAD ANONIMA",
     "estado": "ACTIVO",
     "condicion": "HABIDO",

@@ -3,14 +3,12 @@
 namespace Peru\Sunat\Async;
 
 use Peru\Http\Async\ClientInterface;
+use Peru\Sunat\Endpoints;
 use Peru\Sunat\RucParser;
 use React\Promise\PromiseInterface;
 
 class Ruc
 {
-    private const URL_CONSULT = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    private const URL_RANDOM = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
-
     /**
      * @var ClientInterface
      */
@@ -36,9 +34,9 @@ class Ruc
     public function get(string $ruc): PromiseInterface
     {
         return $this->client
-            ->getAsync(self::URL_RANDOM)
+            ->getAsync(Endpoints::RANDOM)
             ->then(function ($random) use ($ruc) {
-                $url = self::URL_CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+                $url = Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
 
                 return $this->client->getAsync($url);
             })
