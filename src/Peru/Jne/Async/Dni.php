@@ -4,12 +4,11 @@ namespace Peru\Jne\Async;
 
 use Peru\Http\Async\ClientInterface;
 use Peru\Jne\DniParser;
+use Peru\Jne\Endpoints;
 use React\Promise\PromiseInterface;
 
 class Dni
 {
-    private const URL_CONSULT = 'https://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano';
-
     /**
      * JNE Request Token
      *
@@ -58,12 +57,11 @@ class Dni
      */
     public function get(string $dni): PromiseInterface
     {
-        $url = self::URL_CONSULT;
         $payload = '{"CODDNI": "'.$dni.'"}';
 
         return $this->client
             ->postAsync(
-                $url,
+                Endpoints::CONSULT,
                 $payload,
                 [
                     'Content-Type' => 'application/json;chartset=utf-8',

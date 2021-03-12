@@ -16,8 +16,6 @@ use Peru\Services\DniInterface;
  */
 class Dni implements DniInterface
 {
-    private const URL_CONSULT = 'https://aplicaciones007.jne.gob.pe/srop_publico/Consulta/api/AfiliadoApi/GetNombresCiudadano';
-
     /**
      * JNE Request Token
      *
@@ -65,10 +63,8 @@ class Dni implements DniInterface
      */
     public function get(string $dni): ?Person
     {
-        $url = self::URL_CONSULT;
-       
         $json = $this->client->post(
-            $url,
+            Endpoints::CONSULT,
             '{"CODDNI": "'.$dni.'"}',
             [
                 'Content-Type' => 'application/json;chartset=utf-8',
