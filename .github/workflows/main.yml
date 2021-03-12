@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
 
 jobs:
   test:
@@ -20,7 +24,7 @@ jobs:
         php-version: 7.1
         extensions: mbstring
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-suggest
+      run: composer install --prefer-dist --no-progress
     - name: Install React HTTP
       run: composer require react/http
     - name: Run PHPStan
