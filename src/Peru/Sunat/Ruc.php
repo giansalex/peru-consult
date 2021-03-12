@@ -16,9 +16,6 @@ use Peru\Services\RucInterface;
  */
 class Ruc implements RucInterface
 {
-    public $urlConsult = 'https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    public $urlRandom = 'https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
-
     /**
      * @var ClientInterface
      */
@@ -49,8 +46,8 @@ class Ruc implements RucInterface
      */
     public function get(string $ruc): ?Company
     {
-        $random = $this->client->get($this->urlRandom);
-        $html = $this->client->get($this->urlConsult."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
+        $random = $this->client->get(Endpoints::RANDOM);
+        $html = $this->client->get(Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
 
         return $html === false ? null : $this->parser->parse($html);
     }
