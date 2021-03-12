@@ -16,7 +16,7 @@ namespace Peru\Http;
 class ContextClient implements ClientInterface
 {
     private const FORM_CONTENT_TYPE = 'application/x-www-form-urlencoded';
-    private const USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-US; rv:1.8.1.9) Gecko/20071025 Firefox/3.0.0.1';
+    private const USER_AGENT = 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.72 Safari/537.36';
     private const HTTP_VERSION = 1.1;
 
     /**
