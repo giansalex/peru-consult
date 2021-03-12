@@ -16,8 +16,8 @@ use Peru\Services\RucInterface;
  */
 class Ruc implements RucInterface
 {
-    public $urlConsult = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
-    public $urlRandom = 'http://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
+    public $urlConsult = 'https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias';
+    public $urlRandom = 'https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/captcha?accion=random';
 
     /**
      * @var ClientInterface
