@@ -51,7 +51,7 @@ class RucParser
     {
         $cp = $this->getHeadCompany($items);
         $cp->sistEmsion = $items['Sistema Emisión de Comprobante:'] ?? $items['Sistema de Emisión de Comprobante:'] ?? '';
-        $cp->sistContabilidad = $items['Sistema Contabilidad:'] ?? $items['Sistema de Contabilidad:'] ?? '';
+        $cp->sistContabilidad = $items['Sistema Contabilidiad:'] ?? $items['Sistema Contabilidad:'] ?? $items['Sistema de Contabilidad:'] ?? '';
         $cp->actExterior = $items['Actividad Comercio Exterior:'] ?? $items['Actividad de Comercio Exterior:'] ?? '';
         $cp->actEconomicas = $items['Actividad(es) Económica(s):'] ?? [];
         $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'] ?? [];
