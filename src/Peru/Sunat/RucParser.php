@@ -76,8 +76,8 @@ class RucParser
         $cp->nombreComercial = $items['Nombre Comercial:'] ?? '';
         $cp->telefonos = [];
         $cp->tipo = $items['Tipo Contribuyente:'] ?? '';
-        $cp->estado = $items['Estado del Contribuyente:'] ?? $items['Estado:'];
-        $cp->condicion = $items['Condición del Contribuyente:'] ?? $items['Condición:'];
+        $cp->estado = $this->getFirstLine($items['Estado del Contribuyente:'] ?? $items['Estado:']);
+        $cp->condicion = $this->getFirstLine($items['Condición del Contribuyente:'] ?? $items['Condición:']);
         $cp->direccion = $items['Domicilio Fiscal:'] ?? $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:'] ?? '');
         $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '');
@@ -100,6 +100,13 @@ class RucParser
         $date = DateTime::createFromFormat('d/m/Y', $text);
 
         return false === $date ? null : $date->format('Y-m-d').'T00:00:00.000Z';
+    }
+
+    private function getFirstLine(string $text): string
+    {
+        $lines = explode("\r\n", $text);
+
+        return $lines[0];
     }
 
     private function fixDirection(Company $company): void
