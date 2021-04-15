@@ -3,6 +3,7 @@
 namespace Peru\Sunat;
 
 use DateTime;
+use Generator;
 
 class RucParser
 {
@@ -125,20 +126,23 @@ class RucParser
         if ($count === 1) {
             return;
         }
-
         $company->estado = $lines[0];
-        $validLines = [];
+
+        $validLines = iterator_to_array($this->filterValidLines($lines));
+        $updateFechaBaja = count($validLines) === 3 && $company->fechaBaja === null;
+
+        $company->fechaBaja = $updateFechaBaja ? $this->parseDate($validLines[2]): $company->fechaBaja;
+    }
+
+    private function filterValidLines(array $lines): Generator
+    {
         foreach ($lines as $line) {
             $value = trim($line);
             if ($value === '') {
                 continue;
             }
-            $validLines[] = $value;
+           yield $value;
         }
-
-        $updateFechaBaja = count($validLines) === 3 && $company->fechaBaja === null;
-
-        $company->fechaBaja = $updateFechaBaja ? $this->parseDate($validLines[2]): $company->fechaBaja;
     }
 
     private function fixDirection(Company $company): void
