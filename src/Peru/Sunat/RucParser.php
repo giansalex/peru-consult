@@ -50,17 +50,17 @@ class RucParser
     private function getCompany(array $items): Company
     {
         $cp = $this->getHeadCompany($items);
-        $cp->sistEmsion = $items['Sistema de Emisión de Comprobante:'] ?? '';
-        $cp->sistContabilidad = $items['Sistema de Contabilidad:'] ?? '';
-        $cp->actExterior = $items['Actividad de Comercio Exterior:'] ?? '';
+        $cp->sistEmsion = $items['Sistema Emisión de Comprobante:'] ?? $items['Sistema de Emisión de Comprobante:'] ?? '';
+        $cp->sistContabilidad = $items['Sistema Contabilidad:'] ?? $items['Sistema de Contabilidad:'] ?? '';
+        $cp->actExterior = $items['Actividad Comercio Exterior:'] ?? $items['Actividad de Comercio Exterior:'] ?? '';
         $cp->actEconomicas = $items['Actividad(es) Económica(s):'] ?? [];
         $cp->cpPago = $items['Comprobantes de Pago c/aut. de impresión (F. 806 u 816):'] ?? [];
-        $cp->sistElectronica = $items['Sistema de Emision Electronica:'] ?? $items['Sistema de Emisión Electrónica:'];
+        $cp->sistElectronica = $items['Sistema de Emisión Electrónica:'] ?? $items['Sistema de Emision Electronica:'] ?? [];
         $cp->fechaEmisorFe = $this->parseDate($items['Emisor electrónico desde:'] ?? '');
         $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:'] ?? '');
         $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:'] ?? '');
-        $cp->padrones = $items['Padrones :'] ?? [];
-        if ('-' == $cp->sistElectronica) {
+        $cp->padrones = $items['Padrones:'] ?? [];
+        if ('-' === $cp->sistElectronica) {
             $cp->sistElectronica = [];
         }
         $this->fixDirection($cp);
@@ -78,7 +78,7 @@ class RucParser
         $cp->tipo = $items['Tipo Contribuyente:'] ?? '';
         $cp->estado = $items['Estado del Contribuyente:'] ?? $items['Estado:'];
         $cp->condicion = $items['Condición del Contribuyente:'] ?? $items['Condición:'];
-        $cp->direccion = $items['Dirección del Domicilio Fiscal:'] ?? $items['Domicilio Fiscal:'];
+        $cp->direccion = $items['Domicilio Fiscal:'] ?? $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:'] ?? '');
         $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '');
         $cp->profesion = $items['Profesión u Oficio:'] ?? '';
