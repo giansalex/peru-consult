@@ -65,9 +65,7 @@ class RucParser
         $cp->cpeElectronico = $this->getCpes($items['Comprobantes Electrónicos:'] ?? '');
         $cp->fechaPle = $this->parseDate($items['Afiliado al PLE desde:'] ?? '');
         $cp->padrones = $items['Padrones:'] ?? [];
-        if ('-' === $cp->sistElectronica) {
-            $cp->sistElectronica = [];
-        }
+
         $this->fixDirection($cp);
 
         return $cp;
