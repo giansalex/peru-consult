@@ -13,7 +13,7 @@ namespace Tests\Peru\Sunat;
 use DateTime;
 use Exception;
 use Peru\Http\{ContextClient, EmptyResponseDecorator};
-use Peru\Sunat\{HtmlParser, Ruc, RucParser};
+use Peru\Sunat\{Parser\HtmlRecaptchaParser, Ruc, RucParser};
 use PHPUnit\Framework\TestCase;
 
 /**
@@ -42,7 +42,7 @@ class RucTest extends TestCase
         ];
         $this->cs = new Ruc(
             new ClientStubDecorator(new EmptyResponseDecorator($client)),
-            new RucParser(new HtmlParser()));
+            new RucParser(new HtmlRecaptchaParser()));
     }
 
     /**
@@ -88,7 +88,7 @@ class RucTest extends TestCase
 
     public function testInvalidRuc()
     {
-        $cs = new Ruc(new ContextClient(), new RucParser(new HtmlParser()));
+        $cs = new Ruc(new ContextClient(), new RucParser(new HtmlRecaptchaParser()));
         $company = $cs->get('20000000001');
 
         $this->assertNull($company);

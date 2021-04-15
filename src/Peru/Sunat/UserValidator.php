@@ -9,6 +9,7 @@
 namespace Peru\Sunat;
 
 use Peru\Http\ClientInterface;
+use Peru\Sunat\Parser\XpathLoader;
 
 /**
  * Class UserValidator.
@@ -52,9 +53,9 @@ class UserValidator
         return false !== strpos(strtoupper($state), 'ACTIVO');
     }
 
-    private function getStatus($html)
+    private function getStatus(string $html): string
     {
-        $xpt = HtmlParser::getXpathFromHtml($html);
+        $xpt = XpathLoader::getXpathFromHtml($html);
         $nodes = $xpt->query('//strong');
 
         if (1 !== $nodes->length) {

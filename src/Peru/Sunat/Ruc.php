@@ -47,7 +47,7 @@ class Ruc implements RucInterface
     public function get(string $ruc): ?Company
     {
         $random = $this->client->get(Endpoints::RANDOM);
-        $html = $this->client->get(Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random");
+        $html = $this->client->get(Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&actReturn=1&modo=1");
 
         return $html === false ? null : $this->parser->parse($html);
     }

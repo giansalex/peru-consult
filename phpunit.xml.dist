@@ -19,6 +19,7 @@
 			<exclude>
 				<directory>./tests</directory>
 				<directory>./vendor</directory>
+				<file>./src/Peru/Sunat/HtmlParser.php</file>
 			</exclude>
 		</whitelist>
 	</filter>

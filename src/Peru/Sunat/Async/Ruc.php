@@ -36,7 +36,7 @@ class Ruc
         return $this->client
             ->getAsync(Endpoints::RANDOM)
             ->then(function ($random) use ($ruc) {
-                $url = Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&tipdoc=";
+                $url = Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&actReturn=1&modo=1";
 
                 return $this->client->getAsync($url);
             })
