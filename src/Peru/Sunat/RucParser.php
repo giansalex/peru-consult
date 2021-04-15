@@ -76,12 +76,13 @@ class RucParser
         $cp->nombreComercial = $items['Nombre Comercial:'] ?? '';
         $cp->telefonos = [];
         $cp->tipo = $items['Tipo Contribuyente:'] ?? '';
-        $cp->estado = $this->getFirstLine($items['Estado del Contribuyente:'] ?? $items['Estado:']);
+        $cp->estado = $items['Estado del Contribuyente:'] ?? $items['Estado:'];
         $cp->condicion = $this->getFirstLine($items['Condición del Contribuyente:'] ?? $items['Condición:']);
         $cp->direccion = $items['Domicilio Fiscal:'] ?? $items['Dirección del Domicilio Fiscal:'];
         $cp->fechaInscripcion = $this->parseDate($items['Fecha de Inscripción:'] ?? '');
         $cp->fechaBaja = $this->parseDate($items['Fecha de Baja:'] ?? '');
         $cp->profesion = $items['Profesión u Oficio:'] ?? '';
+        $this->fixEstado($cp);
 
         return $cp;
     }
@@ -107,6 +108,29 @@ class RucParser
         $lines = explode("\r\n", $text);
 
         return $lines[0];
+    }
+
+    private function fixEstado(Company $company): void
+    {
+        $lines = explode("\r\n", $company->estado);
+        $count = count($lines);
+        if ($count === 1) {
+            return;
+        }
+
+        $company->estado = $lines[0];
+        $validLines = [];
+        foreach ($lines as $line) {
+            $value = trim($line);
+            if ($value === '') {
+                continue;
+            }
+            $validLines[] = $value;
+        }
+
+        $updateFechaBaja = count($validLines) === 3 && $company->fechaBaja === null;
+
+        $company->fechaBaja = $updateFechaBaja ? $this->parseDate($validLines[2]): $company->fechaBaja;
     }
 
     private function fixDirection(Company $company): void
