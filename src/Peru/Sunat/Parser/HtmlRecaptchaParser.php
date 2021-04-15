@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Peru\Sunat\Parser;
 
-use DOMDocument;
 use DOMNode;
 use DOMNodeList;
 use DOMXPath;
@@ -22,7 +21,7 @@ class HtmlRecaptchaParser implements HtmlParserInterface
      */
     public function parse(string $html)
     {
-        $xp = $this->getXpathFromHtml($html);
+        $xp = XpathLoader::getXpathFromHtml($html);
         $table = $xp->query("//div[contains(concat(' ', normalize-space(@class), ' '), ' list-group ')]");
 
         if (0 == $table->length) {
@@ -81,17 +80,6 @@ class HtmlRecaptchaParser implements HtmlParserInterface
             /** @var $item DOMNode */
             yield trim($item->textContent);
         }
-    }
-
-    public static function getXpathFromHtml($html): DOMXPath
-    {
-        $dom = new DOMDocument();
-        $prevState = libxml_use_internal_errors(true);
-        $dom->loadHTML($html);
-        libxml_clear_errors();
-        libxml_use_internal_errors($prevState);
-
-        return new DOMXPath($dom);
     }
 
     private function isNotElement(DOMNode $node)
