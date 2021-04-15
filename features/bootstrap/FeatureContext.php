@@ -7,7 +7,7 @@ use Peru\Jne\Dni;
 use Peru\Jne\DniParser;
 use Peru\Reniec\Person;
 use Peru\Sunat\Company;
-use Peru\Sunat\HtmlParser;
+use Peru\Sunat\Parser\HtmlRecaptchaParser;
 use Peru\Sunat\Ruc;
 use Peru\Sunat\RucParser;
 use PHPUnit\Framework\Assert;
@@ -58,7 +58,7 @@ class FeatureContext implements Context
                 $this->result = $cs->get($this->document);
                 break;
             case 11:
-                $cs = new Ruc($client, new RucParser(new HtmlParser()));
+                $cs = new Ruc($client, new RucParser(new HtmlRecaptchaParser()));
                 $this->result = $cs->get($this->document);
                 break;
         }
