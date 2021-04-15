@@ -19,15 +19,15 @@ class RucParser
     ];
 
     /**
-     * @var HtmlParser
+     * @var HtmlParserInterface
      */
     private $parser;
 
     /**
      * RucHtmlParser constructor.
-     * @param HtmlParser $parser
+     * @param HtmlParserInterface $parser
      */
-    public function __construct(HtmlParser $parser)
+    public function __construct(HtmlParserInterface $parser)
     {
         $this->parser = $parser;
     }

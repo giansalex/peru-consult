@@ -17,7 +17,7 @@ use Generator;
 /**
  * Class HtmlParser.
  */
-final class HtmlParser
+final class HtmlParser implements HtmlParserInterface
 {
     /**
      * Parse html to dictionary.
