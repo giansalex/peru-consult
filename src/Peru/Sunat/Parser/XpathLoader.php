@@ -9,7 +9,7 @@ use DOMXPath;
 
 class XpathLoader
 {
-    public static function getXpathFromHtml($html): DOMXPath
+    public static function getXpathFromHtml(string $html): DOMXPath
     {
         $dom = new DOMDocument();
         $prevState = libxml_use_internal_errors(true);

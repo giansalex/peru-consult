@@ -9,7 +9,7 @@ class RucParser
     /**
      * Override Departments.
      *
-     * @var array
+     * @var array<string, string>
      */
     private $overridDeps = [
         'DIOS' => 'MADRE DE DIOS',
@@ -47,6 +47,10 @@ class RucParser
         return $this->getCompany($dic);
     }
 
+    /**
+     * @param array<string, mixed> $items
+     * @return Company
+     */
     private function getCompany(array $items): Company
     {
         $cp = $this->getHeadCompany($items);
@@ -68,6 +72,10 @@ class RucParser
         return $cp;
     }
 
+    /**
+     * @param array<string, mixed> $items
+     * @return Company
+     */
     private function getHeadCompany(array $items): Company
     {
         $cp = new Company();
@@ -152,7 +160,7 @@ class RucParser
         $company->direccion = rtrim(join(' ', $pieces));
     }
 
-    private function getDepartment($department): string
+    private function getDepartment(?string $department): string
     {
         $department = strtoupper($department);
         if (isset($this->overridDeps[$department])) {
@@ -162,7 +170,11 @@ class RucParser
         return $department;
     }
 
-    private function getCpes($text)
+    /**
+     * @param string|null $text
+     * @return string[]
+     */
+    private function getCpes(?string $text): array
     {
         $cpes = [];
         if (!empty($text) && '-' != $text) {
@@ -172,7 +184,11 @@ class RucParser
         return $cpes;
     }
 
-    private function getRucRzSocial($text)
+    /**
+     * @param string|null $text
+     * @return string[]
+     */
+    private function getRucRzSocial(?string $text): array
     {
         $pos = strpos($text, '-');
 

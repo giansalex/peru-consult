@@ -53,7 +53,7 @@ class UserValidator
         return false !== strpos(strtoupper($state), 'ACTIVO');
     }
 
-    private function getStatus($html)
+    private function getStatus(string $html): string
     {
         $xpt = XpathLoader::getXpathFromHtml($html);
         $nodes = $xpt->query('//strong');
