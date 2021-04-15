@@ -16,6 +16,7 @@ use Generator;
 
 /**
  * Class HtmlParser.
+ * @deprecated obsoleto desde version 4.4, usar en vez Peru\Sunat\Parser\HtmlRecaptchaParser
  */
 final class HtmlParser implements HtmlParserInterface
 {
