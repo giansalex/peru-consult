@@ -114,7 +114,7 @@ class RucParser
     {
         $lines = explode("\r\n", $text);
 
-        return $lines[0];
+        return trim($lines[0]);
     }
 
     private function fixEstado(Company $company): void
@@ -124,11 +124,11 @@ class RucParser
         if ($count === 1) {
             return;
         }
-        $company->estado = $lines[0];
 
         $validLines = iterator_to_array($this->filterValidLines($lines));
         $updateFechaBaja = count($validLines) === 3 && $company->fechaBaja === null;
 
+        $company->estado = $validLines[0];
         $company->fechaBaja = $updateFechaBaja ? $this->parseDate($validLines[2]): $company->fechaBaja;
     }
 
