@@ -8,8 +8,6 @@ Consultas gratuita de DNI y RUC sin uso de captcha, ni OCR.
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=giansalex_peru-consult)](https://sonarcloud.io/dashboard?id=giansalex_peru-consult) 
 
-> :memo: No se asegura una completa disponibilidad del servicio, ya que son fuentes externas, si necesita una mayor estabilidad puede utilizar [quertium](https://quertium.com/?utm_source=github&utm_campaign=peru-consult).
-
 ## Install
 Usando composer desde [packagist.org](https://packagist.org/packages/giansalex/peru-consult)
 ```bash
