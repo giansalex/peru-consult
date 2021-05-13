@@ -16,6 +16,8 @@ use Peru\Services\RucInterface;
  */
 class Ruc implements RucInterface
 {
+    private const PATTERN_RANDOM = '/<input type="hidden" name="numRnd" value="(.*)">/';
+
     /**
      * @var ClientInterface
      */
@@ -46,9 +48,18 @@ class Ruc implements RucInterface
      */
     public function get(string $ruc): ?Company
     {
-        $random = $this->client->get(Endpoints::RANDOM);
+        $random = $this->getRandom();
+
         $html = $this->client->get(Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&actReturn=1&modo=1");
 
         return $html === false ? null : $this->parser->parse($html);
+    }
+
+    public function getRandom(): ?string
+    {
+        $html = $this->client->get(Endpoints::RANDOM_PAGE);
+        preg_match_all(self::PATTERN_RANDOM, $html, $matches, PREG_SET_ORDER);
+
+        return count($matches) > 0 ? $matches[0][1] : '';
     }
 }
