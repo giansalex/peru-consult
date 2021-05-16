@@ -4,11 +4,14 @@ namespace Peru\Sunat\Async;
 
 use Peru\Http\Async\ClientInterface;
 use Peru\Sunat\Endpoints;
+use Peru\Sunat\RandomTrait;
 use Peru\Sunat\RucParser;
 use React\Promise\PromiseInterface;
 
 class Ruc
 {
+    use RandomTrait;
+
     /**
      * @var ClientInterface
      */
@@ -34,8 +37,9 @@ class Ruc
     public function get(string $ruc): PromiseInterface
     {
         return $this->client
-            ->getAsync(Endpoints::RANDOM)
-            ->then(function ($random) use ($ruc) {
+            ->getAsync(Endpoints::RANDOM_PAGE)
+            ->then(function ($htmlRandom) use ($ruc) {
+                $random = $this->getRandom($htmlRandom);
                 $url = Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&actReturn=1&modo=1";
 
                 return $this->client->getAsync($url);
