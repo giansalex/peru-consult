@@ -145,7 +145,7 @@ class ContextClient implements ClientInterface
         $merged = $default;
         foreach($overwrite as $key => $value) {
             if (array_key_exists($key, $default) && is_array($value)) {
-                $merged[$key] = $this->mergeOptions($default[$key], $overwrite[$key]);
+                $merged[$key] = $this->mergeOptions($default[$key], $value);
             } else {
                 $merged[$key] = $value;
             }
