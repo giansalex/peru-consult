@@ -69,11 +69,11 @@ class HttpClient extends Browser implements ClientInterface
             $responseCookies = [$responseCookies];
         }
 
-        $this->cookies = array_map(function ($cookie) {
+        $this->cookies = array_merge($this->cookies ?? [], array_map(function ($cookie) {
             $pos = strpos($cookie, ';');
 
             return $pos === false ? $cookie : substr($cookie, 0, $pos);
-        }, $responseCookies);
+        }, $responseCookies));
     }
 
     private function buildHeaders(array $headers)
