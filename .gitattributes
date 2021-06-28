@@ -8,6 +8,7 @@
 .php_cs.dist export-ignore
 .sonarcloud.properties export-ignore
 *.yml export-ignore
+phpstan.neon export-ignore
 phpunit.xml.dist export-ignore
 requirements.txt export-ignore
 
