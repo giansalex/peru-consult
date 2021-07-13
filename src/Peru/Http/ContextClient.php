@@ -12,6 +12,7 @@ namespace Peru\Http;
  * Stream Context Client.
  *
  * Class ContextClient
+ * @deprecated obsoleto desde version 4.4.4, usar en su lugar Peru\Http\CurlClient
  */
 class ContextClient implements ClientInterface
 {
