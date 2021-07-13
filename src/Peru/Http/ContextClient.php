@@ -77,7 +77,7 @@ class ContextClient implements ClientInterface
      */
     private function getContext(string $method, $data, array $headers)
     {
-//        $headers['Connection'] = 'close';
+        $headers['Connection'] = 'close';
         $defaultOptions = [
             'http' => [
                 'header' => $this->join(': ', $headers),
