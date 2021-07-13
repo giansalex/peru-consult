@@ -3,10 +3,6 @@
 Consulta de RUC.
 > Fuente: **SUNAT**.
 
-## Requerimientos
-- Tener cargada la extension `dom`.
-- Tener activo [allow_url_fopen](https://www.php.net/manual/es/filesystem.configuration.php#ini.allow-url-fopen).
-
 ## Ejemplo
 
 ```php

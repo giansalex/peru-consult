@@ -2,9 +2,6 @@
 Consulta la válidez del usuario SOL.
 > Fuente: **SUNAT**.
 
-## Requerimientos
-- Tener activada la extensión `dom`.
-
 ## Ejemplo
 
 ```php

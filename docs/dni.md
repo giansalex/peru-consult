@@ -2,9 +2,6 @@
 Consulta de DNI.
 > Fuente: **JNE**.
 
-## Requerimientos
-- Tener activo [allow_url_fopen](https://www.php.net/manual/es/filesystem.configuration.php#ini.allow-url-fopen).
-
 ## Ejemplo
 
 ```php
