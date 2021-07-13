@@ -10,7 +10,7 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Jne;
 
-use Peru\{Http\ClientInterface, Http\ContextClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
+use Peru\{Http\ClientInterface, Http\CurlClient, Http\EmptyResponseDecorator, Jne\Dni, Jne\DniParser};
 use PHPUnit\Framework\TestCase;
 use Tests\Peru\Sunat\ClientStubDecorator;
 
@@ -27,13 +27,7 @@ class DniTest extends TestCase
 
     public function setUp()
     {
-        $client = new ContextClient();
-        $client->options = [
-            'http' => [
-                'ignore_errors' => true,
-            ]
-        ];
-
+        $client = new CurlClient();
         $this->cs = new Dni(new ClientStubDecorator(new EmptyResponseDecorator($client)), new DniParser());
     }
 
