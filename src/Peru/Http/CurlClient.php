@@ -39,7 +39,7 @@ class CurlClient implements ClientInterface
     {
         curl_setopt($this->ch, CURLOPT_URL, $url);
         curl_setopt($this->ch, CURLOPT_USERAGENT, self::USER_AGENT);
-        curl_setopt($this->ch, CURLOPT_COOKIEJAR, '-');
+        curl_setopt($this->ch, CURLOPT_COOKIEJAR, '/dev/null');
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->ch, CURLOPT_FAILONERROR, 1);
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->buildHeaders($headers));
