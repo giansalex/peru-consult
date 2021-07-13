@@ -1,5 +1,4 @@
 /.github export-ignore
-/bin export-ignore
 /docs export-ignore
 /features export-ignore
 /tests export-ignore
@@ -12,4 +11,3 @@ phpstan.neon export-ignore
 phpunit.xml.dist export-ignore
 requirements.txt export-ignore
 
-tests/Resources/* linguist-vendored
