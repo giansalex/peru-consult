@@ -56,13 +56,6 @@ class RucTest extends TestCase
         $this->assertNotEmpty($company->provincia);
         $this->assertNotEmpty($company->distrito);
     }
-    public function testCurl()
-    {
-        $ac = new CurlClient();
-        $resp = $ac->get('https://e-consultaruc.sunat.gob.pe/cl-ti-itmrconsruc/jcrS00Alias');
-
-        echo $resp;
-    }
 
     public function testJsonEncode()
     {
