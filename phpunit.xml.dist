@@ -19,12 +19,9 @@
 			<exclude>
 				<directory>./tests</directory>
 				<directory>./vendor</directory>
+				<file>./src/Peru/Http/ContextClient.php</file>
 				<file>./src/Peru/Sunat/HtmlParser.php</file>
 			</exclude>
 		</whitelist>
 	</filter>
-	<logging>
-		<log type="coverage-clover" target="test-results/phpunit/clover.xml"/>
-		<log type="junit" target="test-results/phpunit/junit.xml"/>
-	</logging>
 </phpunit>

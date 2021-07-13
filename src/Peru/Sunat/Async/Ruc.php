@@ -37,12 +37,33 @@ class Ruc
     public function get(string $ruc): PromiseInterface
     {
         return $this->client
-            ->getAsync(Endpoints::RANDOM_PAGE)
+            ->getAsync(Endpoints::CONSULT)
+            ->then(function () {
+                $data = [
+                    'accion' => 'consPorRazonSoc',
+                    'razSoc' => 'BVA FOODS',
+                ];
+
+                return $this->client->postAsync(Endpoints::CONSULT,
+                    http_build_query($data),
+                    [
+                        'Content-Type' => 'application/x-www-form-urlencoded'
+                    ]);
+            })
             ->then(function ($htmlRandom) use ($ruc) {
                 $random = $this->getRandom($htmlRandom);
-                $url = Endpoints::CONSULT."?accion=consPorRuc&nroRuc=$ruc&numRnd=$random&actReturn=1&modo=1";
-
-                return $this->client->getAsync($url);
+                $data = [
+                    'accion' => 'consPorRuc',
+                    'nroRuc' => $ruc,
+                    'numRnd' => $random,
+                    'actReturn' => '1',
+                    'modo' => '1',
+                ];
+                return $this->client->postAsync(Endpoints::CONSULT,
+                    http_build_query($data),
+                    [
+                        'Content-Type' => 'application/x-www-form-urlencoded'
+                    ]);
             })
             ->then(function ($html) {
                 return $this->parser->parse($html);

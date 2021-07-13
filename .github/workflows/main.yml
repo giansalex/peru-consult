@@ -22,7 +22,7 @@ jobs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: 7.1
-        extensions: mbstring
+        extensions: mbstring,curl
     - name: Install dependencies
       run: composer install --prefer-dist --no-progress
     - name: Install React HTTP
@@ -33,7 +33,7 @@ jobs:
       run: mkdir -p test-results/behat
       shell: bash
     - name: PHPUnit Tests
-      run: vendor/bin/phpunit
+      run: vendor/bin/phpunit --coverage-clover clover.xml
       shell: bash
       env:
         MOCK_URL: ${{ secrets.MockServer }}
@@ -43,7 +43,7 @@ jobs:
     - name: Report code coverage
       uses: codecov/codecov-action@v1
       with:
-        file: ./test-results/phpunit/clover.xml
+        file: ./clover.xml
         flags: unittests
         name: codecov-peruconsult
       if: matrix.operating-system == 'ubuntu-latest'

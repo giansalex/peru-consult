@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace Tests\Peru\Sunat;
 
-use Peru\Http\ContextClient;
+use Peru\Http\CurlClient;
 use Peru\Sunat\UserValidator;
 use PHPUnit\Framework\TestCase;
 
@@ -25,7 +25,7 @@ class UserValidatorTest extends TestCase
 
     protected function setUp()
     {
-        $this->validator = new UserValidator(new ClientStubDecorator(new ContextClient()));
+        $this->validator = new UserValidator(new ClientStubDecorator(new CurlClient()));
     }
 
     public function testValidezCorrect()

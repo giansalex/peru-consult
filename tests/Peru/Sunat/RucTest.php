@@ -12,7 +12,7 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
-use Peru\Http\{ContextClient, EmptyResponseDecorator};
+use Peru\Http\{CurlClient, EmptyResponseDecorator};
 use Peru\Sunat\{Parser\HtmlRecaptchaParser, Ruc, RucParser};
 use PHPUnit\Framework\TestCase;
 
@@ -29,19 +29,8 @@ class RucTest extends TestCase
 
     public function setUp()
     {
-        $client = new ContextClient();
-        $client->options = [
-            'http' => [
-                'protocol_version' => 1.1
-            ],
-            'ssl' => [
-                'allow_self_signed' => true,
-                'verify_peer' => false,
-                'verify_peer_name' => false,
-            ],
-        ];
         $this->cs = new Ruc(
-            new ClientStubDecorator(new EmptyResponseDecorator($client)),
+            new ClientStubDecorator(new EmptyResponseDecorator(new CurlClient())),
             new RucParser(new HtmlRecaptchaParser()));
     }
 
@@ -62,7 +51,7 @@ class RucTest extends TestCase
         $this->assertNotEmpty($company->direccion);
         $this->assertNotEmpty($company->fechaInscripcion);
         $this->assertTrue(is_array($company->cpeElectronico));
-        $this->assertTrue(new DateTime($company->fechaInscripcion) !== false);
+        $this->assertNotNull(new DateTime($company->fechaInscripcion));
         $this->assertNotEmpty($company->departamento);
         $this->assertNotEmpty($company->provincia);
         $this->assertNotEmpty($company->distrito);
@@ -88,7 +77,7 @@ class RucTest extends TestCase
 
     public function testInvalidRuc()
     {
-        $cs = new Ruc(new ContextClient(), new RucParser(new HtmlRecaptchaParser()));
+        $cs = new Ruc(new CurlClient(), new RucParser(new HtmlRecaptchaParser()));
         $company = $cs->get('20000000001');
 
         $this->assertNull($company);

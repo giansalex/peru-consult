@@ -65,7 +65,7 @@ class ContextClient implements ClientInterface
 
         $ctx = $this->getContext('POST', $data, $headers);
 
-        return $this->getResponseAndSaveCookies($url, $ctx);
+        return $this->getResponsePostAndSaveCookies($url, $ctx);
     }
 
     /**
@@ -110,7 +110,7 @@ class ContextClient implements ClientInterface
         }
 
         if (!empty($responseCookies)) {
-            $this->cookies = $responseCookies;
+            $this->cookies = array_merge($this->cookies ?? [], $responseCookies);
         }
     }
 
@@ -140,12 +140,46 @@ class ContextClient implements ClientInterface
         return $response;
     }
 
+    private function getResponsePostAndSaveCookies(string $url, $ctx)
+    {
+        $fp = @fopen($url, 'r', false, $ctx);
+        $length = 0;
+        if (isset($http_response_header)) {
+            foreach ($http_response_header as $hdr) {
+                if (preg_match('/^Content-Length:\s*([^;]+)/', $hdr, $matches)) {
+                    $length = (int)$matches[1];
+                    break;
+                }
+            }
+        }
+
+        if ($length === 0) {
+            $response = '';
+            while (($buffer = fgets($fp, 1024)) !== false) {
+                $response.=$buffer;
+                if (strpos($buffer, '</body>') !== false) {
+                    $response.='</html>';
+                    break;
+                }
+            }
+        } else {
+            $response = @stream_get_contents($fp, $length);
+        }
+        fclose($fp);
+
+        if (isset($http_response_header)) {
+            $this->saveCookies($http_response_header);
+        }
+
+        return $response;
+    }
+
     private function mergeOptions(array $default, array $overwrite): array
     {
         $merged = $default;
         foreach($overwrite as $key => $value) {
             if (array_key_exists($key, $default) && is_array($value)) {
-                $merged[$key] = $this->mergeOptions($default[$key], $overwrite[$key]);
+                $merged[$key] = $this->mergeOptions($default[$key], $value);
             } else {
                 $merged[$key] = $value;
             }

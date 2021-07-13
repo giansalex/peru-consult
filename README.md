@@ -17,6 +17,7 @@ composer require giansalex/peru-consult
 
 ### Requerimientos
 - PHP 7.1 o superior.
+- Extensión `curl`
 
 ### Servicios Disponibles
 - Consulta de DNI
