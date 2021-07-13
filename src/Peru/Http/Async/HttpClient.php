@@ -65,9 +65,7 @@ class HttpClient extends Browser implements ClientInterface
             return;
         }
         $responseCookies = $headers['Set-Cookie'];
-        if (is_string($responseCookies)) {
-            $responseCookies = [$responseCookies];
-        }
+        $responseCookies = is_string($responseCookies) ? [$responseCookies] : $responseCookies;
 
         $this->cookies = array_merge($this->cookies ?? [], array_map(function ($cookie) {
             $pos = strpos($cookie, ';');
