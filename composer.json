@@ -24,7 +24,8 @@
         "ext-json": "*",
         "ext-dom": "*",
         "ext-libxml": "*",
-        "ext-curl": "*"
+        "ext-curl": "*",
+        "guzzlehttp/guzzle": "^6.5"
     },
     "require-dev": {
         "phpunit/phpunit": "^7",
