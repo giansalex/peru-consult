@@ -27,7 +27,8 @@ class DniParserTest extends TestCase
      */
     public function testParseDni($dni)
     {
-        $person = $this->parser->parse($dni, 'A|B|C');
+        $obj = json_decode('{"apeMatSoli": "PATERNO","apePatSoli": "MATERNO","nombreSoli": "NOMBRES"}');
+        $person = $this->parser->parse($dni, $obj);
 
         $this->assertNotNull($person);
         $this->assertNotNull($person->codVerifica);

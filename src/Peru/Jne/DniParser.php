@@ -6,18 +6,13 @@ use Peru\Reniec\Person;
 
 class DniParser
 {
-    public function parse(string $dni, string $raw): ?Person
+    public function parse(string $dni, $data): ?Person
     {
-        $parts = explode('|', $raw);
-        if (count($parts) !== 3 || empty($parts[0])) {
-            return null;
-        }
-
         $person = new Person();
         $person->dni = $dni;
-        $person->apellidoPaterno = $parts[0];
-        $person->apellidoMaterno = $parts[1];
-        $person->nombres = $parts[2];
+        $person->apellidoPaterno = $data->apePatSoli;
+        $person->apellidoMaterno = $data->apeMatSoli;
+        $person->nombres = $data->nombreSoli;
         $person->codVerifica = strval($this->getVerifyCode($dni));
 
         return $person;

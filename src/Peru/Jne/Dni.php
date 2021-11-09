@@ -17,13 +17,6 @@ use Peru\Services\DniInterface;
 class Dni implements DniInterface
 {
     /**
-     * JNE Request Token
-     *
-     * @var string
-     */
-    private $requestToken = 'Dmfiv1Unnsv8I9EoXEzbyQExSD8Q1UY7viyyf_347vRCfO-1xGFvDddaxDAlvm0cZ8XgAKTaWclVFnnsGgoy4aLlBGB5m-E8rGw_ymEcCig1:eq4At-H2zqgXPrPnoiDGFZH0Fdx5a-1UiyVaR4nQlCvYZzAhzmvWxLwkUk6-yORYrBBxEnoG5sm-Hkiyc91so6-nHHxIeLee5p700KE47Cw1';
-
-    /**
      * @var ClientInterface
      */
     private $client;
@@ -47,11 +40,11 @@ class Dni implements DniInterface
     /**
      * Override JNE Request token
      *
+     * @deprecated
      * @param string $requestToken
      */
     public function setRequestToken(string $requestToken): void
     {
-        $this->requestToken = $requestToken;
     }
 
     /**
@@ -63,18 +56,13 @@ class Dni implements DniInterface
      */
     public function get(string $dni): ?Person
     {
-        $json = $this->client->post(
-            Endpoints::CONSULT,
-            '{"CODDNI": "'.$dni.'"}',
-            [
-                'Content-Type' => 'application/json;chartset=utf-8',
-                'Requestverificationtoken' => $this->requestToken,
-            ]);
+        $url = sprintf(Endpoints::CONSULT, $dni);
+        $json = $this->client->post($url, []);
 
-        if ($json === false || !($result = json_decode($json)) || !isset($result->data)) {
+        if ($json === false || !($result = json_decode($json)) || !isset($result->nombreSoli)) {
             return null;
         }
 
-        return $this->parser->parse($dni, $result->data);
+        return $this->parser->parse($dni, $result);
     }
 }
