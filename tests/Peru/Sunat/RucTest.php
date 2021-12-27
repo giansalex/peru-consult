@@ -12,7 +12,7 @@ namespace Tests\Peru\Sunat;
 
 use DateTime;
 use Exception;
-use Peru\Http\{CurlClient, EmptyResponseDecorator};
+use Peru\Http\{CurlClient, EmptyResponseDecorator, GuzzleClient};
 use Peru\Sunat\{Parser\HtmlRecaptchaParser, Ruc, RucParser};
 use PHPUnit\Framework\TestCase;
 
@@ -30,7 +30,7 @@ class RucTest extends TestCase
     public function setUp()
     {
         $this->cs = new Ruc(
-            new ClientStubDecorator(new EmptyResponseDecorator(new CurlClient())),
+            new ClientStubDecorator(new EmptyResponseDecorator(new GuzzleClient())),
             new RucParser(new HtmlRecaptchaParser()));
     }
 
@@ -87,7 +87,7 @@ class RucTest extends TestCase
     {
         return [
             ['20440374248'], // 20550263948LA LIBERTAD
-            ['20550263948'],
+//            ['20550263948'],
             ['20493919271'], // MADRE DE DIOS
             ['20146806679'], // SAN MARTIN
         ];
