@@ -36,7 +36,7 @@ jobs:
       run: vendor/bin/phpunit --coverage-clover clover.xml
       shell: bash
       env:
-        MOCK_URL: ${{ secrets.MockServer }}
+        MOCK_URL: 'https://thawing-springs-87732.herokuapp.com'
     - name: BDD Tests
       run: vendor/bin/behat --config behat.yml -f pretty -o std -f junit -o test-results/behat/
       shell: bash
