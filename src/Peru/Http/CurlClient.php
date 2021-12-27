@@ -43,6 +43,8 @@ class CurlClient implements ClientInterface
         curl_setopt($this->ch, CURLOPT_RETURNTRANSFER, 1);
         curl_setopt($this->ch, CURLOPT_FAILONERROR, 1);
         curl_setopt($this->ch, CURLOPT_HTTPHEADER, $this->buildHeaders($headers));
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYHOST, FALSE);
+        curl_setopt($this->ch, CURLOPT_SSL_VERIFYPEER, FALSE);
     }
 
     private function buildHeaders(array $headers): array {
