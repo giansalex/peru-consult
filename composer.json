@@ -1,5 +1,5 @@
 {
-    "name": "giansalex/peru-consult",
+    "name": "bzavalavaldivia/peru-consult",
     "description": "Consulta gratuita de DNI, RUC en Perú",
     "keywords": [
         "sunat",
@@ -15,9 +15,13 @@
         {
             "name": "Giancarlos Salas",
             "email": "giansalex@gmail.com"
+        },
+        {
+            "name": "Bryan Zavala",
+            "email": "bzavalavaldivia@gmail.com"
         }
     ],
-    "homepage": "https://github.com/giansalex/peru-consult",
+    "homepage": "https://github.com/bzavalavaldivia/peru-consult",
     "type": "library",
     "require": {
         "php": ">=7.1",
