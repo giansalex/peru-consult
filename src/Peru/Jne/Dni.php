@@ -56,8 +56,8 @@ class Dni implements DniInterface
      */
     public function get(string $dni): ?Person
     {
-        $url = sprintf(Endpoints::CONSULT, $dni);
-        $json = $this->client->post($url, []);
+        $params = '{"tipDocu": "1", "numDocu": "'.$dni.'", "tipPers":"1"}';
+        $json = $this->client->post(Endpoints::CONSULT, $params, ['Content-Type' => 'application/json']);
 
         if ($json === false || !($result = json_decode($json)) || !isset($result->nombreSoli)) {
             return null;
