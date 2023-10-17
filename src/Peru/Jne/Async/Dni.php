@@ -50,10 +50,10 @@ class Dni
      */
     public function get(string $dni): PromiseInterface
     {
-        $url = sprintf(Endpoints::CONSULT, $dni);
+        $params = '{"tipDocu": "1", "numDocu": "'.$dni.'", "tipPers":"1"}';
 
         return $this->client
-            ->postAsync($url, null)
+            ->postAsync(Endpoints::CONSULT, $params, ['Content-Type' => 'application/json'])
             ->then(function ($json) use ($dni) {
                 if ($json === false || !($result = json_decode($json)) || !isset($result->nombreSoli)) {
                     return null;
